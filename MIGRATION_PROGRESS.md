@@ -14612,3 +14612,22 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `validate_dedicated_server_safety.py`: 277 files scanned, 0 client-reference issues (AmaterasuHandler is server-only).
   - `validate_port_resources.py`: all issue counts 0.
 - MISSING jutsu remaining: 4 — Shinra Tensei + Ban Sho Ten'in (Rinnegan/Tenseigan Key 1/Key 3) and Hakke Kūshō (Byakugan Key 1 + sneak; needs the `ProcedureAirPunch` cone base), plus the Gourd-armor STUB.
+
+### M7 GitHub Repository Publication Slice
+
+- Created the public GitHub repository `quasar2333/narutomod-1.20.1` for the Forge 1.20.1 port:
+  - Repository URL: https://github.com/quasar2333/narutomod-1.20.1
+  - Initial branch: `main`.
+  - Initial source commit: `12a09d3` (`Publish Forge 1.20.1 port workspace`).
+  - `1.12.2/` is recorded as a proper Git submodule pointing at `https://github.com/AHZNB/naruto_mod.git`, so the original mod reference stays linked without embedding a broken nested repository.
+  - Added root `README.md`, `LICENSE`, `.gitignore`, `.gitattributes`, and `.gitmodules` for GitHub publication. The license notice preserves the original mod rule: source is public, forks/modifications are allowed, and monetization of the mod/forks/releases requires permission.
+  - Build output, `.gradle`, runtime logs, crash reports, Python caches, and packaged jars are ignored from source control; the Gradle wrapper jar remains tracked so fresh clones can build.
+- Published the first GitHub prerelease:
+  - Release URL: https://github.com/quasar2333/narutomod-1.20.1/releases/tag/v0.2.10-beta.1%2Bmc1.20.1
+  - Release title: `Naruto Mod 0.2.10-beta.1 for Forge 1.20.1`.
+  - Uploaded artifact: `narutomod-0.2.10-beta.1+mc1.20.1.jar`, size 20,000,917 bytes after the release build.
+- Verification before publication:
+  - `python tools\validate_port_resources.py`: all issue counts 0.
+  - `python tools\validate_dedicated_server_safety.py`: 277 non-client Java files scanned, 0 client-reference issues.
+  - `.\gradlew.bat "-Dnet.minecraftforge.gradle.check.certs=false" --no-daemon build`: passes.
+  - `tools\run_dedicated_server_gate.ps1`: ready `true`, fatal issue count 0, latest ready line `Done (15.990s)`, checked at `2026-06-15T17:37:36`.
