@@ -1,0 +1,16 @@
+original_key,new_key,original_path,new_path,reason
+Amaterasu,amaterasu,amaterasu,amaterasu,uppercase_key
+ShinraTensei,shinratensei,shinratensei,shinratensei,uppercase_key
+ChibakuTensei,chibakutensei,chibakutensei,chibakutensei,uppercase_key
+byakugan,byakugan,byakugan neji,byakugan_neji,invalid_path_chars
+FurryRoar,furryroar,chewbacca sound byte,chewbacca_sound_byte,uppercase_key;invalid_path_chars
+KamuiSFX,kamuisfx,kamui sound efect ,kamui_sound_efect,uppercase_key;invalid_path_chars
+MonsterGrowl,monstergrowl,monster growl,monster_growl,uppercase_key;invalid_path_chars
+KoH_spawn,koh_spawn,koh_spawn,koh_spawn,uppercase_key
+HakkeRokujuuyonShou,hakkerokujuuyonshou,hakke_rokujuu_yonshou,hakke_rokujuu_yonshou,uppercase_key
+HakkeshoKaiten,hakkeshokaiten,hakkeshokaiten,hakkeshokaiten,uppercase_key
+HakkeKusho,hakkekusho,hakkekusho,hakkekusho,uppercase_key
+MajiNaguri,majinaguri,majinaguri,majinaguri,uppercase_key
+80GodsPunch,80godspunch,eightygodspunch,eightygodspunch,uppercase_key
+Kaguya_FinalTSB,kaguya_finaltsb,bigtruthseekerball,bigtruthseekerball,uppercase_key
+BanshoTenin,banshotenin,banshotenin,banshotenin,uppercase_key

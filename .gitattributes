@@ -1,0 +1,8 @@
+# Normalize text files in the repository.
+* text=auto
+
+# Forge generated resource cache files should remain LF.
+src/generated/**/.cache/cache text eol=lf
+src/generated/**/*.json text eol=lf
+1.20.1/src/generated/**/.cache/cache text eol=lf
+1.20.1/src/generated/**/*.json text eol=lf

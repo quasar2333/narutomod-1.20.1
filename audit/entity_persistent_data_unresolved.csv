@@ -1,0 +1,12 @@
+key,method,source,scope,legacy_file,line,argument
+,setBoolean,key,procedure,net/narutomod/procedure/ProcedureAoeCommand.java,284,key
+,setInteger,key,procedure,net/narutomod/procedure/ProcedureAoeCommand.java,293,key
+,setBoolean,CTRL_pressed,procedure,net/narutomod/procedure/ProcedureSpecialJutsu2OnKeyPressed.java,197,(CTRL_pressed)
+,removeTag,tagName,procedure,net/narutomod/procedure/ProcedureSync.java,552,tagName
+,setInteger,tagName,procedure,net/narutomod/procedure/ProcedureSync.java,557,tagName
+,setDouble,tagName,procedure,net/narutomod/procedure/ProcedureSync.java,562,tagName
+,setBoolean,tagName,procedure,net/narutomod/procedure/ProcedureSync.java,567,tagName
+,removeTag,message.tag,procedure,net/narutomod/procedure/ProcedureSync.java,631,message.tag
+,setInteger,message.tag,procedure,net/narutomod/procedure/ProcedureSync.java,634,message.tag
+,setDouble,message.tag,procedure,net/narutomod/procedure/ProcedureSync.java,637,message.tag
+,setBoolean,message.tag,procedure,net/narutomod/procedure/ProcedureSync.java,640,message.tag

@@ -1,0 +1,10 @@
+model,location,old_value,new_value,action
+models/block/amaterasuflame_side0.json,parent,narutomod:custom/fire_side,narutomod:block/fire_side,parent_custom_to_block
+models/block/amaterasuflame_side1.json,parent,narutomod:custom/fire_side,narutomod:block/fire_side,parent_custom_to_block
+models/block/amaterasuflame_side_alt0.json,parent,narutomod:custom/fire_side_alt,narutomod:block/fire_side_alt,parent_custom_to_block
+models/block/amaterasuflame_side_alt1.json,parent,narutomod:custom/fire_side_alt,narutomod:block/fire_side_alt,parent_custom_to_block
+models/block/amaterasuflame_up0.json,parent,narutomod:custom/fire_up,narutomod:block/fire_up,parent_custom_to_block
+models/block/amaterasuflame_up1.json,parent,narutomod:custom/fire_up,narutomod:block/fire_up,parent_custom_to_block
+models/block/amaterasuflame_up_alt0.json,parent,narutomod:custom/fire_up_alt,narutomod:block/fire_up_alt,parent_custom_to_block
+models/block/amaterasuflame_up_alt1.json,parent,narutomod:custom/fire_up_alt,narutomod:block/fire_up_alt,parent_custom_to_block
+models/item/jutsu.json,textures.layer0,narutomod:items/mokuton_symbol,narutomod:blocks/mokuton_symbol,texture_items_to_blocks

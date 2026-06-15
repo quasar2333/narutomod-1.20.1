@@ -1,0 +1,39 @@
+{
+  "group": "narutomod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "0 2",
+    "345",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:purple_dye"
+    },
+    "2": {
+      "item": "minecraft:purple_dye"
+    },
+    "3": {
+      "item": "minecraft:iron_ingot"
+    },
+    "4": {
+      "item": "minecraft:leather_chestplate"
+    },
+    "5": {
+      "item": "minecraft:iron_ingot"
+    },
+    "6": {
+      "item": "minecraft:purple_dye"
+    },
+    "7": {
+      "item": "minecraft:iron_ingot"
+    },
+    "8": {
+      "item": "minecraft:purple_dye"
+    }
+  },
+  "result": {
+    "item": "narutomod:steam_armorbody",
+    "count": 1
+  }
+}

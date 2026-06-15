@@ -1,0 +1,15 @@
+{
+  "textures_copied": 362,
+  "models_copied": {
+    "block": 33,
+    "custom": 80,
+    "item": 176
+  },
+  "blockstates_converted": 8,
+  "blockstate_issues": 6,
+  "model_issues": 9,
+  "outputs": [
+    "audit/blockstate_conversion_issues.csv",
+    "audit/model_conversion_issues.csv"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "items": 157,
+  "blocks": 9,
+  "entity_types": 162,
+  "mob_effects": 9,
+  "particle_types": 12,
+  "outputs": [
+    "1.20.1/src/main/java/net/narutomod/registry/ModItems.java",
+    "1.20.1/src/main/java/net/narutomod/registry/ModBlocks.java",
+    "1.20.1/src/main/java/net/narutomod/registry/ModEntityTypes.java",
+    "1.20.1/src/main/java/net/narutomod/registry/ModEffects.java",
+    "1.20.1/src/main/java/net/narutomod/registry/ModParticleTypes.java",
+    "audit/generated_registry_names.csv"
+  ]
+}

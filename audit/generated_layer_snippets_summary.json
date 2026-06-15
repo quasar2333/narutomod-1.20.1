@@ -1,0 +1,11 @@
+{
+  "snippet_candidates": 91,
+  "compiled_source_methods": 74,
+  "compiled_source_box_limit": 600,
+  "compiled_source_requires_static_part_poses": true,
+  "skipped": 5,
+  "array_part_models_included": 21,
+  "skipped_dynamic_box_args": 5,
+  "output_dir": "audit/generated_layer_snippets",
+  "generated_source": "1.20.1/src/generated/java/net/narutomod/client/model/generated/LegacyModelLayerDefinitions.java"
+}

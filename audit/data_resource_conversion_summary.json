@@ -1,0 +1,8 @@
+{
+  "loot_tables_written": 10,
+  "advancements_written": 21,
+  "particle_definitions_written": 12,
+  "outputs": [
+    "audit/block_loot_table_policies.csv"
+  ]
+}

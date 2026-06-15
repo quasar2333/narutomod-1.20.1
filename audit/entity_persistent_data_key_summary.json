@@ -1,0 +1,282 @@
+{
+  "raw_get_entity_data_occurrences": 297,
+  "entity_data_calls": 265,
+  "resolved_calls": 254,
+  "unresolved_calls": 11,
+  "unique_resolved_keys": 61,
+  "methods": {
+    "getBoolean": 39,
+    "getByte": 2,
+    "getDouble": 38,
+    "getIntArray": 6,
+    "getInteger": 35,
+    "getLong": 4,
+    "getUniqueId": 1,
+    "hasKey": 5,
+    "removeTag": 12,
+    "setBoolean": 31,
+    "setByte": 2,
+    "setDouble": 47,
+    "setIntArray": 4,
+    "setInteger": 35,
+    "setLong": 3,
+    "setUniqueId": 1
+  },
+  "keys": {
+    "BanshoTenin_cooldown": {
+      "getInteger": 2,
+      "setInteger": 1
+    },
+    "ChakraPathwaySystem": {
+      "getDouble": 1,
+      "setDouble": 1
+    },
+    "ChidoriEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "EntityChakraModeIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "FearEffect": {
+      "getInteger": 5,
+      "setInteger": 3
+    },
+    "FirstGotNinjutsuFlag": {
+      "getBoolean": 1,
+      "setBoolean": 2
+    },
+    "ForceBipedBowPose": {
+      "getBoolean": 2
+    },
+    "ForceExtinguish": {
+      "getInteger": 2,
+      "setInteger": 2
+    },
+    "FutonChakraFlowEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "GlowingTicks": {
+      "getInteger": 1,
+      "hasKey": 1,
+      "removeTag": 1,
+      "setInteger": 1
+    },
+    "HakkeRokujuuyonshouActive": {
+      "getBoolean": 1,
+      "setBoolean": 2
+    },
+    "I_am_clone_ogCloneIDKey": {
+      "getInteger": 3,
+      "setInteger": 3
+    },
+    "IryoCellularActivationEntityIdKey": {
+      "getInteger": 2,
+      "setInteger": 1
+    },
+    "IryoEnhancedStrengthEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "JitonSandLevitationEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "JitonSandShieldEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "JutsuKey2Pressed": {
+      "getBoolean": 1,
+      "setBoolean": 1
+    },
+    "KabutowariHammerSlamTime": {
+      "getInteger": 2,
+      "removeTag": 1,
+      "setInteger": 2
+    },
+    "KageBunshinEntityId": {
+      "getIntArray": 2,
+      "setIntArray": 1
+    },
+    "LavaChakraModeEntityId": {
+      "getInteger": 1,
+      "removeTag": 1,
+      "setInteger": 1
+    },
+    "LimboCloneEntityIds": {
+      "getIntArray": 1,
+      "setIntArray": 1
+    },
+    "MindTransferEntityIdKey": {
+      "getInteger": 2,
+      "removeTag": 1,
+      "setInteger": 1
+    },
+    "NuibariSkeweredTime": {
+      "getInteger": 1,
+      "removeTag": 1,
+      "setInteger": 1
+    },
+    "OriginalGameMode": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "PlayerRenderTransparent": {
+      "getBoolean": 1
+    },
+    "ShadowImitationEntityIdKey": {
+      "getIntArray": 3,
+      "removeTag": 2,
+      "setIntArray": 2
+    },
+    "SkinCloningRenderTargetLayers": {
+      "getBoolean": 1
+    },
+    "SkinCloningTargetId": {
+      "getInteger": 1,
+      "hasKey": 2,
+      "removeTag": 1
+    },
+    "SkinColorMultiplier": {
+      "getInteger": 1,
+      "hasKey": 1
+    },
+    "TempData_disableKnockback": {
+      "getBoolean": 1,
+      "removeTag": 1,
+      "setBoolean": 2
+    },
+    "TransformationEntityIdKey": {
+      "getInteger": 1,
+      "removeTag": 1,
+      "setInteger": 1
+    },
+    "WaterShockwaveEntityIdKey": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "WearingBijuCloakTicks": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "amaterasu_active": {
+      "getBoolean": 3,
+      "setBoolean": 3
+    },
+    "amaterasu_cd": {
+      "getDouble": 1,
+      "setDouble": 1
+    },
+    "battle_experience": {
+      "getDouble": 6,
+      "setDouble": 3
+    },
+    "byakugan_activated": {
+      "getBoolean": 3,
+      "setBoolean": 2
+    },
+    "byakugan_fov": {
+      "getDouble": 3,
+      "setDouble": 3
+    },
+    "chibakutensei_active": {
+      "getBoolean": 1,
+      "setBoolean": 2
+    },
+    "chibakutenseicd": {
+      "getLong": 2,
+      "setLong": 1
+    },
+    "deathAnimationTime": {
+      "getDouble": 4,
+      "setDouble": 3
+    },
+    "deathAnimationType": {
+      "getDouble": 5,
+      "setDouble": 2
+    },
+    "entityModelScale": {
+      "getDouble": 3,
+      "setDouble": 4
+    },
+    "invulnerableTime": {
+      "getDouble": 3,
+      "setDouble": 14
+    },
+    "kamui_intangible": {
+      "getBoolean": 6,
+      "setBoolean": 2
+    },
+    "kamui_teleport": {
+      "getBoolean": 6,
+      "setBoolean": 4
+    },
+    "kamui_timer": {
+      "getDouble": 1,
+      "setDouble": 1
+    },
+    "lastOverworldY": {
+      "getDouble": 2,
+      "setDouble": 4
+    },
+    "lastWornForeignDojutsu": {
+      "getUniqueId": 1,
+      "setUniqueId": 1
+    },
+    "mostRecentlyHadAnyDojutsu": {
+      "getLong": 2,
+      "setLong": 2
+    },
+    "noClipFlag": {
+      "getByte": 2,
+      "hasKey": 1,
+      "setByte": 2
+    },
+    "pressDuration": {
+      "getInteger": 1,
+      "setInteger": 1
+    },
+    "press_time": {
+      "getDouble": 2,
+      "setDouble": 4
+    },
+    "shinratensei_power": {
+      "getDouble": 1,
+      "setDouble": 1
+    },
+    "shinratenseicd": {
+      "getDouble": 3,
+      "setDouble": 1
+    },
+    "summonedSusanooID": {
+      "getInteger": 1,
+      "setInteger": 5
+    },
+    "susanoo_activated": {
+      "getBoolean": 8,
+      "setBoolean": 3
+    },
+    "susanoo_cd": {
+      "setDouble": 1
+    },
+    "susanoo_ticks": {
+      "getDouble": 3,
+      "setDouble": 2
+    },
+    "temporaryDisableAI": {
+      "getBoolean": 2,
+      "setBoolean": 2
+    },
+    "was_pressed": {
+      "getBoolean": 2,
+      "setBoolean": 2
+    }
+  },
+  "outputs": [
+    "audit/entity_persistent_data_keys.csv",
+    "audit/entity_persistent_data_unresolved.csv"
+  ]
+}

@@ -1,0 +1,197 @@
+// Source: net/narutomod/entity/EntityKikaichu.java:376 ModelBeetle
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityKikaichu.java:376 ModelBeetle
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition head = root.addOrReplaceChild(
+        "head",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-1.5F, 0.5F, -7.0F, 3.0F, 2.0F, 1.0F, new CubeDeformation(0.0F))
+            .texOffs(15, 24)
+            .addBox(-1.5F, 0.0F, -6.0F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(16, 17)
+            .addBox(-2.5F, 0.0F, -4.0F, 5.0F, 3.0F, 4.0F, new CubeDeformation(0.1F)),
+        PartPose.offsetAndRotation(0.0F, -1.5F, -5.0F, 0.3491F, 0.0F, 0.0F)
+    );
+
+    PartDefinition Mouth1 = head.addOrReplaceChild(
+        "Mouth1",
+        CubeListBuilder.create()
+            .texOffs(4, 6)
+            .addBox(-0.5F, -0.4852F, -1.9881F, 1.0F, 1.0F, 2.0F, new CubeDeformation(-0.1F)),
+        PartPose.offsetAndRotation(-1.0F, 1.7352F, -6.5119F, 0.3491F, -0.2618F, 0.0F)
+    );
+
+    PartDefinition Mouth2 = head.addOrReplaceChild(
+        "Mouth2",
+        CubeListBuilder.create()
+            .texOffs(4, 6)
+            .mirror()
+            .addBox(-0.5F, -0.4852F, -1.9881F, 1.0F, 1.0F, 2.0F, new CubeDeformation(-0.1F))
+            .mirror(false),
+        PartPose.offsetAndRotation(1.0F, 1.7352F, -6.5119F, 0.3491F, 0.2618F, 0.0F)
+    );
+
+    PartDefinition Eye1 = head.addOrReplaceChild(
+        "Eye1",
+        CubeListBuilder.create()
+            .texOffs(4, 3)
+            .addBox(-0.5F, -0.7352F, -0.4881F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(-1.25F, 0.4852F, -6.0119F)
+    );
+
+    PartDefinition Eye2 = head.addOrReplaceChild(
+        "Eye2",
+        CubeListBuilder.create()
+            .texOffs(4, 3)
+            .mirror()
+            .addBox(-0.5F, -0.7352F, -0.4881F, 1.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offset(1.25F, 0.4852F, -6.0119F)
+    );
+
+    PartDefinition body = root.addOrReplaceChild(
+        "body",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -1.5F, -5.0F, 8.0F, 4.0F, 10.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 14)
+            .addBox(-3.5F, -1.0F, 5.0F, 7.0F, 4.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 21)
+            .addBox(-3.0F, 0.0F, 7.0F, 6.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(26, 0)
+            .addBox(-2.5F, 1.0F, 9.0F, 5.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition wingLeft = body.addOrReplaceChild(
+        "wingLeft",
+        CubeListBuilder.create()
+            .texOffs(28, 0)
+            .addBox(-3.0F, 0.0F, 0.0F, 6.0F, 0.0F, 12.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(1.0F, -1.75F, -4.0F, 0.1964F + f6 * 0.0655F, 0.7854F + f6 * 0.2618F, 0.0F)
+    );
+
+    PartDefinition wingRight = body.addOrReplaceChild(
+        "wingRight",
+        CubeListBuilder.create()
+            .texOffs(28, 0)
+            .mirror()
+            .addBox(-3.0F, 0.0F, 0.0F, 6.0F, 0.0F, 12.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-1.0F, -1.75F, -4.0F, 0.1964F + f6 * 0.0655F, -0.7854F - f6 * 0.2618F, 0.0F)
+    );
+
+    PartDefinition leg1 = root.addOrReplaceChild(
+        "leg1",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .addBox(-5.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-3.0F, 2.0F, -4.0F, MathHelper.cos(f * 0.6662F) * 1.4F * f1, -0.5236F, 0.5236F)
+    );
+
+    PartDefinition foreleg1 = leg1.addOrReplaceChild(
+        "foreleg1",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(-4.5F, 0.25F, 0.0F)
+    );
+
+    PartDefinition leg2 = root.addOrReplaceChild(
+        "leg2",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .mirror()
+            .addBox(0.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(3.0F, 2.0F, -4.0F, MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1, 0.5236F, -0.5236F)
+    );
+
+    PartDefinition foreleg2 = leg2.addOrReplaceChild(
+        "foreleg2",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .mirror()
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offset(4.5F, 0.25F, 0.0F)
+    );
+
+    PartDefinition leg3 = root.addOrReplaceChild(
+        "leg3",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .addBox(-5.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-3.0F, 2.0F, 0.0F, MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1, 0.0F, 0.5236F)
+    );
+
+    PartDefinition foreleg3 = leg3.addOrReplaceChild(
+        "foreleg3",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(-4.5F, 0.25F, 0.0F)
+    );
+
+    PartDefinition leg4 = root.addOrReplaceChild(
+        "leg4",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .mirror()
+            .addBox(0.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(3.0F, 2.0F, 0.0F, MathHelper.cos(f * 0.6662F) * 1.4F * f1, 0.0F, -0.5236F)
+    );
+
+    PartDefinition foreleg4 = leg4.addOrReplaceChild(
+        "foreleg4",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .mirror()
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offset(4.5F, 0.25F, 0.0F)
+    );
+
+    PartDefinition leg5 = root.addOrReplaceChild(
+        "leg5",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .addBox(-5.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-3.0F, 2.0F, 4.0F, MathHelper.cos(f * 0.6662F) * 1.4F * f1, 0.5236F, 0.5236F)
+    );
+
+    PartDefinition foreleg5 = leg5.addOrReplaceChild(
+        "foreleg5",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(-4.5F, 0.25F, 0.0F)
+    );
+
+    PartDefinition leg6 = root.addOrReplaceChild(
+        "leg6",
+        CubeListBuilder.create()
+            .texOffs(17, 14)
+            .mirror()
+            .addBox(0.0F, -0.5F, -0.5F, 5.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(3.0F, 2.0F, 4.0F, MathHelper.cos(f * 0.6662F + (float)Math.PI) * 1.4F * f1, -0.5236F, -0.5236F)
+    );
+
+    PartDefinition foreleg6 = leg6.addOrReplaceChild(
+        "foreleg6",
+        CubeListBuilder.create()
+            .texOffs(0, 3)
+            .mirror()
+            .addBox(-0.5F, -0.25F, -0.5F, 1.0F, 5.0F, 1.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offset(4.5F, 0.25F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 64);
+}

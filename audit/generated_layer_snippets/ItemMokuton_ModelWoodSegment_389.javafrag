@@ -1,0 +1,57 @@
+// Source: net/narutomod/item/ItemMokuton.java:389 ModelWoodSegment
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/item/ItemMokuton.java:389 ModelWoodSegment
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bb_main = root.addOrReplaceChild(
+        "bb_main",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -3.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone5 = bb_main.addOrReplaceChild(
+        "bone5",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, 1.0F, 0.0F)
+    );
+
+    PartDefinition bone = bone5.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -4.0F, 0.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -4.0F, -2.0F, 0.5236F, 3.1416F, 0.0F)
+    );
+
+    PartDefinition bone2 = bone5.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -4.0F, 0.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -4.0F, 2.0F, 0.5236F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone3 = bone5.addOrReplaceChild(
+        "bone3",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -4.0F, 0.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-2.0F, -4.0F, 0.0F, 0.0F, -1.5708F, 0.5236F)
+    );
+
+    PartDefinition bone4 = bone5.addOrReplaceChild(
+        "bone4",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .mirror()
+            .addBox(-2.0F, -4.0F, 0.0F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(2.0F, -4.0F, 0.0F, 0.0F, 1.5708F, -0.5236F)
+    );
+
+    return LayerDefinition.create(mesh, 16, 16);
+}

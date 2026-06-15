@@ -1,0 +1,4 @@
+entity,old_spawn_this,old_spawn_in_dungeons,old_weight,old_min_group,old_max_group,current_replacement,current_weight,current_min_group,current_max_group,status
+itachi,true,true,1,1,1,natural_monster_biome_modifier,1,1,1,dungeon_spawner_injection_not_reintroduced
+kisame_hoshigaki,true,true,1,1,1,natural_monster_biome_modifier,1,1,1,dungeon_spawner_injection_not_reintroduced
+zabuza_momochi,true,true,20,4,4,natural_monster_biome_modifier,20,4,4,dungeon_spawner_injection_not_reintroduced

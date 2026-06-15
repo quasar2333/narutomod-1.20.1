@@ -1,0 +1,10 @@
+block,drop_policy,reason
+amaterasublock,empty,legacy block dropped nothing or is fluid/special
+explosive_tag,self,basic self drop
+kamuiblock,empty,legacy block dropped nothing or is fluid/special
+light_source,empty,legacy block dropped nothing or is fluid/special
+meteor,self,basic self drop
+meteorite,empty,legacy block dropped nothing or is fluid/special
+mud,empty,legacy block dropped nothing or is fluid/special
+portalblock,empty,legacy block dropped nothing or is fluid/special
+water_still,empty,legacy block dropped nothing or is fluid/special

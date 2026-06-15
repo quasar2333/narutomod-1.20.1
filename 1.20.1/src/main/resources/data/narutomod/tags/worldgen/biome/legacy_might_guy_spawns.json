@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#narutomod:legacy_leaf_npc_spawns",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    "minecraft:windswept_savanna"
+  ]
+}

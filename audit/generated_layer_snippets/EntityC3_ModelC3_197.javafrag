@@ -1,0 +1,133 @@
+// Source: net/narutomod/entity/EntityC3.java:197 ModelC3
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityC3.java:197 ModelC3
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition body = root.addOrReplaceChild(
+        "body",
+        CubeListBuilder.create()
+            .texOffs(0, 22)
+            .addBox(-5.0F, 4.0F, -5.0F, 10.0F, 10.0F, 10.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 0)
+            .addBox(-6.0F, 14.0F, -6.0F, 12.0F, 10.0F, 12.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition leftWing = body.addOrReplaceChild(
+        "leftWing",
+        CubeListBuilder.create()
+            .texOffs(0, 42)
+            .addBox(0.0F, -2.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.4F)),
+        PartPose.offsetAndRotation(5.0F, 8.0F, 0.0F, -0.6981F, 0.0F, 0.0F)
+    );
+
+    PartDefinition leftWingTip = leftWing.addOrReplaceChild(
+        "leftWingTip",
+        CubeListBuilder.create()
+            .texOffs(48, 12)
+            .addBox(-2.5F, -2.0F, -1.5F, 5.0F, 6.0F, 3.0F, new CubeDeformation(0.4F)),
+        PartPose.offsetAndRotation(2.0F, 4.0F, 0.0F, 0.0F, 0.0F, 0.7854F)
+    );
+
+    PartDefinition bone6 = leftWingTip.addOrReplaceChild(
+        "bone6",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F)),
+        PartPose.offsetAndRotation(2.5F, 7.0F, 0.0F, 0.0F, 0.0F, -0.2618F)
+    );
+
+    PartDefinition bone7 = leftWingTip.addOrReplaceChild(
+        "bone7",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F)),
+        PartPose.offset(0.0F, 7.0F, 0.0F)
+    );
+
+    PartDefinition bone8 = leftWingTip.addOrReplaceChild(
+        "bone8",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F)),
+        PartPose.offsetAndRotation(-2.5F, 7.0F, 0.0F, 0.0F, 0.0F, 0.2618F)
+    );
+
+    PartDefinition rightWing = body.addOrReplaceChild(
+        "rightWing",
+        CubeListBuilder.create()
+            .texOffs(0, 42)
+            .mirror()
+            .addBox(-4.0F, -2.0F, -2.0F, 4.0F, 6.0F, 4.0F, new CubeDeformation(0.4F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-5.0F, 8.0F, 0.0F, -0.8727F, 0.0F, 0.0F)
+    );
+
+    PartDefinition rightWingTip = rightWing.addOrReplaceChild(
+        "rightWingTip",
+        CubeListBuilder.create()
+            .texOffs(48, 12)
+            .mirror()
+            .addBox(-2.5F, -2.0F, -1.5F, 5.0F, 6.0F, 3.0F, new CubeDeformation(0.4F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-2.0F, 4.0F, 0.0F, 0.0F, 0.0F, -0.7854F)
+    );
+
+    PartDefinition bone11 = rightWingTip.addOrReplaceChild(
+        "bone11",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .mirror()
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-2.5F, 7.0F, 0.0F, 0.0F, 0.0F, 0.2618F)
+    );
+
+    PartDefinition bone12 = rightWingTip.addOrReplaceChild(
+        "bone12",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .mirror()
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F))
+            .mirror(false),
+        PartPose.offset(0.0F, 7.0F, 0.0F)
+    );
+
+    PartDefinition bone13 = rightWingTip.addOrReplaceChild(
+        "bone13",
+        CubeListBuilder.create()
+            .texOffs(0, 54)
+            .mirror()
+            .addBox(-1.0F, -4.0F, -1.0F, 2.0F, 8.0F, 2.0F, new CubeDeformation(0.4F))
+            .mirror(false),
+        PartPose.offsetAndRotation(2.5F, 7.0F, 0.0F, 0.0F, 0.0F, -0.2618F)
+    );
+
+    PartDefinition head = body.addOrReplaceChild(
+        "head",
+        CubeListBuilder.create()
+            .texOffs(44, 31)
+            .addBox(-2.5F, -3.5F, -2.5F, 5.0F, 6.0F, 5.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 4.5F, -4.5F)
+    );
+
+    PartDefinition hump = body.addOrReplaceChild(
+        "hump",
+        CubeListBuilder.create()
+            .texOffs(30, 22)
+            .addBox(-4.5F, -2.0F, -3.0F, 9.0F, 2.0F, 7.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 4.0F, -0.5F)
+    );
+
+    PartDefinition bone2 = hump.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(36, 0)
+            .addBox(-3.0F, -3.0F, -2.05F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -2.0F, -0.45F, 0.0F, 0.0F, 0.7854F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 64);
+}

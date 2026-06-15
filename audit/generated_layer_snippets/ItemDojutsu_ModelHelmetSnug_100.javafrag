@@ -1,0 +1,41 @@
+// Source: net/narutomod/item/ItemDojutsu.java:100 ModelHelmetSnug
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/item/ItemDojutsu.java:100 ModelHelmetSnug
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bipedHead = root.addOrReplaceChild(
+        "head",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.05F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bipedHeadwear = root.addOrReplaceChild(
+        "hat",
+        CubeListBuilder.create()
+            .texOffs(32, 0)
+            .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.2F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition highlight = root.addOrReplaceChild(
+        "highlight",
+        CubeListBuilder.create()
+            .texOffs(24, 0)
+            .addBox(-4.0F, -8.0F, -4.15F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition forehead = root.addOrReplaceChild(
+        "forehead",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -8.0F, -4.25F, 4.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 16);
+}

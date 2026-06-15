@@ -1,0 +1,31 @@
+// Source: net/narutomod/item/ItemJinton.java:488 ModelCube
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/item/ItemJinton.java:488 ModelCube
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bone = root.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-0.5F, -4.5F, -0.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone2 = root.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-1.0F, -5.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 0)
+            .addBox(-1.5F, -5.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 0)
+            .addBox(-2.0F, -6.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 16)
+            .addBox(-4.0F, -8.0F, -4.0F, 8.0F, 8.0F, 8.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 32, 32);
+}

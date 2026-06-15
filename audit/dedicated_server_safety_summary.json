@@ -1,0 +1,7 @@
+{
+  "files_scanned": 277,
+  "client_reference_issues": 0,
+  "outputs": [
+    "audit/dedicated_server_safety_issues.csv"
+  ]
+}

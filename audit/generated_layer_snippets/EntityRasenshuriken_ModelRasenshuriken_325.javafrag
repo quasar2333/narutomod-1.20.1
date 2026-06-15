@@ -1,0 +1,297 @@
+// Source: net/narutomod/entity/EntityRasenshuriken.java:325 ModelRasenshuriken
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityRasenshuriken.java:325 ModelRasenshuriken
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition flaps = root.addOrReplaceChild(
+        "flaps",
+        CubeListBuilder.create(),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, f6, f2 * 0.6F, 0.0F)
+    );
+
+    PartDefinition bone3 = flaps.addOrReplaceChild(
+        "bone3",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone6 = flaps.addOrReplaceChild(
+        "bone6",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone5 = flaps.addOrReplaceChild(
+        "bone5",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 3.1416F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone4 = flaps.addOrReplaceChild(
+        "bone4",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone28 = flaps.addOrReplaceChild(
+        "bone28",
+        CubeListBuilder.create(),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.0436F, -0.0436F, 0.0436F)
+    );
+
+    PartDefinition bone29 = bone28.addOrReplaceChild(
+        "bone29",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone30 = bone28.addOrReplaceChild(
+        "bone30",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone31 = bone28.addOrReplaceChild(
+        "bone31",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 3.1416F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone32 = bone28.addOrReplaceChild(
+        "bone32",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone33 = flaps.addOrReplaceChild(
+        "bone33",
+        CubeListBuilder.create(),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0436F, 0.0436F, -0.0436F)
+    );
+
+    PartDefinition bone34 = bone33.addOrReplaceChild(
+        "bone34",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone35 = bone33.addOrReplaceChild(
+        "bone35",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone36 = bone33.addOrReplaceChild(
+        "bone36",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 3.1416F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition bone37 = bone33.addOrReplaceChild(
+        "bone37",
+        CubeListBuilder.create()
+            .texOffs(0, 6)
+            .addBox(0.0F, -16.0F, -5.0F, 0.0F, 16.0F, 10.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.5708F, 0.0F, 1.5708F)
+    );
+
+    PartDefinition ball = root.addOrReplaceChild(
+        "ball",
+        CubeListBuilder.create(),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, f2 * 0.6F, -f2 * 0.8F, 0.0F)
+    );
+
+    PartDefinition bone2 = ball.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone8 = ball.addOrReplaceChild(
+        "bone8",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.2618F, -0.2618F, 0.2618F)
+    );
+
+    PartDefinition bone9 = ball.addOrReplaceChild(
+        "bone9",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.5236F, -0.5236F, 0.5236F)
+    );
+
+    PartDefinition bone10 = ball.addOrReplaceChild(
+        "bone10",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.7854F, -0.7854F, 0.7854F)
+    );
+
+    PartDefinition bone11 = ball.addOrReplaceChild(
+        "bone11",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.0472F, -1.0472F, 1.0472F)
+    );
+
+    PartDefinition bone12 = ball.addOrReplaceChild(
+        "bone12",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.309F, -1.309F, 1.309F)
+    );
+
+    PartDefinition bone13 = ball.addOrReplaceChild(
+        "bone13",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.8326F, -1.8326F, 1.8326F)
+    );
+
+    PartDefinition bone14 = ball.addOrReplaceChild(
+        "bone14",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.0944F, -2.0944F, 2.0944F)
+    );
+
+    PartDefinition bone15 = ball.addOrReplaceChild(
+        "bone15",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.3562F, -2.3562F, 2.3562F)
+    );
+
+    PartDefinition bone16 = ball.addOrReplaceChild(
+        "bone16",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.618F, -2.618F, 2.618F)
+    );
+
+    PartDefinition bone17 = ball.addOrReplaceChild(
+        "bone17",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -2.8798F, -2.8798F, 2.8798F)
+    );
+
+    PartDefinition bone18 = ball.addOrReplaceChild(
+        "bone18",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 2.8798F, 2.8798F, -2.8798F)
+    );
+
+    PartDefinition bone19 = ball.addOrReplaceChild(
+        "bone19",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 2.618F, 2.618F, -2.618F)
+    );
+
+    PartDefinition bone20 = ball.addOrReplaceChild(
+        "bone20",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 2.3562F, 2.3562F, -2.3562F)
+    );
+
+    PartDefinition bone21 = ball.addOrReplaceChild(
+        "bone21",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 2.0944F, 2.0944F, -2.0944F)
+    );
+
+    PartDefinition bone22 = ball.addOrReplaceChild(
+        "bone22",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.8326F, 1.8326F, -1.8326F)
+    );
+
+    PartDefinition bone23 = ball.addOrReplaceChild(
+        "bone23",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.309F, 1.309F, -1.309F)
+    );
+
+    PartDefinition bone24 = ball.addOrReplaceChild(
+        "bone24",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 1.0472F, 1.0472F, -1.0472F)
+    );
+
+    PartDefinition bone25 = ball.addOrReplaceChild(
+        "bone25",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.7854F, 0.7854F, -0.7854F)
+    );
+
+    PartDefinition bone26 = ball.addOrReplaceChild(
+        "bone26",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.5236F, 0.5236F, -0.5236F)
+    );
+
+    PartDefinition bone27 = ball.addOrReplaceChild(
+        "bone27",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-3.0F, -3.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, 0.2618F, 0.2618F, -0.2618F)
+    );
+
+    return LayerDefinition.create(mesh, 32, 32);
+}

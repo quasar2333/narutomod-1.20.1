@@ -1,0 +1,7 @@
+blockstate,action,reason
+explosive_tag.json,converted,normal variant renamed to empty default variant
+kamuiblock.json,converted,normal variant renamed to empty default variant
+light_source.json,converted,normal variant renamed to empty default variant
+meteor.json,converted,normal variant renamed to empty default variant
+meteorite.json,converted,normal variant renamed to empty default variant
+mud.json,skipped,forge_marker fluid blockstate requires 1.20 fluid rewrite

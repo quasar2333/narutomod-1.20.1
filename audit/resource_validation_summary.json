@@ -1,0 +1,20 @@
+{
+  "sound_or_path_issues": 0,
+  "lang_registry_gaps": 0,
+  "model_reference_issues": 0,
+  "recipe_validation_issues": 0,
+  "loot_table_validation_issues": 0,
+  "advancement_validation_issues": 0,
+  "particle_validation_issues": 0,
+  "registry_reference_issues": 0,
+  "outputs": [
+    "audit/resource_path_issues.csv",
+    "audit/lang_registry_gaps.csv",
+    "audit/model_reference_issues.csv",
+    "audit/recipe_validation_issues.csv",
+    "audit/loot_table_validation_issues.csv",
+    "audit/advancement_validation_issues.csv",
+    "audit/particle_validation_issues.csv",
+    "audit/registry_reference_issues.csv"
+  ]
+}

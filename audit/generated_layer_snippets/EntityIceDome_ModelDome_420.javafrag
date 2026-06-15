@@ -1,0 +1,165 @@
+// Source: net/narutomod/entity/EntityIceDome.java:420 ModelDome
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityIceDome.java:420 ModelDome
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition dome = root.addOrReplaceChild(
+        "dome",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition wall = dome.addOrReplaceChild(
+        "wall",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone2 = wall.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, 0.0F, -8.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, -8.0F, -1.5F)
+    );
+
+    PartDefinition bone6 = wall.addOrReplaceChild(
+        "bone6",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -8.0F, -8.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 17.7F)
+    );
+
+    PartDefinition bone3 = wall.addOrReplaceChild(
+        "bone3",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(0.0F, 8.0F, 0.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(4.0F, -16.0F, -9.5F, 0.0F, -0.7854F, 0.0F)
+    );
+
+    PartDefinition bone7 = wall.addOrReplaceChild(
+        "bone7",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(0.0F, 0.0F, 0.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-9.6F, -8.0F, 4.1F, 0.0F, -0.7854F, 0.0F)
+    );
+
+    PartDefinition bone4 = wall.addOrReplaceChild(
+        "bone4",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-0.1F, 8.0F, 0.1F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(9.75F, -16.0F, -3.75F, 0.0F, -1.5708F, 0.0F)
+    );
+
+    PartDefinition bone8 = wall.addOrReplaceChild(
+        "bone8",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-0.15F, 8.0F, 0.05F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-9.55F, -16.0F, -3.75F, 0.0F, -1.5708F, 0.0F)
+    );
+
+    PartDefinition cube_r1 = wall.addOrReplaceChild(
+        "cube_r1",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-7.95F, 0.0F, -0.025F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(9.6F, -8.0F, 4.2F, 0.0F, 0.7854F, 0.0F)
+    );
+
+    PartDefinition cube_r2 = wall.addOrReplaceChild(
+        "cube_r2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.2023F, 8.0F, 0.0457F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-6.7F, -16.0F, -6.9F, 0.0F, 0.7854F, 0.0F)
+    );
+
+    PartDefinition roof = dome.addOrReplaceChild(
+        "roof",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, -16.0F, -9.5F)
+    );
+
+    PartDefinition bone10 = roof.addOrReplaceChild(
+        "bone10",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.0F, -4.0F, 0.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.05F, 2.7F, 9.65F, -1.5708F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone12 = roof.addOrReplaceChild(
+        "bone12",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.0F, -2.3431F, 5.6569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -0.7854F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone13 = roof.addOrReplaceChild(
+        "bone13",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.2426F, -2.3431F, 5.6569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(7.0F, 0.0F, 3.0F, -0.7854F, -0.7854F, 0.0F)
+    );
+
+    PartDefinition bone18 = roof.addOrReplaceChild(
+        "bone18",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.0F, -2.3431F, -5.6569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 19.2F, 0.7854F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone16 = roof.addOrReplaceChild(
+        "bone16",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.2426F, -2.3431F, -5.6569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(7.0F, 0.0F, 16.3F, 0.7854F, 0.7854F, 0.0F)
+    );
+
+    PartDefinition bone14 = roof.addOrReplaceChild(
+        "bone14",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.1F, -2.3431F, 5.7569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(9.75F, 0.0F, 9.75F, -0.7854F, -1.5708F, 0.0F)
+    );
+
+    PartDefinition bone17 = roof.addOrReplaceChild(
+        "bone17",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .mirror()
+            .addBox(-3.9F, -2.3431F, 5.7569F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-9.65F, 0.0F, 9.75F, -0.7854F, 1.5708F, 0.0F)
+    );
+
+    PartDefinition cube_r3 = roof.addOrReplaceChild(
+        "cube_r3",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-4.0609F, -8.0F, 0.0457F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-6.8F, 8.0F, 2.7F, -0.7854F, 0.7854F, 0.0F)
+    );
+
+    PartDefinition cube_r4 = roof.addOrReplaceChild(
+        "cube_r4",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-3.8609F, -7.9F, -0.0457F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-6.8F, 8.0F, 16.3F, 0.7854F, -0.7854F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 16, 16);
+}

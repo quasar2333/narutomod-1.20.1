@@ -1,0 +1,26 @@
+{
+  "group": "narutomod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    " 4 "
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:black_wool"
+    },
+    "1": {
+      "item": "minecraft:iron_helmet"
+    },
+    "2": {
+      "item": "minecraft:black_wool"
+    },
+    "4": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "item": "narutomod:samurai_armorhelmet",
+    "count": 1
+  }
+}

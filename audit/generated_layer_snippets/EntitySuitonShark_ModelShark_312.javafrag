@@ -1,0 +1,93 @@
+// Source: net/narutomod/entity/EntitySuitonShark.java:312 ModelShark
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntitySuitonShark.java:312 ModelShark
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition body = root.addOrReplaceChild(
+        "body",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -7.0F, 0.0F, 8.0F, 7.0F, 13.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, -5.0F)
+    );
+
+    PartDefinition head = body.addOrReplaceChild(
+        "head",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, -3.0F, 0.0F)
+    );
+
+    PartDefinition foreHead = head.addOrReplaceChild(
+        "foreHead",
+        CubeListBuilder.create()
+            .texOffs(19, 20)
+            .addBox(-4.0F, 0.0F, -6.0F, 8.0F, 4.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -3.5F, 0.0F, 0.1745F - f4 * 0.4363F, 0.0F, 0.0F)
+    );
+
+    PartDefinition jaw = head.addOrReplaceChild(
+        "jaw",
+        CubeListBuilder.create()
+            .texOffs(29, 0)
+            .addBox(-3.5F, -1.5F, -4.75F, 7.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 1.5F, 0.25F, f4 * 0.5236F, 0.0F, 0.0F)
+    );
+
+    PartDefinition tail = body.addOrReplaceChild(
+        "tail",
+        CubeListBuilder.create()
+            .texOffs(0, 20)
+            .addBox(-2.0F, -2.5F, -1.0F, 4.0F, 5.0F, 11.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -3.5F, 13.0F, 0.0F, MathHelper.cos(f * 0.6662F) * 0.4F * f1, 0.0F)
+    );
+
+    PartDefinition tailFin = tail.addOrReplaceChild(
+        "tailFin",
+        CubeListBuilder.create(),
+        PartPose.offsetAndRotation(0.0F, -0.5F, 8.0F, 0.0F, MathHelper.cos(f * 0.6662F) * 0.4F * f1, 0.0F)
+    );
+
+    PartDefinition tailFinUpper = tailFin.addOrReplaceChild(
+        "tailFinUpper",
+        CubeListBuilder.create()
+            .texOffs(0, 20)
+            .addBox(-0.5F, -6.9924F, -1.1743F, 1.0F, 8.0F, 3.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -1.0F, 1.0F, -0.6109F, 0.0F, 0.0F)
+    );
+
+    PartDefinition tailFinLower = tailFin.addOrReplaceChild(
+        "tailFinLower",
+        CubeListBuilder.create()
+            .texOffs(0, 36)
+            .addBox(-0.5F, -1.4924F, -1.0403F, 1.0F, 6.0F, 3.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 1.0F, 1.0F, 0.5236F, 0.0F, 0.0F)
+    );
+
+    PartDefinition backFin = body.addOrReplaceChild(
+        "backFin",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-0.5F, -7.75F, -1.5F, 1.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -6.0F, 6.0F, -0.5236F, 0.0F, 0.0F)
+    );
+
+    PartDefinition leftFin = body.addOrReplaceChild(
+        "leftFin",
+        CubeListBuilder.create()
+            .texOffs(32, 34)
+            .addBox(0.0F, -4.0F, -1.5F, 1.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(3.0F, -3.0F, 8.0F, 0.9599F, 0.0F, 1.8675F)
+    );
+
+    PartDefinition rightFin = body.addOrReplaceChild(
+        "rightFin",
+        CubeListBuilder.create()
+            .texOffs(32, 34)
+            .addBox(-1.0F, -4.0F, -1.5F, 1.0F, 4.0F, 7.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-3.0F, -3.0F, 8.0F, 0.9599F, 0.0F, -1.8675F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 64);
+}

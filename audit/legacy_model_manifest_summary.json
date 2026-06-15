@@ -1,0 +1,18 @@
+{
+  "model_classes": 96,
+  "model_classes_by_source_dir": {
+    "entity": 72,
+    "item": 24
+  },
+  "model_helmet_snug_samples": 4,
+  "models_with_array_parts": 22,
+  "models_with_dynamic_box_args": 5,
+  "dynamic_box_arg_rows": 810,
+  "outputs": [
+    "audit/legacy_model_manifest.csv",
+    "audit/legacy_model_manifest.json",
+    "audit/model_sample_modelhelmetsnug.json",
+    "audit/legacy_model_dynamic_box_args.csv",
+    "audit/legacy_model_manifest_summary.json"
+  ]
+}

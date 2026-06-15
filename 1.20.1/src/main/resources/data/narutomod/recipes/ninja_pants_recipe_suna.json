@@ -1,0 +1,36 @@
+{
+  "group": "narutomod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "6 8"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:yellow_wool"
+    },
+    "1": {
+      "item": "minecraft:leather_leggings"
+    },
+    "2": {
+      "item": "minecraft:yellow_wool"
+    },
+    "3": {
+      "item": "minecraft:yellow_wool"
+    },
+    "5": {
+      "item": "minecraft:yellow_wool"
+    },
+    "6": {
+      "item": "minecraft:yellow_wool"
+    },
+    "8": {
+      "item": "minecraft:yellow_wool"
+    }
+  },
+  "result": {
+    "item": "narutomod:ninja_armor_sunalegs",
+    "count": 1
+  }
+}

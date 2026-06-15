@@ -1,0 +1,15 @@
+NarutoMod Source Distribution Notice
+
+This repository follows the original NarutoMod distribution terms:
+
+My mod is open source because I want to help people understand what I'm doing,
+and maybe get support. But I own all the rights to my source code and the
+releases built from my source code. Forks or modifications are completely
+allowed, but monetization of any part of my mod/fork or any releases built on
+it without my permission is NOT allowed.
+
+Original author: ahznb
+Original mod version referenced for this port: 0.2.10-beta for Minecraft 1.12.2
+
+The Forge MDK and Minecraft Forge components retain their own licenses and
+notices, including the Forge LGPL notice present in the Forge workspace.

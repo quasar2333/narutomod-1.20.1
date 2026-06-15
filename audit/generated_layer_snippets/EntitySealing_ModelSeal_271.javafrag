@@ -1,0 +1,21 @@
+// Source: net/narutomod/entity/EntitySealing.java:271 ModelSeal
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntitySealing.java:271 ModelSeal
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bb_main = root.addOrReplaceChild(
+        "bb_main",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-8.0F, 0.0F, -8.0F, 16.0F, 0.0F, 16.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 0)
+            .addBox(-1.5F, -1.0F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(0, 4)
+            .addBox(-1.5F, -1.2F, -1.5F, 3.0F, 1.0F, 3.0F, new CubeDeformation(-0.1F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 16);
+}

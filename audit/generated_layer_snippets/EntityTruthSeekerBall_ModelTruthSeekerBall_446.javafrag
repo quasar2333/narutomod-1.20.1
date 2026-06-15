@@ -1,0 +1,17 @@
+// Source: net/narutomod/entity/EntityTruthSeekerBall.java:446 ModelTruthSeekerBall
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityTruthSeekerBall.java:446 ModelTruthSeekerBall
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bb_main = root.addOrReplaceChild(
+        "bb_main",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-2.0F, -4.0F, -2.0F, 4.0F, 4.0F, 4.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 2.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 16, 16);
+}

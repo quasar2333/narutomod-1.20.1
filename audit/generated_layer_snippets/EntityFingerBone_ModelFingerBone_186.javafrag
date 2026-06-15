@@ -1,0 +1,35 @@
+// Source: net/narutomod/entity/EntityFingerBone.java:186 ModelFingerBone
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityFingerBone.java:186 ModelFingerBone
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bone2 = root.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(12, 0)
+            .addBox(-1.5F, -1.0F, -1.5F, 3.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+            .texOffs(9, 5)
+            .addBox(-1.5F, -1.5F, -1.5F, 3.0F, 3.0F, 3.0F, new CubeDeformation(-0.1F))
+            .texOffs(0, 8)
+            .addBox(-1.5F, -2.0F, -1.5F, 3.0F, 4.0F, 3.0F, new CubeDeformation(-0.3F))
+            .texOffs(0, 0)
+            .addBox(-1.5F, -2.5F, -1.5F, 3.0F, 5.0F, 3.0F, new CubeDeformation(-0.5F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone = root.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create()
+            .texOffs(8, 17)
+            .addBox(-1.0F, -1.0F, -1.0F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.1F))
+            .texOffs(0, 15)
+            .addBox(-1.0F, -1.5F, -1.0F, 2.0F, 3.0F, 2.0F, new CubeDeformation(-0.1F))
+            .texOffs(12, 11)
+            .addBox(-1.0F, -2.0F, -1.0F, 2.0F, 4.0F, 2.0F, new CubeDeformation(-0.3F)),
+        PartPose.offsetAndRotation(0.0F, 3.5F, 0.0F, 0.0F, 0.5236F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 32, 32);
+}

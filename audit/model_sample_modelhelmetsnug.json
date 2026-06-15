@@ -1,0 +1,443 @@
+{
+  "models": [
+    {
+      "file": "net/narutomod/item/ItemByakuRinnesharingan.java",
+      "class_name": "ModelHelmetSnug",
+      "base_class": "ModelBase",
+      "line_start": 69,
+      "line_end": 89,
+      "texture_width": 32,
+      "texture_height": 16,
+      "part_count": 1,
+      "box_count": 1,
+      "child_link_count": 0,
+      "root_parts": [
+        "bb_main"
+      ],
+      "array_part_count": 0,
+      "dynamic_box_arg_count": 0,
+      "parts": [
+        {
+          "name": "bb_main",
+          "line": 74,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "24.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 76,
+              "args": [
+                "bb_main",
+                "0",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.1F",
+                "false"
+              ]
+            }
+          ]
+        }
+      ],
+      "dynamic_box_args": []
+    },
+    {
+      "file": "net/narutomod/item/ItemDojutsu.java",
+      "class_name": "ModelHelmetSnug",
+      "base_class": "ModelBiped",
+      "line_start": 100,
+      "line_end": 181,
+      "texture_width": 64,
+      "texture_height": 16,
+      "part_count": 4,
+      "box_count": 4,
+      "child_link_count": 0,
+      "root_parts": [
+        "bipedHead",
+        "bipedHeadwear",
+        "forehead",
+        "highlight"
+      ],
+      "array_part_count": 0,
+      "dynamic_box_arg_count": 0,
+      "parts": [
+        {
+          "name": "bipedHead",
+          "line": 111,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 113,
+              "args": [
+                "this.bipedHead",
+                "0",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.05F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "bipedHeadwear",
+          "line": 114,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 116,
+              "args": [
+                "this.bipedHeadwear",
+                "32",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.2F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "highlight",
+          "line": 117,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 119,
+              "args": [
+                "this.highlight",
+                "24",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.15F",
+                "8",
+                "8",
+                "0",
+                "0.0F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "forehead",
+          "line": 121,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 123,
+              "args": [
+                "this.forehead",
+                "0",
+                "0",
+                "-2.0F",
+                "-8.0F",
+                "-4.25F",
+                "4",
+                "4",
+                "0",
+                "0.0F",
+                "false"
+              ]
+            }
+          ]
+        }
+      ],
+      "dynamic_box_args": []
+    },
+    {
+      "file": "net/narutomod/item/ItemSageModeArmor.java",
+      "class_name": "ModelHelmetSnug",
+      "base_class": "ModelBiped",
+      "line_start": 104,
+      "line_end": 141,
+      "texture_width": 64,
+      "texture_height": 16,
+      "part_count": 3,
+      "box_count": 3,
+      "child_link_count": 0,
+      "root_parts": [
+        "bipedHead",
+        "bipedHeadwear",
+        "highlight"
+      ],
+      "array_part_count": 0,
+      "dynamic_box_arg_count": 0,
+      "parts": [
+        {
+          "name": "bipedHead",
+          "line": 110,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 112,
+              "args": [
+                "this.bipedHead",
+                "0",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.02F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "highlight",
+          "line": 113,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 115,
+              "args": [
+                "this.highlight",
+                "24",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.15F",
+                "8",
+                "8",
+                "0",
+                "0.0F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "bipedHeadwear",
+          "line": 116,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 118,
+              "args": [
+                "this.bipedHeadwear",
+                "32",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.2F",
+                "false"
+              ]
+            }
+          ]
+        }
+      ],
+      "dynamic_box_args": []
+    },
+    {
+      "file": "net/narutomod/item/ItemSenjutsu.java",
+      "class_name": "ModelHelmetSnug",
+      "base_class": "ModelBiped",
+      "line_start": 422,
+      "line_end": 450,
+      "texture_width": 64,
+      "texture_height": 16,
+      "part_count": 3,
+      "box_count": 3,
+      "child_link_count": 0,
+      "root_parts": [
+        "bipedHead",
+        "bipedHeadwear",
+        "highlight"
+      ],
+      "array_part_count": 0,
+      "dynamic_box_arg_count": 0,
+      "parts": [
+        {
+          "name": "bipedHead",
+          "line": 428,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 430,
+              "args": [
+                "this.bipedHead",
+                "0",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.02F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "highlight",
+          "line": 431,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 433,
+              "args": [
+                "this.highlight",
+                "24",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.15F",
+                "8",
+                "8",
+                "0",
+                "0.0F",
+                "false"
+              ]
+            }
+          ]
+        },
+        {
+          "name": "bipedHeadwear",
+          "line": 434,
+          "tex_u": null,
+          "tex_v": null,
+          "rotation_point": [
+            "0.0F",
+            "0.0F",
+            "0.0F"
+          ],
+          "rotation": null,
+          "children": [],
+          "boxes": [
+            {
+              "source": "ModelBox",
+              "line": 436,
+              "args": [
+                "this.bipedHeadwear",
+                "32",
+                "0",
+                "-4.0F",
+                "-8.0F",
+                "-4.0F",
+                "8",
+                "8",
+                "8",
+                "0.2F",
+                "false"
+              ]
+            }
+          ]
+        }
+      ],
+      "dynamic_box_args": []
+    }
+  ]
+}

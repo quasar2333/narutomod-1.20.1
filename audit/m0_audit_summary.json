@@ -1,0 +1,28 @@
+{
+  "java_files_scanned": 451,
+  "registry_rows": 437,
+  "registry_counts": {
+    "block_or_block_item": 10,
+    "entity_type": 162,
+    "item": 157,
+    "mob_effect": 10,
+    "sound_event": 98
+  },
+  "uppercase_sound_keys": 14,
+  "model_item_mismatches": 10,
+  "network_messages": 56,
+  "damage_source_rows": 113,
+  "minecraft_get_minecraft_files": 56,
+  "minecraft_get_minecraft_occurrences": 143,
+  "get_entity_data_files": 75,
+  "get_entity_data_occurrences": 297,
+  "outputs": [
+    "audit/legacy_registry_names.csv",
+    "audit/sound_key_case_issues.csv",
+    "audit/model_item_name_mismatches.csv",
+    "audit/network_messages.csv",
+    "audit/damage_source_usage.csv",
+    "audit/client_class_references.csv",
+    "audit/entity_persistent_data_refs.csv"
+  ]
+}

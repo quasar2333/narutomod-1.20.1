@@ -1,0 +1,157 @@
+// Source: net/narutomod/item/ItemRinnegan.java:316 ModelSizPathRobe
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/item/ItemRinnegan.java:316 ModelSizPathRobe
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = HumanoidModel.createMesh(CubeDeformation.NONE, 0.0F);
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bipedBody = root.addOrReplaceChild(
+        "body",
+        CubeListBuilder.create()
+            .texOffs(16, 16)
+            .addBox(-4.0F, 0.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.05F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition robe = bipedBody.addOrReplaceChild(
+        "robe",
+        CubeListBuilder.create()
+            .texOffs(16, 32)
+            .addBox(-4.0F, -24.0F, -2.0F, 8.0F, 12.0F, 4.0F, new CubeDeformation(0.25F)),
+        PartPose.offset(0.0F, 24.0F, 0.0F)
+    );
+
+    PartDefinition skirtRight = robe.addOrReplaceChild(
+        "skirtRight",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, -0.25F, 0.0F)
+    );
+
+    PartDefinition bone2 = skirtRight.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 48)
+            .addBox(-4.0F, 0.0F, 0.0F, 4.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -12.0F, -2.0F, -0.1745F, 0.0F, 0.1745F)
+    );
+
+    PartDefinition bone = skirtRight.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create()
+            .texOffs(8, 48)
+            .addBox(0.0F, 0.0F, -2.1F, 0.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-4.0F, -12.25F, 0.0F, -0.1745F, 0.0F, 0.1745F)
+    );
+
+    PartDefinition bone3 = skirtRight.addOrReplaceChild(
+        "bone3",
+        CubeListBuilder.create()
+            .texOffs(16, 48)
+            .addBox(0.0F, 0.0F, -1.85F, 0.0F, 8.0F, 4.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-4.0F, -12.25F, 0.0F, 0.1745F, 0.0F, 0.1745F)
+    );
+
+    PartDefinition bone4 = skirtRight.addOrReplaceChild(
+        "bone4",
+        CubeListBuilder.create()
+            .texOffs(0, 56)
+            .addBox(-4.0F, 0.0F, 0.1F, 4.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, -12.0F, 2.0F, 0.1745F, 0.0F, 0.1745F)
+    );
+
+    PartDefinition skirtLeft = robe.addOrReplaceChild(
+        "skirtLeft",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, -0.25F, 0.0F)
+    );
+
+    PartDefinition bone7 = skirtLeft.addOrReplaceChild(
+        "bone7",
+        CubeListBuilder.create()
+            .texOffs(0, 48)
+            .mirror()
+            .addBox(0.0F, 0.0F, 0.0F, 4.0F, 8.0F, 0.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(0.0F, -12.0F, -2.0F, -0.1745F, 0.0F, -0.1745F)
+    );
+
+    PartDefinition bone8 = skirtLeft.addOrReplaceChild(
+        "bone8",
+        CubeListBuilder.create()
+            .texOffs(8, 48)
+            .mirror()
+            .addBox(0.0F, 0.0F, -2.1F, 0.0F, 8.0F, 4.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(4.0F, -12.25F, 0.0F, -0.1745F, 0.0F, -0.1745F)
+    );
+
+    PartDefinition bone9 = skirtLeft.addOrReplaceChild(
+        "bone9",
+        CubeListBuilder.create()
+            .texOffs(16, 48)
+            .mirror()
+            .addBox(0.0F, 0.0F, -1.85F, 0.0F, 8.0F, 4.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(4.0F, -12.25F, 0.0F, 0.1745F, 0.0F, -0.1745F)
+    );
+
+    PartDefinition bone10 = skirtLeft.addOrReplaceChild(
+        "bone10",
+        CubeListBuilder.create()
+            .texOffs(0, 56)
+            .mirror()
+            .addBox(0.0F, 0.0F, 0.0F, 4.0F, 8.0F, 0.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(0.0F, -12.0F, 2.1F, 0.1745F, 0.0F, -0.1745F)
+    );
+
+    PartDefinition bipedRightArm = root.addOrReplaceChild(
+        "right_arm",
+        CubeListBuilder.create()
+            .texOffs(40, 16)
+            .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.05F))
+            .texOffs(40, 32)
+            .addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.3F)),
+        PartPose.offsetAndRotation(-5.0F, 2.5F, 0.0F, -0.1745F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bipedLeftArm = root.addOrReplaceChild(
+        "left_arm",
+        CubeListBuilder.create()
+            .texOffs(48, 0)
+            .mirror()
+            .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.05F))
+            .mirror(false)
+            .texOffs(40, 32)
+            .mirror()
+            .addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.3F))
+            .mirror(false),
+        PartPose.offsetAndRotation(5.0F, 2.5F, 0.0F, -0.1745F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bipedRightLeg = root.addOrReplaceChild(
+        "right_leg",
+        CubeListBuilder.create()
+            .texOffs(0, 16)
+            .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.1F))
+            .texOffs(0, 32)
+            .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.3F)),
+        PartPose.offsetAndRotation(-1.9F, 12.0F, 0.0F, 0.0F, 0.0F, 0.0349F)
+    );
+
+    PartDefinition bipedLeftLeg = root.addOrReplaceChild(
+        "left_leg",
+        CubeListBuilder.create()
+            .texOffs(0, 16)
+            .mirror()
+            .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.1F))
+            .mirror(false)
+            .texOffs(0, 32)
+            .mirror()
+            .addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, new CubeDeformation(0.3F))
+            .mirror(false),
+        PartPose.offsetAndRotation(1.9F, 12.0F, 0.0F, 0.0F, 0.0F, -0.0349F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 64);
+}

@@ -1,0 +1,11 @@
+issue,name,details
+registry_without_item_model,mud,
+item_model_without_registry_literal,dojutsu,
+item_model_without_registry_literal,jutsu,
+item_model_without_registry_literal,ninja_armor,
+item_model_without_registry_literal,ninja_armor_anbuboots,
+item_model_without_registry_literal,ninja_armor_iwaboots,
+item_model_without_registry_literal,ninja_armor_kiriboots,
+item_model_without_registry_literal,ninja_armor_kumoboots,
+item_model_without_registry_literal,ninja_armor_sunaboots,
+item_model_without_registry_literal,on_body,

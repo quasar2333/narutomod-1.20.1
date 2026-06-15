@@ -1,0 +1,50 @@
+# IDE
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Gradle and build output
+.gradle/
+**/.gradle/
+build/
+**/build/
+out/
+bin/
+
+# Minecraft runtime output
+run/
+**/run/
+logs/
+**/logs/
+crash-reports/
+**/crash-reports/
+saves/
+**/saves/
+screenshots/
+**/screenshots/
+
+# Generated/local caches
+.metadata/
+eclipse/
+*.launch
+
+# Packaged artifacts are attached to GitHub Releases, not committed.
+*.jar
+!**/gradle/wrapper/gradle-wrapper.jar
+*.zip
+*.7z
+*.rar
+
+# Python caches
+__pycache__/
+**/__pycache__/
+*.pyc
+
+# Local system files
+Thumbs.db
+Desktop.ini

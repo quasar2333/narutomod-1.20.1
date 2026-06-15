@@ -1,0 +1,6 @@
+{
+  "recipes_converted": 42,
+  "issues": 129,
+  "output_dir": "1.20.1\\src\\main\\resources\\data\\narutomod\\recipes",
+  "audit": "audit/recipe_conversion_issues.csv"
+}

@@ -1,0 +1,17 @@
+// Source: net/narutomod/entity/EntityPretaShield.java:285 ModelPretaShield
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityPretaShield.java:285 ModelPretaShield
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bone = root.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-8.0F, -33.0F, -8.0F, 16.0F, 32.0F, 16.0F, new CubeDeformation(2.0F)),
+        PartPose.offset(0.0F, 24.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 32, 32);
+}

@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#narutomod:legacy_zabuza_spawns",
+  "spawners": {
+    "type": "narutomod:zabuza_momochi",
+    "weight": 20,
+    "minCount": 4,
+    "maxCount": 4
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "narutomod:jinton_damage",
+    "narutomod:katon_firestream_damage",
+    "narutomod:kusanagi_damage",
+    "narutomod:hirudora_damage",
+    "narutomod:night_guy_damage"
+  ]
+}

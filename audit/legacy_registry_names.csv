@@ -1,0 +1,438 @@
+registry,name,legacy_file,line,details
+block_or_block_item,amaterasublock,net/narutomod/block/BlockAmaterasuBlock.java,47,setRegistryName literal
+block_or_block_item,explosive_tag,net/narutomod/block/BlockExplosiveTag.java,66,setRegistryName literal
+block_or_block_item,kamuiblock,net/narutomod/block/BlockKamuiBlock.java,35,setRegistryName literal
+block_or_block_item,light_source,net/narutomod/block/BlockLightSource.java,60,setRegistryName literal
+block_or_block_item,meteor,net/narutomod/block/BlockMeteor.java,45,setRegistryName literal
+block_or_block_item,meteorite,net/narutomod/block/BlockMeteorite.java,60,setRegistryName literal
+block_or_block_item,mud,net/narutomod/block/BlockMud.java,76,setRegistryName literal
+block_or_block_item,mud,net/narutomod/block/BlockMud.java,77,setRegistryName literal
+block_or_block_item,portalblock,net/narutomod/block/BlockPortalBlock.java,69,setRegistryName literal
+block_or_block_item,water_still,net/narutomod/block/BlockWaterStill.java,36,setRegistryName literal
+entity_type,altcamviewentity,net/narutomod/entity/EntityAltCamView.java,30,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""altcamviewentity"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,anbu,net/narutomod/entity/EntityAnbu.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""anbu"",""tracker"":""64, 3, true"",""egg"":""-1, -52429""}"
+entity_type,biggerme,net/narutomod/item/ItemYoton.java,61,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""biggerme"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,buddha_1000,net/narutomod/entity/EntityBuddha1000.java,77,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""buddha_1000"",""tracker"":""128, 3, true"",""egg"":null}"
+entity_type,buddha_arm,net/narutomod/entity/EntityBuddha1000.java,80,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""buddha_arm"",""tracker"":""128, 3, true"",""egg"":null}"
+entity_type,bugball,net/narutomod/entity/EntityKikaichu.java,54,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""bugball"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,c_1,net/narutomod/entity/EntityC1.java,42,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""c_1"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,c_2,net/narutomod/entity/EntityC2.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""c_2"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,c_3,net/narutomod/entity/EntityC3.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""c_3"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,cellular_activation,net/narutomod/entity/EntityCellularActivation.java,48,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""cellular_activation"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,chibaku_satellite,net/narutomod/entity/EntityChibakuTenseiBall.java,64,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""chibaku_satellite"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,chibaku_tensei_ball,net/narutomod/entity/EntityChibakuTenseiBall.java,61,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""chibaku_tensei_ball"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,chidori,net/narutomod/entity/EntityChidori.java,69,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""chidori"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,chidori_spear,net/narutomod/entity/EntityChidori.java,71,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""chidori_spear"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,crow,net/narutomod/entity/EntityCrow.java,29,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""crow"",""tracker"":""64, 3, true"",""egg"":""-16777216, -13421773""}"
+entity_type,earth_blocks,net/narutomod/entity/EntityEarthBlocks.java,69,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""earth_blocks"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,earth_sandwich,net/narutomod/entity/EntityEarthSandwich.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""earth_sandwich"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,earth_spears,net/narutomod/entity/EntityEarthSpears.java,40,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""earth_spears"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,eight_tails,net/narutomod/entity/EntityEightTails.java,49,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""eight_tails"",""tracker"":""96, 3, true"",""egg"":""-5469059, -5469059""}"
+entity_type,eighttrigramsentity,net/narutomod/entity/EntityEightTrigrams.java,56,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""eighttrigramsentity"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,enhanced_strength,net/narutomod/entity/EntityEnhancedStrength.java,34,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""enhanced_strength"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,entity80gods,net/narutomod/item/ItemKekkeiMora.java,60,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entity80gods"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybrackendance,net/narutomod/item/ItemShikotsumyaku.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybrackendance"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletashbones,net/narutomod/item/ItemAshBones.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletashbones"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletasuracanon,net/narutomod/item/ItemAsuraCanon.java,46,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletasuracanon"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletblack_receiver,net/narutomod/item/ItemBlackReceiver.java,65,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletblack_receiver"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletfolding_fan,net/narutomod/item/ItemFoldingFan.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletfolding_fan"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybullethiramekarei_sword,net/narutomod/item/ItemHiramekareiSword.java,64,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybullethiramekarei_sword"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletkamuishuriken,net/narutomod/item/ItemKamuiShuriken.java,65,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletkamuishuriken"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletkiba_blades,net/narutomod/item/ItemKibaBlades.java,69,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletkiba_blades"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletkunai,net/narutomod/item/ItemKunai.java,63,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletkunai"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletkunai_explosive,net/narutomod/item/ItemKunaiExplosive.java,65,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletkunai_explosive"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletkusanagi_sword,net/narutomod/item/ItemKusanagiSword.java,68,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletkusanagi_sword"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletnuibari_sword,net/narutomod/item/ItemNuibariSword.java,86,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletnuibari_sword"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletscroll_karasu,net/narutomod/item/ItemScrollKarasu.java,58,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletscroll_karasu"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletscroll_sanshouo,net/narutomod/item/ItemScrollSanshouo.java,59,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletscroll_sanshouo"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletsenjutsu,net/narutomod/item/ItemSenjutsu.java,80,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletsenjutsu"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletshuriken,net/narutomod/item/ItemShuriken.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletshuriken"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitybulletsmoke_bomb,net/narutomod/item/ItemSmokeBomb.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitybulletsmoke_bomb"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entityearthwall,net/narutomod/item/ItemDoton.java,75,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entityearthwall"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entityhidinginrock,net/narutomod/item/ItemDoton.java,77,"{""legacy_numeric_id"":""ENTITY2ID"",""legacy_name"":""entityhidinginrock"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entityhirudora,net/narutomod/item/ItemEightGates.java,99,"{""legacy_numeric_id"":""ENTITYID3"",""legacy_name"":""entityhirudora"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entityjitonshield,net/narutomod/item/ItemJiton.java,78,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entityjitonshield"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitykagutsuchiswordbigfireball,net/narutomod/item/ItemKagutsuchiSwordRanged.java,68,"{""legacy_numeric_id"":""ENTITYID2"",""legacy_name"":""entitykagutsuchiswordbigfireball"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entitykagutsuchiswordfireball,net/narutomod/item/ItemKagutsuchiSwordRanged.java,65,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitykagutsuchiswordfireball"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,entityngdragon,net/narutomod/item/ItemEightGates.java,97,"{""legacy_numeric_id"":""ENTITYID2"",""legacy_name"":""entityngdragon"",""tracker"":""96, 1, true"",""egg"":null}"
+entity_type,entitysekizo,net/narutomod/item/ItemEightGates.java,95,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""entitysekizo"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,explosive_clone,net/narutomod/entity/EntityExplosiveClone.java,46,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""explosive_clone"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,false_darkness,net/narutomod/entity/EntityFalseDarkness.java,38,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""false_darkness"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,finger_bone,net/narutomod/entity/EntityFingerBone.java,49,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""finger_bone"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,five_tails,net/narutomod/entity/EntityFiveTails.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""five_tails"",""tracker"":""96, 3, true"",""egg"":""-1, -3355648""}"
+entity_type,four_tails,net/narutomod/entity/EntityFourTails.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""four_tails"",""tracker"":""96, 3, true"",""egg"":""-3407872, -6697984""}"
+entity_type,futon_great_breakthrough,net/narutomod/entity/EntityFutonGreatBreakthrough.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""futon_great_breakthrough"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,futon_vacuum,net/narutomod/entity/EntityFutonVacuum.java,36,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""futon_vacuum"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,futonchakraflow,net/narutomod/item/ItemFuton.java,59,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""futonchakraflow"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,futton_mist,net/narutomod/item/ItemFutton.java,68,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""futton_mist"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,gaara,net/narutomod/entity/EntityGaara.java,48,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""gaara"",""tracker"":""64, 3, true"",""egg"":""-3360672, -6750157""}"
+entity_type,gamabunta,net/narutomod/entity/EntityGamabunta.java,35,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""gamabunta"",""tracker"":""128, 3, true"",""egg"":""-6266019, -10996173""}"
+entity_type,gedo_statue,net/narutomod/entity/EntityGedoStatue.java,63,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""gedo_statue"",""tracker"":""128, 3, true"",""egg"":""-8621734, -10069692""}"
+entity_type,giant_dog_2h,net/narutomod/entity/EntityGiantDog2h.java,60,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""giant_dog_2h"",""tracker"":""64, 3, true"",""egg"":""-11388356, -9088173""}"
+entity_type,ground_shock,net/narutomod/entity/EntityGroundShock.java,38,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ground_shock"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,hakkeshokeitenentity,net/narutomod/entity/EntityHakkeshoKeiten.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""hakkeshokeitenentity"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,haku,net/narutomod/entity/EntityHaku.java,52,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""haku"",""tracker"":""64, 3, true"",""egg"":""-16737895, -1""}"
+entity_type,hiding_in_ash,net/narutomod/entity/EntityHidingInAsh.java,36,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""hiding_in_ash"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,ice_dome,net/narutomod/entity/EntityIceDome.java,60,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ice_dome"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,ice_prison,net/narutomod/entity/EntityIcePrison.java,43,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ice_prison"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,ice_spear,net/narutomod/entity/EntityIceSpear.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ice_spear"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,ice_spike,net/narutomod/item/ItemHyoton.java,72,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ice_spike"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,inton_raiha,net/narutomod/entity/EntityIntonRaiha.java,36,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""inton_raiha"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,iruka_sensei,net/narutomod/entity/EntityIrukaSensei.java,60,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""iruka_sensei"",""tracker"":""64, 3, true"",""egg"":""-16751104, -6711040""}"
+entity_type,itachi,net/narutomod/entity/EntityItachi.java,83,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""itachi"",""tracker"":""64, 3, true"",""egg"":""-16777216, -65485""}"
+entity_type,jinchuriki_clone,net/narutomod/entity/EntityJinchurikiClone.java,47,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""jinchuriki_clone"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,jintonbeam,net/narutomod/item/ItemJinton.java,75,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""jintonbeam"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,jintoncube,net/narutomod/item/ItemJinton.java,77,"{""legacy_numeric_id"":""ENTITY2ID"",""legacy_name"":""jintoncube"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,kage_bunshin,net/narutomod/entity/EntityKageBunshin.java,55,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kage_bunshin"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,kakashi,net/narutomod/entity/EntityKakashi.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kakashi"",""tracker"":""64, 3, true"",""egg"":""-16737946, -16764058""}"
+entity_type,kankuro,net/narutomod/entity/EntityKankuro.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kankuro"",""tracker"":""64, 3, true"",""egg"":""-16777216, -3355444""}"
+entity_type,katonfireball,net/narutomod/item/ItemKaton.java,76,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""katonfireball"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,katonfirestream,net/narutomod/item/ItemKaton.java,78,"{""legacy_numeric_id"":""ENTITY2ID"",""legacy_name"":""katonfirestream"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,kikaichu,net/narutomod/entity/EntityKikaichu.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kikaichu"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,kingofhellentity,net/narutomod/entity/EntityKingOfHell.java,60,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kingofhellentity"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,kirin,net/narutomod/entity/EntityKirin.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kirin"",""tracker"":""128, 3, true"",""egg"":null}"
+entity_type,kisame_hoshigaki,net/narutomod/entity/EntityKisameHoshigaki.java,87,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kisame_hoshigaki"",""tracker"":""64, 3, true"",""egg"":""-13421773, -3355444""}"
+entity_type,kurotsuchi,net/narutomod/entity/EntityKurotsuchi.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""kurotsuchi"",""tracker"":""64, 3, true"",""egg"":""-39271, -13108""}"
+entity_type,laser_circus,net/narutomod/entity/EntityLaserCircus.java,48,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""laser_circus"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,laser_ring,net/narutomod/entity/EntityLaserCircus.java,50,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""laser_ring"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,lava_chakra_mode,net/narutomod/entity/EntityLavaChakraMode.java,54,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""lava_chakra_mode"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,lightning_arc,net/narutomod/entity/EntityLightningArc.java,55,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""lightning_arc"",""tracker"":""96, 3, true"",""egg"":null}"
+entity_type,lightning_beast,net/narutomod/entity/EntityLightningBeast.java,59,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""lightning_beast"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,limbo_clone,net/narutomod/entity/EntityLimboClone.java,56,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""limbo_clone"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,magmaball,net/narutomod/item/ItemYooton.java,70,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""magmaball"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,manda,net/narutomod/entity/EntityManda.java,28,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""manda"",""tracker"":""128, 3, true"",""egg"":""-10092391, -10092340""}"
+entity_type,melting_jutsu,net/narutomod/entity/EntityMeltingJutsu.java,47,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""melting_jutsu"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,mightguy,net/narutomod/entity/EntityMightGuy.java,86,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""mightguy"",""tracker"":""64, 3, true"",""egg"":""-16751104, -3355648""}"
+entity_type,mind_transfer,net/narutomod/entity/EntityMindTransfer.java,54,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""mind_transfer"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,mind_transfer_self,net/narutomod/entity/EntityMindTransfer.java,57,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""mind_transfer_self"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,nine_tails,net/narutomod/entity/EntityNineTails.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""nine_tails"",""tracker"":""96, 3, true"",""egg"":""-39424, -13421773""}"
+entity_type,ninja_iwa,net/narutomod/entity/EntityNinjaIwa.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ninja_iwa"",""tracker"":""64, 3, true"",""egg"":""-6737152, -6710887""}"
+entity_type,ninja_kiri,net/narutomod/entity/EntityNinjaKiri.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ninja_kiri"",""tracker"":""64, 3, true"",""egg"":""-16777216, -10066330""}"
+entity_type,ninja_konoha,net/narutomod/entity/EntityNinjaKonoha.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ninja_konoha"",""tracker"":""64, 3, true"",""egg"":""-16751053, -16764058""}"
+entity_type,ninja_kumo,net/narutomod/entity/EntityNinjaKumo.java,44,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ninja_kumo"",""tracker"":""64, 3, true"",""egg"":""-6395566, -1""}"
+entity_type,ninja_suna,net/narutomod/entity/EntityNinjaSuna.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ninja_suna"",""tracker"":""64, 3, true"",""egg"":""-7044282, -16777216""}"
+entity_type,one_tail,net/narutomod/entity/EntityOneTail.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""one_tail"",""tracker"":""96, 3, true"",""egg"":""-3355648, -16737844""}"
+entity_type,particle,net/narutomod/entity/EntityParticle.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""particle"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,poison_mist,net/narutomod/entity/EntityPoisonMist.java,43,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""poison_mist"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,pretashieldentity,net/narutomod/entity/EntityPretaShield.java,50,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""pretashieldentity"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,puppet_hiruko,net/narutomod/entity/EntityPuppetHiruko.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""puppet_hiruko"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,puppet_karasu,net/narutomod/entity/EntityPuppetKarasu.java,43,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""puppet_karasu"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,puppet_sanshouo,net/narutomod/entity/EntityPuppetSanshouo.java,49,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""puppet_sanshouo"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,purple_dragon,net/narutomod/entity/EntityGedoStatue.java,67,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""purple_dragon"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,raitonchakramode,net/narutomod/item/ItemRaiton.java,59,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""raitonchakramode"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,ranton_koga,net/narutomod/entity/EntityRantonKoga.java,30,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ranton_koga"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,rantoncloud,net/narutomod/item/ItemRanton.java,53,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""rantoncloud"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,rasengan,net/narutomod/entity/EntityRasengan.java,70,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""rasengan"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,rasenshuriken,net/narutomod/entity/EntityRasenshuriken.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""rasenshuriken"",""tracker"":""96, 3, true"",""egg"":null}"
+entity_type,replacementclone,net/narutomod/item/ItemNinjutsu.java,76,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""replacementclone"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,sakura_haruno,net/narutomod/entity/EntitySakuraHaruno.java,71,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sakura_haruno"",""tracker"":""64, 3, true"",""egg"":""-3407668, -26215""}"
+entity_type,sand_bind,net/narutomod/entity/EntitySandBind.java,46,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sand_bind"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,sand_bullet,net/narutomod/entity/EntitySandBullet.java,43,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sand_bullet"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,sand_levitation,net/narutomod/entity/EntitySandLevitation.java,54,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sand_levitation"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,scorchorb,net/narutomod/item/ItemShakuton.java,68,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""scorchorb"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,sealing,net/narutomod/entity/EntitySealing.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sealing"",""tracker"":""96, 3, true"",""egg"":null}"
+entity_type,sealing_chains,net/narutomod/entity/EntitySealingChains.java,48,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""sealing_chains"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,seven_tails,net/narutomod/entity/EntitySevenTails.java,58,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""seven_tails"",""tracker"":""96, 3, true"",""egg"":""-10066330, -13312""}"
+entity_type,shadow_imitation,net/narutomod/entity/EntityShadowImitation.java,62,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""shadow_imitation"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,six_tails,net/narutomod/entity/EntitySixTails.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""six_tails"",""tracker"":""96, 3, true"",""egg"":""-2500097, -1""}"
+entity_type,slug,net/narutomod/entity/EntitySlug.java,62,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""slug"",""tracker"":""128, 3, true"",""egg"":""-1, 0xFF3C7593""}"
+entity_type,snake_8_head1,net/narutomod/entity/EntitySnake8Heads.java,68,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""snake_8_head1"",""tracker"":""128, 3, true"",""egg"":""-1, -10066330""}"
+entity_type,snake_8_heads,net/narutomod/entity/EntitySnake8Heads.java,65,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""snake_8_heads"",""tracker"":""128, 3, true"",""egg"":null}"
+entity_type,snake_summon,net/narutomod/item/ItemSummoningContract.java,64,"{""legacy_numeric_id"":""ENTITY2ID"",""legacy_name"":""snake_summon"",""tracker"":""96, 3, true"",""egg"":""-1, -1""}"
+entity_type,specialeffectentity,net/narutomod/entity/EntitySpecialEffect.java,47,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""specialeffectentity"",""tracker"":""128, 1, true"",""egg"":null}"
+entity_type,spike,net/narutomod/entity/EntitySpike.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""spike"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,suiton_shark,net/narutomod/entity/EntitySuitonShark.java,56,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""suiton_shark"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,suitonmist,net/narutomod/item/ItemSuiton.java,82,"{""legacy_numeric_id"":""ENTITY2ID"",""legacy_name"":""suitonmist"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,suitonstream,net/narutomod/item/ItemSuiton.java,80,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""suitonstream"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,susanooclothed,net/narutomod/entity/EntitySusanooClothed.java,66,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""susanooclothed"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,susanooskeleton,net/narutomod/entity/EntitySusanooSkeleton.java,40,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""susanooskeleton"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,susanoowinged,net/narutomod/entity/EntitySusanooWinged.java,63,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""susanoowinged"",""tracker"":""96, 1, true"",""egg"":null}"
+entity_type,swamp_pit,net/narutomod/entity/EntitySwampPit.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""swamp_pit"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,tailbeastball,net/narutomod/entity/EntityTailedBeast.java,106,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""tailbeastball"",""tracker"":""128, 1, true"",""egg"":null}"
+entity_type,temari,net/narutomod/entity/EntityTemari.java,45,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""temari"",""tracker"":""64, 3, true"",""egg"":""-13421773, -3407821""}"
+entity_type,ten_tails,net/narutomod/entity/EntityTenTails.java,54,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""ten_tails"",""tracker"":""96, 3, true"",""egg"":""-13421773, -16777216""}"
+entity_type,tensei_baku_gold,net/narutomod/entity/EntityTenseiBakuGold.java,51,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""tensei_baku_gold"",""tracker"":""128, 3, true"",""egg"":null}"
+entity_type,tensei_baku_silver,net/narutomod/entity/EntityTenseiBakuSilver.java,55,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""tensei_baku_silver"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,tenseigangun,net/narutomod/item/ItemTenseiganChakraMode.java,68,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""tenseigangun"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,tenten,net/narutomod/entity/EntityTenten.java,67,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""tenten"",""tracker"":""64, 3, true"",""egg"":""-1, -13210""}"
+entity_type,three_tails,net/narutomod/entity/EntityThreeTails.java,52,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""three_tails"",""tracker"":""96, 3, true"",""egg"":""-10066330, -6750208""}"
+entity_type,toad_summon,net/narutomod/item/ItemSummoningContract.java,62,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""toad_summon"",""tracker"":""96, 3, true"",""egg"":""-1, -1""}"
+entity_type,transformation_jutsu,net/narutomod/entity/EntityTransformationJutsu.java,47,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""transformation_jutsu"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,truthseekerball,net/narutomod/entity/EntityTruthSeekerBall.java,63,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""truthseekerball"",""tracker"":""96, 3, true"",""egg"":null}"
+entity_type,two_tails,net/narutomod/entity/EntityTwoTails.java,56,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""two_tails"",""tracker"":""96, 3, true"",""egg"":""-16737793, -16777216""}"
+entity_type,unrivaled_strength,net/narutomod/entity/EntityUnrivaledStrength.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""unrivaled_strength"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,water_dragon,net/narutomod/entity/EntityWaterDragon.java,57,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""water_dragon"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,water_prison,net/narutomod/entity/EntityWaterPrison.java,48,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""water_prison"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,water_shockwave,net/narutomod/entity/EntityWaterShockwave.java,49,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""water_shockwave"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,whitezetsu,net/narutomod/entity/EntityWhiteZetsu.java,55,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""whitezetsu"",""tracker"":""64, 3, true"",""egg"":""-16724788, -1""}"
+entity_type,wood_arm,net/narutomod/entity/EntityWoodArm.java,31,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""wood_arm"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,wood_burial,net/narutomod/entity/EntityWoodBurial.java,39,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""wood_burial"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,wood_golem,net/narutomod/entity/EntityWoodGolem.java,56,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""wood_golem"",""tracker"":""96, 3, true"",""egg"":null}"
+entity_type,wood_prison,net/narutomod/entity/EntityWoodPrison.java,49,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""wood_prison"",""tracker"":""64, 3, true"",""egg"":null}"
+entity_type,yasaka_magatama,net/narutomod/entity/EntitySusanooClothed.java,68,"{""legacy_numeric_id"":""ENTITYID_RANGED"",""legacy_name"":""yasaka_magatama"",""tracker"":""64, 1, true"",""egg"":null}"
+entity_type,zabuza_momochi,net/narutomod/entity/EntityZabuzaMomochi.java,74,"{""legacy_numeric_id"":""ENTITYID"",""legacy_name"":""zabuza_momochi"",""tracker"":""64, 3, true"",""egg"":""-6710887, -16764058""}"
+item,akatsuki_robebody,net/narutomod/item/ItemAkatsukiRobe.java,84,setRegistryName literal
+item,akatsuki_robehelmet,net/narutomod/item/ItemAkatsukiRobe.java,68,setRegistryName literal
+item,anbu_mask_1helmet,net/narutomod/item/ItemAnbuMask1.java,64,setRegistryName literal
+item,anbu_mask_2helmet,net/narutomod/item/ItemAnbuMask2.java,64,setRegistryName literal
+item,anbu_mask_3helmet,net/narutomod/item/ItemAnbuMask3.java,64,setRegistryName literal
+item,anbu_sword,net/narutomod/item/ItemAnbuSword.java,39,setRegistryName literal
+item,ashbones,net/narutomod/item/ItemAshBones.java,73,setRegistryName literal
+item,asuracanon,net/narutomod/item/ItemAsuraCanon.java,67,setRegistryName literal
+item,asurapatharmorbody,net/narutomod/item/ItemAsuraPathArmor.java,86,setRegistryName literal
+item,bakuton,net/narutomod/item/ItemBakuton.java,98,setRegistryName literal
+item,biju_cloakbody,net/narutomod/item/ItemBijuCloak.java,229,setRegistryName literal
+item,biju_cloakhelmet,net/narutomod/item/ItemBijuCloak.java,127,setRegistryName literal
+item,biju_cloaklegs,net/narutomod/item/ItemBijuCloak.java,276,setRegistryName literal
+item,black_receiver,net/narutomod/item/ItemBlackReceiver.java,90,setRegistryName literal
+item,bone_armorbody,net/narutomod/item/ItemBoneArmor.java,89,setRegistryName literal
+item,bone_drill,net/narutomod/item/ItemBoneDrill.java,41,setRegistryName literal
+item,bone_sword,net/narutomod/item/ItemBoneSword.java,88,setRegistryName literal
+item,byakuganhelmet,net/narutomod/item/ItemByakugan.java,182,setRegistryName literal
+item,byakurinnesharinganhelmet,net/narutomod/item/ItemByakuRinnesharingan.java,59,setRegistryName literal
+item,chakrafruit,net/narutomod/item/ItemChakraFruit.java,47,setRegistryName literal
+item,chokuto,net/narutomod/item/ItemChokuto.java,47,setRegistryName literal
+item,doton,net/narutomod/item/ItemDoton.java,91,setRegistryName literal
+item,eightgates,net/narutomod/item/ItemEightGates.java,249,setRegistryName literal
+item,folding_fan,net/narutomod/item/ItemFoldingFan.java,81,setRegistryName literal
+item,futon,net/narutomod/item/ItemFuton.java,87,setRegistryName literal
+item,futton,net/narutomod/item/ItemFutton.java,82,setRegistryName literal
+item,gourdbody,net/narutomod/item/ItemGourd.java,109,setRegistryName literal
+item,hiramekarei_sword,net/narutomod/item/ItemHiramekareiSword.java,89,setRegistryName literal
+item,hyoton,net/narutomod/item/ItemHyoton.java,97,setRegistryName literal
+item,ice_senbon,net/narutomod/item/ItemIceSenbon.java,55,setRegistryName literal
+item,inton,net/narutomod/item/ItemInton.java,60,setRegistryName literal
+item,iryo_jutsu,net/narutomod/item/ItemIryoJutsu.java,70,setRegistryName literal
+item,jinton,net/narutomod/item/ItemJinton.java,102,setRegistryName literal
+item,jiton,net/narutomod/item/ItemJiton.java,117,setRegistryName literal
+item,kabutowari,net/narutomod/item/ItemKabutowari.java,78,setRegistryName literal
+item,kabutowari_axe,net/narutomod/item/ItemKabutowariAxe.java,51,setRegistryName literal
+item,kabutowari_hammer,net/narutomod/item/ItemKabutowariHammer.java,126,setRegistryName literal
+item,kagutsuchiswordranged,net/narutomod/item/ItemKagutsuchiSwordRanged.java,91,setRegistryName literal
+item,kamuishuriken,net/narutomod/item/ItemKamuiShuriken.java,90,setRegistryName literal
+item,katon,net/narutomod/item/ItemKaton.java,99,setRegistryName literal
+item,kekkei_mora,net/narutomod/item/ItemKekkeiMora.java,83,setRegistryName literal
+item,kiba_blades,net/narutomod/item/ItemKibaBlades.java,92,setRegistryName literal
+item,kunai,net/narutomod/item/ItemKunai.java,87,setRegistryName literal
+item,kunai_explosive,net/narutomod/item/ItemKunaiExplosive.java,90,setRegistryName literal
+item,kusanagi_sword,net/narutomod/item/ItemKusanagiSword.java,93,setRegistryName literal
+item,mangekyosharinganeternalhelmet,net/narutomod/item/ItemMangekyoSharinganEternal.java,91,setRegistryName literal
+item,mangekyosharinganhelmet,net/narutomod/item/ItemMangekyoSharingan.java,81,setRegistryName literal
+item,mangekyosharinganobitohelmet,net/narutomod/item/ItemMangekyoSharinganObito.java,101,setRegistryName literal
+item,medical_scroll,net/narutomod/item/ItemMedicalScroll.java,47,setRegistryName literal
+item,military_rations_pill,net/narutomod/item/ItemMilitaryRationsPill.java,53,setRegistryName literal
+item,military_rations_pill_gold,net/narutomod/item/ItemMilitaryRationsPillGold.java,54,setRegistryName literal
+item,mokuton,net/narutomod/item/ItemMokuton.java,91,setRegistryName literal
+item,ninja_armor_amehelmet,net/narutomod/item/ItemNinjaArmorAme.java,57,setRegistryName literal
+item,ninja_armor_anbubody,net/narutomod/item/ItemNinjaArmorAnbu.java,48,setRegistryName literal
+item,ninja_armor_anbulegs,net/narutomod/item/ItemNinjaArmorAnbu.java,73,setRegistryName literal
+item,ninja_armor_fishnetslegs,net/narutomod/item/ItemNinjaArmorFishnets.java,51,setRegistryName literal
+item,ninja_armor_iwabody,net/narutomod/item/ItemNinjaArmorIwa.java,70,setRegistryName literal
+item,ninja_armor_iwahelmet,net/narutomod/item/ItemNinjaArmorIwa.java,51,setRegistryName literal
+item,ninja_armor_iwalegs,net/narutomod/item/ItemNinjaArmorIwa.java,94,setRegistryName literal
+item,ninja_armor_jumpsuitlegs,net/narutomod/item/ItemNinjaArmorJumpsuit.java,52,setRegistryName literal
+item,ninja_armor_kiribody,net/narutomod/item/ItemNinjaArmorKiri.java,71,setRegistryName literal
+item,ninja_armor_kirihelmet,net/narutomod/item/ItemNinjaArmorKiri.java,51,setRegistryName literal
+item,ninja_armor_kirilegs,net/narutomod/item/ItemNinjaArmorKiri.java,97,setRegistryName literal
+item,ninja_armor_konohabody,net/narutomod/item/ItemNinjaArmorKonoha.java,75,setRegistryName literal
+item,ninja_armor_konohahelmet,net/narutomod/item/ItemNinjaArmorKonoha.java,51,setRegistryName literal
+item,ninja_armor_konohalegs,net/narutomod/item/ItemNinjaArmorKonoha.java,100,setRegistryName literal
+item,ninja_armor_kumobody,net/narutomod/item/ItemNinjaArmorKumo.java,70,setRegistryName literal
+item,ninja_armor_kumohelmet,net/narutomod/item/ItemNinjaArmorKumo.java,51,setRegistryName literal
+item,ninja_armor_kumolegs,net/narutomod/item/ItemNinjaArmorKumo.java,86,setRegistryName literal
+item,ninja_armor_sunabody,net/narutomod/item/ItemNinjaArmorSuna.java,75,setRegistryName literal
+item,ninja_armor_sunahelmet,net/narutomod/item/ItemNinjaArmorSuna.java,51,setRegistryName literal
+item,ninja_armor_sunalegs,net/narutomod/item/ItemNinjaArmorSuna.java,100,setRegistryName literal
+item,ninja_armor_war_1body,net/narutomod/item/ItemNinjaArmorWar1.java,77,setRegistryName literal
+item,ninja_armor_war_1helmet,net/narutomod/item/ItemNinjaArmorWar1.java,51,setRegistryName literal
+item,ninjutsu,net/narutomod/item/ItemNinjutsu.java,99,setRegistryName literal
+item,nuibari_sword,net/narutomod/item/ItemNuibariSword.java,116,setRegistryName literal
+item,nuibari_thrown,net/narutomod/item/ItemNuibariThrown.java,67,setRegistryName literal
+item,raiton,net/narutomod/item/ItemRaiton.java,73,setRegistryName literal
+item,ranton,net/narutomod/item/ItemRanton.java,67,setRegistryName literal
+item,rinneganbody,net/narutomod/item/ItemRinnegan.java,226,setRegistryName literal
+item,rinneganhelmet,net/narutomod/item/ItemRinnegan.java,190,setRegistryName literal
+item,rinneganlegs,net/narutomod/item/ItemRinnegan.java,262,setRegistryName literal
+item,ryo_100,net/narutomod/item/ItemRyo100.java,45,setRegistryName literal
+item,ryo_1000,net/narutomod/item/ItemRyo1000.java,45,setRegistryName literal
+item,ryo_10000,net/narutomod/item/ItemRyo10000.java,45,setRegistryName literal
+item,ryo_1_m,net/narutomod/item/ItemRyo1M.java,41,setRegistryName literal
+item,sage_mode_armorhelmet,net/narutomod/item/ItemSageModeArmor.java,93,setRegistryName literal
+item,samehada,net/narutomod/item/ItemSamehada.java,57,setRegistryName literal
+item,samurai_armorbody,net/narutomod/item/ItemSamuraiArmor.java,92,setRegistryName literal
+item,samurai_armorhelmet,net/narutomod/item/ItemSamuraiArmor.java,73,setRegistryName literal
+item,samurai_armorlegs,net/narutomod/item/ItemSamuraiArmor.java,117,setRegistryName literal
+item,scroll_big_blow,net/narutomod/item/ItemScrollBigBlow.java,50,setRegistryName literal
+item,scroll_body_replacement,net/narutomod/item/ItemScrollBodyReplacement.java,50,setRegistryName literal
+item,scroll_cellular_activation,net/narutomod/item/ItemScrollCellularActivation.java,50,setRegistryName literal
+item,scroll_chidori,net/narutomod/item/ItemScrollChidori.java,50,setRegistryName literal
+item,scroll_earth_sandwich,net/narutomod/item/ItemScrollEarthSandwich.java,50,setRegistryName literal
+item,scroll_earth_spears,net/narutomod/item/ItemScrollEarthSpears.java,50,setRegistryName literal
+item,scroll_earth_wall,net/narutomod/item/ItemScrollEarthWall.java,50,setRegistryName literal
+item,scroll_enhanced_strength,net/narutomod/item/ItemScrollEnhancedStrength.java,50,setRegistryName literal
+item,scroll_false_darkness,net/narutomod/item/ItemScrollFalseDarkness.java,50,setRegistryName literal
+item,scroll_fire_annihilation,net/narutomod/item/ItemScrollFireAnnihilation.java,50,setRegistryName literal
+item,scroll_fire_stream,net/narutomod/item/ItemScrollFireStream.java,50,setRegistryName literal
+item,scroll_futon_chakra_flow,net/narutomod/item/ItemScrollFutonChakraFlow.java,50,setRegistryName literal
+item,scroll_futon_vacuum,net/narutomod/item/ItemScrollFutonVacuum.java,50,setRegistryName literal
+item,scroll_genjutsu,net/narutomod/item/ItemScrollGenjutsu.java,50,setRegistryName literal
+item,scroll_great_fireball,net/narutomod/item/ItemScrollGreatFireball.java,50,setRegistryName literal
+item,scroll_healing,net/narutomod/item/ItemScrollHealing.java,50,setRegistryName literal
+item,scroll_hiding_in_ash,net/narutomod/item/ItemScrollHidingInAsh.java,50,setRegistryName literal
+item,scroll_hiding_in_camouflage,net/narutomod/item/ItemScrollHidingInCamouflage.java,50,setRegistryName literal
+item,scroll_hiding_in_mist,net/narutomod/item/ItemScrollHidingInMist.java,50,setRegistryName literal
+item,scroll_hiding_in_rock,net/narutomod/item/ItemScrollHidingInRock.java,50,setRegistryName literal
+item,scroll_kage_bunshin,net/narutomod/item/ItemScrollKageBunshin.java,50,setRegistryName literal
+item,scroll_karasu,net/narutomod/item/ItemScrollKarasu.java,83,setRegistryName literal
+item,scroll_kikaichu_sphere,net/narutomod/item/ItemScrollKikaichuSphere.java,50,setRegistryName literal
+item,scroll_lightning_beast,net/narutomod/item/ItemScrollLightningBeast.java,50,setRegistryName literal
+item,scroll_lightning_chakra_mode,net/narutomod/item/ItemScrollLightningChakraMode.java,50,setRegistryName literal
+item,scroll_mind_transfer,net/narutomod/item/ItemScrollMindTransfer.java,50,setRegistryName literal
+item,scroll_multi_size,net/narutomod/item/ItemScrollMultiSize.java,50,setRegistryName literal
+item,scroll_poison_mist,net/narutomod/item/ItemScrollPoisonMist.java,50,setRegistryName literal
+item,scroll_rasengan,net/narutomod/item/ItemScrollRasengan.java,50,setRegistryName literal
+item,scroll_rasenshuriken,net/narutomod/item/ItemScrollRasenshuriken.java,50,setRegistryName literal
+item,scroll_sanshouo,net/narutomod/item/ItemScrollSanshouo.java,84,setRegistryName literal
+item,scroll_shadow_imitation,net/narutomod/item/ItemScrollShadowImitation.java,50,setRegistryName literal
+item,scroll_swamp_pit,net/narutomod/item/ItemScrollSwampPit.java,50,setRegistryName literal
+item,scroll_transformation,net/narutomod/item/ItemScrollTransformation.java,50,setRegistryName literal
+item,scroll_water_dragon,net/narutomod/item/ItemScrollWaterDragon.java,50,setRegistryName literal
+item,scroll_water_prison,net/narutomod/item/ItemScrollWaterPrison.java,50,setRegistryName literal
+item,scroll_water_shark,net/narutomod/item/ItemScrollWaterShark.java,50,setRegistryName literal
+item,scroll_water_shockwave,net/narutomod/item/ItemScrollWaterShockwave.java,50,setRegistryName literal
+item,scroll_water_stream,net/narutomod/item/ItemScrollWaterStream.java,50,setRegistryName literal
+item,senjutsu,net/narutomod/item/ItemSenjutsu.java,117,setRegistryName literal
+item,shakuton,net/narutomod/item/ItemShakuton.java,92,setRegistryName literal
+item,sharinganhelmet,net/narutomod/item/ItemSharingan.java,257,setRegistryName literal
+item,shibuki_sword,net/narutomod/item/ItemShibukiSword.java,50,setRegistryName literal
+item,shikotsumyaku,net/narutomod/item/ItemShikotsumyaku.java,85,setRegistryName literal
+item,shuriken,net/narutomod/item/ItemShuriken.java,81,setRegistryName literal
+item,six_path_senjutsu,net/narutomod/item/ItemSixPathSenjutsu.java,81,setRegistryName literal
+item,smoke_bomb,net/narutomod/item/ItemSmokeBomb.java,76,setRegistryName literal
+item,steam_armorbody,net/narutomod/item/ItemSteamArmor.java,91,setRegistryName literal
+item,steam_armorhelmet,net/narutomod/item/ItemSteamArmor.java,72,setRegistryName literal
+item,steam_armorlegs,net/narutomod/item/ItemSteamArmor.java,109,setRegistryName literal
+item,suiton,net/narutomod/item/ItemSuiton.java,103,setRegistryName literal
+item,summoning_contract,net/narutomod/item/ItemSummoningContract.java,112,setRegistryName literal
+item,team_scroll,net/narutomod/item/ItemTeamScroll.java,59,setRegistryName literal
+item,tenseigan_chakra_mode,net/narutomod/item/ItemTenseiganChakraMode.java,91,setRegistryName literal
+item,tenseiganbody,net/narutomod/item/ItemTenseigan.java,150,setRegistryName literal
+item,tenseiganhelmet,net/narutomod/item/ItemTenseigan.java,114,setRegistryName literal
+item,tenseiganlegs,net/narutomod/item/ItemTenseigan.java,186,setRegistryName literal
+item,totsuka_sword,net/narutomod/item/ItemTotsukaSword.java,90,setRegistryName literal
+item,uchihabody,net/narutomod/item/ItemUchiha.java,71,setRegistryName literal
+item,uchihaboots,net/narutomod/item/ItemUchiha.java,93,setRegistryName literal
+item,uchihalegs,net/narutomod/item/ItemUchiha.java,82,setRegistryName literal
+item,whitezetsuflesh,net/narutomod/item/ItemWhiteZetsuFlesh.java,47,setRegistryName literal
+item,yooton,net/narutomod/item/ItemYooton.java,97,setRegistryName literal
+item,yoton,net/narutomod/item/ItemYoton.java,90,setRegistryName literal
+item,zabuza_sword,net/narutomod/item/ItemZabuzaSword.java,46,setRegistryName literal
+item,zzz,net/narutomod/item/ItemZzz.java,52,setRegistryName literal
+mob_effect,amaterasuflame,net/narutomod/potion/PotionAmaterasuFlame.java,38,setRegistryName literal
+mob_effect,chakra_enhanced_strength,net/narutomod/potion/PotionChakraEnhancedStrength.java,62,setRegistryName literal
+mob_effect,chakra_regeneration,net/narutomod/potion/PotionChakraRegeneration.java,39,setRegistryName literal
+mob_effect,corrosion,net/narutomod/potion/PotionCorrosion.java,38,setRegistryName literal
+mob_effect,feather_falling,net/narutomod/potion/PotionFeatherFalling.java,39,setRegistryName literal
+mob_effect,flight,net/narutomod/potion/PotionFlight.java,41,setRegistryName literal
+mob_effect,heaviness,net/narutomod/potion/PotionHeaviness.java,47,setRegistryName literal
+mob_effect,heaviness,net/narutomod/potion/PotionHeaviness.java,55,setRegistryName literal
+mob_effect,paralysis,net/narutomod/potion/PotionParalysis.java,40,setRegistryName literal
+mob_effect,reach,net/narutomod/potion/PotionReach.java,38,setRegistryName literal
+sound_event,80GodsPunch,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,Amaterasu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,BanshoTenin,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ChibakuTensei,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,FurryRoar,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,HakkeKusho,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,HakkeRokujuuyonShou,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,HakkeshoKaiten,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,Kaguya_FinalTSB,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,KamuiSFX,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,KoH_spawn,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,MajiNaguri,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,MonsterGrowl,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ShinraTensei,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,amaterasu2,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,bijudama,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,bonecrack,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,bugs,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,bullet,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,bullet_impact,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,byakugan,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,c3,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,chains,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,charge_ground,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,charging_chakra,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,chidori,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,crow_call,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,daibakusuishoha,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,dingding,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,dojutsu_activate,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,dragon_roar,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,eightgatesrelease,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,electricity,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,explosion,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,flamethrow,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,genjutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,genkaihakurinojutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ground_charge,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,hand_press,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,hand_shoot,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,hiding_in_ash,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,hirudora,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,howl_youth,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ice_formation,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ice_shoot,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,ice_shoot_small,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,intonraiha,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,jutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kagebunshin,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kairikimuso,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,katon_gokamekeku,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,katsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kirigakurenojutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kirin_dialog,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kuchiyosenojutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kyuubi_death,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,kyuubi_howl,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,laser,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,laser_long,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,laser_short,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,lasercircus,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,lightning_shoot,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,magatama_spin,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,makyohyosho,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,mindtransfer,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,mokujin_no_jutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,movement,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,nagiharai,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,opengate,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,poof,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rasengan_during,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rasengan_start,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rasenshuriken,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rasenshuriken_explode,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rinbo_hengoku,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,rocks,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,sabakusoso,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,sando_no_jutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,sekizo,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,shadow_sfx,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,sharingansfx,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,shinsusenju,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,snake_hiss,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,spiked,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,suikodannojutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,suironojutsu,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,suiton_suiryuudan,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,tengaishinsei,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,tenseiblastcharge,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,throwpunch,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,waterblast,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,wind,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,windecho,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,wood_click,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,woodgrow,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,woodspawn,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,yagai,src/main/resources/assets/narutomod/sounds.json,,sounds.json key
+sound_event,yominuma,src/main/resources/assets/narutomod/sounds.json,,sounds.json key

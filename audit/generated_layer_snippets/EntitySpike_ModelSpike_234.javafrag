@@ -1,0 +1,55 @@
+// Source: net/narutomod/entity/EntitySpike.java:234 ModelSpike
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntitySpike.java:234 ModelSpike
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition bone = root.addOrReplaceChild(
+        "bone",
+        CubeListBuilder.create(),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone2 = bone.addOrReplaceChild(
+        "bone2",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -32.0F, 0.0F, 8.0F, 32.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 4.0F, 0.1309F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone3 = bone.addOrReplaceChild(
+        "bone3",
+        CubeListBuilder.create()
+            .texOffs(8, 0)
+            .addBox(-4.0F, -32.0F, 0.0F, 8.0F, 32.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, -4.0F, -0.1309F, 0.0F, 0.0F)
+    );
+
+    PartDefinition bone4 = bone.addOrReplaceChild(
+        "bone4",
+        CubeListBuilder.create()
+            .texOffs(8, 0)
+            .addBox(-4.0F, -32.0F, 0.0F, 8.0F, 32.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(4.0F, 0.0F, 0.0F, -0.1309F, -1.5708F, 0.0F)
+    );
+
+    PartDefinition bone5 = bone.addOrReplaceChild(
+        "bone5",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -32.0F, 0.0F, 8.0F, 32.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(-4.0F, 0.0F, 0.0F, 0.1309F, -1.5708F, 0.0F)
+    );
+
+    PartDefinition bone6 = bone.addOrReplaceChild(
+        "bone6",
+        CubeListBuilder.create()
+            .texOffs(16, 24)
+            .addBox(-4.0F, -4.0F, 0.0F, 8.0F, 8.0F, 0.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.0F, 0.0F, -1.5708F, 0.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 32, 32);
+}

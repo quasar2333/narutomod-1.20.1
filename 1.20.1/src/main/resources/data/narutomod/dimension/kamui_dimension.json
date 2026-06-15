@@ -1,0 +1,6 @@
+{
+  "type": "narutomod:kamui_dimension",
+  "generator": {
+    "type": "narutomod:kamui_chunk_generator"
+  }
+}

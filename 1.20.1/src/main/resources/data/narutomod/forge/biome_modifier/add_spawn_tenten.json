@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#narutomod:legacy_leaf_npc_spawns",
+  "spawners": {
+    "type": "narutomod:tenten",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

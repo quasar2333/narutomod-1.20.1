@@ -1,0 +1,36 @@
+{
+  "group": "narutomod",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "6 8"
+  ],
+  "key": {
+    "0": {
+      "item": "minecraft:gray_wool"
+    },
+    "1": {
+      "item": "minecraft:leather_leggings"
+    },
+    "2": {
+      "item": "minecraft:gray_wool"
+    },
+    "3": {
+      "item": "minecraft:gray_wool"
+    },
+    "5": {
+      "item": "minecraft:gray_wool"
+    },
+    "6": {
+      "item": "minecraft:gray_wool"
+    },
+    "8": {
+      "item": "minecraft:gray_wool"
+    }
+  },
+  "result": {
+    "item": "narutomod:ninja_armor_anbulegs",
+    "count": 1
+  }
+}

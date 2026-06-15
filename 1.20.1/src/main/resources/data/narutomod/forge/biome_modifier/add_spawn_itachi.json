@@ -1,0 +1,10 @@
+{
+  "type": "forge:add_spawns",
+  "biomes": "#narutomod:legacy_itachi_spawns",
+  "spawners": {
+    "type": "narutomod:itachi",
+    "weight": 1,
+    "minCount": 1,
+    "maxCount": 1
+  }
+}

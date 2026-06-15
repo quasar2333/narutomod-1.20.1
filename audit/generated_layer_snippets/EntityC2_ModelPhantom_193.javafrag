@@ -1,0 +1,77 @@
+// Source: net/narutomod/entity/EntityC2.java:193 ModelPhantom
+// Imports needed: CubeDeformation, CubeListBuilder, LayerDefinition, MeshDefinition, PartDefinition, PartPose
+// Source: net/narutomod/entity/EntityC2.java:193 ModelPhantom
+public static LayerDefinition createBodyLayer() {
+    MeshDefinition mesh = new MeshDefinition();
+    PartDefinition root = mesh.getRoot();
+
+    PartDefinition body = root.addOrReplaceChild(
+        "body",
+        CubeListBuilder.create()
+            .texOffs(0, 8)
+            .addBox(-2.5F, -2.0F, -8.0F, 5.0F, 3.0F, 9.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.0F, 0.0F, 0.0F)
+    );
+
+    PartDefinition leftWingBody = body.addOrReplaceChild(
+        "leftWingBody",
+        CubeListBuilder.create()
+            .texOffs(23, 12)
+            .addBox(0.0F, 0.0F, 0.0F, 6.0F, 2.0F, 9.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(2.5F, -2.0F, -8.0F, 0.0F, 0.0F, -0.5236F)
+    );
+
+    PartDefinition leftWing = leftWingBody.addOrReplaceChild(
+        "leftWing",
+        CubeListBuilder.create()
+            .texOffs(16, 24)
+            .addBox(0.0F, 0.0F, 0.0F, 13.0F, 1.0F, 9.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(6.0F, 0.0F, 0.0F, 0.0F, 0.0F, 1.0472F)
+    );
+
+    PartDefinition rightWingBody = body.addOrReplaceChild(
+        "rightWingBody",
+        CubeListBuilder.create()
+            .texOffs(23, 12)
+            .mirror()
+            .addBox(-6.0F, 0.0F, 0.0F, 6.0F, 2.0F, 9.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-2.5F, -2.0F, -8.0F, 0.0F, 0.0F, 0.5236F)
+    );
+
+    PartDefinition rightWing = rightWingBody.addOrReplaceChild(
+        "rightWing",
+        CubeListBuilder.create()
+            .texOffs(16, 24)
+            .mirror()
+            .addBox(-13.0F, 0.0F, 0.0F, 13.0F, 1.0F, 9.0F, new CubeDeformation(0.0F))
+            .mirror(false),
+        PartPose.offsetAndRotation(-6.0F, 0.0F, 0.0F, 0.0F, 0.0F, -1.0472F)
+    );
+
+    PartDefinition head = body.addOrReplaceChild(
+        "head",
+        CubeListBuilder.create()
+            .texOffs(0, 0)
+            .addBox(-4.0F, -2.0F, -5.0F, 7.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)),
+        PartPose.offset(0.5F, 1.0F, -7.0F)
+    );
+
+    PartDefinition tail = body.addOrReplaceChild(
+        "tail",
+        CubeListBuilder.create()
+            .texOffs(3, 20)
+            .addBox(-2.0F, 0.0F, 0.0F, 3.0F, 2.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.5F, -2.0F, 1.0F, -(5.0F + MathHelper.cos(f * 2.0F) * 5.0F) * ((float)Math.PI / 180F), 0.0F, 0.0F)
+    );
+
+    PartDefinition tailtip = tail.addOrReplaceChild(
+        "tailtip",
+        CubeListBuilder.create()
+            .texOffs(4, 29)
+            .addBox(-1.0F, 0.0F, 0.0F, 1.0F, 1.0F, 6.0F, new CubeDeformation(0.0F)),
+        PartPose.offsetAndRotation(0.0F, 0.5F, 6.0F, -(5.0F + MathHelper.cos(f * 2.0F) * 5.0F) * ((float)Math.PI / 180F), 0.0F, 0.0F)
+    );
+
+    return LayerDefinition.create(mesh, 64, 64);
+}

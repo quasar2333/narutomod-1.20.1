@@ -1,0 +1,12 @@
+﻿{
+    "ready":  true,
+    "exitedBeforeReady":  false,
+    "fatalIssueCount":  0,
+    "fatalPatterns":  [
+
+                      ],
+    "stdout":  "1.20.1/run/dedicated-server-gate.out.log",
+    "stderr":  "1.20.1/run/dedicated-server-gate.err.log",
+    "doneLine":  "[17:37:30] [Server thread/INFO] [minecraft/DedicatedServer]: Done (15.990s)! For help, type \"help\"",
+    "checkedAt":  "2026-06-15T17:37:36"
+}

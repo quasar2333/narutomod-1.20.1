@@ -1,0 +1,86 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "narutomod:block/fire_floor0"
+        },
+        {
+          "model": "narutomod:block/fire_floor1"
+        },
+        {
+          "model": "narutomod:block/fire_side0"
+        },
+        {
+          "model": "narutomod:block/fire_side1"
+        },
+        {
+          "model": "narutomod:block/fire_side_alt0"
+        },
+        {
+          "model": "narutomod:block/fire_side_alt1"
+        },
+        {
+          "model": "narutomod:block/fire_side0",
+          "y": 90
+        },
+        {
+          "model": "narutomod:block/fire_side1",
+          "y": 90
+        },
+        {
+          "model": "narutomod:block/fire_side_alt0",
+          "y": 90
+        },
+        {
+          "model": "narutomod:block/fire_side_alt1",
+          "y": 90
+        },
+        {
+          "model": "narutomod:block/fire_side0",
+          "y": 180
+        },
+        {
+          "model": "narutomod:block/fire_side1",
+          "y": 180
+        },
+        {
+          "model": "narutomod:block/fire_side_alt0",
+          "y": 180
+        },
+        {
+          "model": "narutomod:block/fire_side_alt1",
+          "y": 180
+        },
+        {
+          "model": "narutomod:block/fire_side0",
+          "y": 270
+        },
+        {
+          "model": "narutomod:block/fire_side1",
+          "y": 270
+        },
+        {
+          "model": "narutomod:block/fire_side_alt0",
+          "y": 270
+        },
+        {
+          "model": "narutomod:block/fire_side_alt1",
+          "y": 270
+        },
+        {
+          "model": "narutomod:block/fire_up0"
+        },
+        {
+          "model": "narutomod:block/fire_up1"
+        },
+        {
+          "model": "narutomod:block/fire_up_alt0"
+        },
+        {
+          "model": "narutomod:block/fire_up_alt1"
+        }
+      ]
+    }
+  ]
+}

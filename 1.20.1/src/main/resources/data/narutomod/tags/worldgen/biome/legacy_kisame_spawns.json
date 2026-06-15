@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#narutomod:legacy_leaf_npc_spawns",
+    "minecraft:swamp",
+    "minecraft:river",
+    "minecraft:beach",
+    "minecraft:snowy_beach",
+    "minecraft:savanna",
+    "minecraft:savanna_plateau",
+    "minecraft:windswept_savanna"
+  ]
+}
