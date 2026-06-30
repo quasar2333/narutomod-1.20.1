@@ -22,6 +22,7 @@ public final class ModDamageTypes {
     public static final ResourceKey<DamageType> KUSANAGI = ResourceKey.create(Registries.DAMAGE_TYPE, NarutomodMod.location("kusanagi_damage"));
     public static final ResourceKey<DamageType> HIRUDORA = ResourceKey.create(Registries.DAMAGE_TYPE, NarutomodMod.location("hirudora_damage"));
     public static final ResourceKey<DamageType> NIGHT_GUY = ResourceKey.create(Registries.DAMAGE_TYPE, NarutomodMod.location("night_guy_damage"));
+    public static final ResourceKey<DamageType> SHINRATENSEI = ResourceKey.create(Registries.DAMAGE_TYPE, NarutomodMod.location("shinratensei_damage"));
 
     private ModDamageTypes() {
     }
@@ -64,6 +65,10 @@ public final class ModDamageTypes {
 
     public static DamageSource nightGuy(Level level, @Nullable Entity directEntity, @Nullable Entity causingEntity) {
         return source(level, NIGHT_GUY, directEntity, causingEntity);
+    }
+
+    public static DamageSource shinratensei(Level level, @Nullable Entity directEntity, @Nullable Entity causingEntity) {
+        return source(level, SHINRATENSEI, directEntity, causingEntity);
     }
 
     public static DamageSource fireball(Level level, @Nullable Entity directEntity, @Nullable Entity causingEntity) {

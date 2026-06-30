@@ -84,6 +84,7 @@ public final class TenseiganChakraModeItem extends JutsuItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
         if (!(livingEntity instanceof Player player) || (!isSilverBlast(getCurrentJutsu(stack)) && !isGoldBlast(getCurrentJutsu(stack)))) {
             return;
         }

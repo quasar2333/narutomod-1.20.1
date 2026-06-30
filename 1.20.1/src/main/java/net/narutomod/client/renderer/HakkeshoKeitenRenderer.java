@@ -15,8 +15,8 @@ import net.narutomod.client.render.NarutoRenderTypes;
 import net.narutomod.entity.HakkeshoKeitenEntity;
 
 public final class HakkeshoKeitenRenderer extends EntityRenderer<HakkeshoKeitenEntity> {
-    private static final ResourceLocation TEXTURE = NarutomodMod.location("textures/electric_armor.png");
-    private static final float SHELL_ALPHA = 0.3F;
+    private static final ResourceLocation TEXTURE = NarutomodMod.location("textures/kaiten.png");
+    private static final float SHELL_ALPHA = 1.0F;
 
     private final HakkeshoKeitenModel model;
 

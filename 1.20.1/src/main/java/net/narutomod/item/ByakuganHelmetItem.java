@@ -2,6 +2,7 @@ package net.narutomod.item;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -24,8 +25,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.narutomod.NarutomodModVariables;
+import net.narutomod.client.DojutsuHelmetClientExtensions;
 import net.narutomod.procedure.ProcedureUtils;
 import net.narutomod.registry.ModItems;
 
@@ -153,6 +156,11 @@ public final class ByakuganHelmetItem extends ArmorItem {
         return isRinnesharinganStack(stack)
                 ? "narutomod:textures/byakurinnesharingan_helmet.png"
                 : "narutomod:textures/byakuganhelmet.png";
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        DojutsuHelmetClientExtensions.initialize(consumer);
     }
 
     @Override

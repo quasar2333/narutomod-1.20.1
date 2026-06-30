@@ -63,6 +63,7 @@ public final class SummoningContractItem extends JutsuItem implements ItemOnBody
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
         if (!(livingEntity instanceof Player player) || !(level instanceof ServerLevel serverLevel)) {
             return;
         }

@@ -14631,3 +14631,98 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `python tools\validate_dedicated_server_safety.py`: 277 non-client Java files scanned, 0 client-reference issues.
   - `.\gradlew.bat "-Dnet.minecraftforge.gradle.check.certs=false" --no-daemon build`: passes.
   - `tools\run_dedicated_server_gate.ps1`: ready `true`, fatal issue count 0, latest ready line `Done (15.990s)`, checked at `2026-06-15T17:37:36`.
+
+### M7 0.3.2-beta Bugfix Slice — Might Guy / Dojutsu Eyes / Rasenshuriken / Kaiten / Charge HUD
+
+- User-reported regressions fixed against upstream `AHZNB/naruto_mod` branch `0.3.2-beta` (read-only clone at `/tmp/naruto_mod_032`):
+  - 迈特凯错误疯狂刷新。
+  - 眼睛贴图方向反了或无法显示。
+  - 螺旋手里剑释放错误、无法稳定丢出。
+  - 回天贴图/护盾表现太小。
+  - 蓄力条/蓄力数值无法显示。
+
+- 0.3.2-beta behavior audited:
+  - `EntityMightGuy.EntityCustom#getCanSpawnHere`: requires a nearby village (`getNearestVillage(..., 32)`) with at least 20 doors and 10 villagers, and rejects natural spawn if any live `EntityMightGuy` exists; then falls back to `super.getCanSpawnHere()`.
+  - `EntityRasenshuriken.EC#onUpdate`: during grow-time the projectile stays above the shooter; after grow it locks one `targetTrace` from `ProcedureUtils.objectEntityLookingAt(shooter, 50d, 3d)`, damps motion by `0.9d`, then `shoot(..., 0.99f, 0f)`. `onImpact` ignores owner hits and ignores block impacts while `fullScale > 1.0f && ticksInAir < 15`.
+  - `EntityHakkeshoKeiten.EntityCustom`: `maxScale = clamp(PlayerTracker.getNinjaLevel(player) * 0.02f, 1f, 6f)`; render shell uses `entity.getScale() * 3.0F`; collision damage is `ninjaLevel / 4.0F + 10F`; block breaking requires `ninjaLevel >= 70d`.
+  - `ItemJutsu.JutsuEnum#onUsingTick`: charged jutsu with `getPowerupDelay() > 0` displays `String.format("%.1f", power)` in the action bar, then emits chakra-charge smoke/sound.
+  - Dojutsu item models in 0.3.2-beta use `models/custom/{sharingan,byakugan,rinnegan,mangekyo_*}.json` plus `textures/blocks/{sharingan,byakugan,rinnegan,mangekyosharingan_*}.png` for the inventory/head item geometry.
+
+- 1.20.1 implementation:
+  - `registry/ModSpawnPlacements.java`: split Might Guy out of the generic ambient registration and added `checkMightGuySpawnRules`; it now requires the ported natural village context and rejects spawn if another live `MightGuyEntity` exists in a large loaded-area AABB (`512 x 256 x 512`).
+  - `entity/MightGuyEntity.java`: expanded the manual natural-village duplicate search radius to the same large radius so debug/natural helper spawning no longer stacks Guys in the same loaded area.
+  - `entity/RasenshurikenEntity.java`: added locked target-point guidance instead of retargeting every tick from the owner's current look vector; restored the early large-projectile block-impact ignore (`scale > 1`, `ticksInAir < 15`) so release does not immediately detonate on nearby blocks.
+  - `entity/HakkeshoKeitenEntity.java`: restored ninja-level-based size, render scale, damage, and block-break threshold from 0.3.2-beta (`ninjaLevel * 0.02`, max 6, render shell `* 3`, damage `ninjaLevel/4+10`, block break at 70).
+  - `item/JutsuItem.java`: added the common server-side charge actionbar display for any jutsu with `powerUpDelay() > 0`; jutsu subclasses that override `onUseTick` now call `super.onUseTick` so the shared charge display is not skipped.
+  - Dojutsu eye rendering:
+    - Added `item/DojutsuHelmetItem.java` for simple Sharingan/Mangekyo helmet items and `client/DojutsuHelmetClientExtensions.java` for armor-model isolation under the client package.
+    - Extended `client/model/DojutsuHelmetSnugModel.java` with a helmet-only visibility mode, then wired Byakugan, Rinnegan, Obito Mangekyo, Eternal Mangekyo, Sharingan, and Sasuke Mangekyo helmets through the same snug eye overlay model.
+    - Restored 0.3.2-beta custom item model JSONs and block-eye textures under `assets/narutomod/models/custom/` and `assets/narutomod/textures/blocks/`, and pointed the affected item models back to those custom parents.
+    - `RinneganHelmetItem#getArmorTexture` now chooses Rinnegan / Tenseigan / Rinnesharingan texture according to item state instead of relying on a missing/default armor texture path.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: BUILD SUCCESSFUL (only pre-existing Forge deprecation warnings for `onArmorTick` / `ItemBlockRenderTypes.setRenderLayer`).
+  - `python tools/validate_port_resources.py`: all issue counts 0 (`sound_or_path`, `lang_registry`, `model_reference`, `recipe`, `loot_table`, `advancement`, `particle`, `registry_reference`).
+  - `python tools/validate_dedicated_server_safety.py`: 278 non-client Java files scanned, 0 client-reference issues.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; jar regenerated at `1.20.1/build/libs/narutomod-0.2.10-beta.1+mc1.20.1.jar`.
+  - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: not directly runnable on macOS because the script uses Windows `Start-Process -WindowStyle`. Ran the equivalent manual gate with `sh ./gradlew --no-daemon -Dnet.minecraftforge.gradle.check.certs=false runServer`; dedicated server reached `Done (8.358s)! For help, type "help"` at `2026-06-29T21:02:49`, fatal pattern count 0 (`NoClassDefFoundError`, `ClassNotFoundException`, `ModLoadingException`, `Failed to start`, `Error during pre-loading phase`, `Encountered an unexpected exception`, `Crash report saved`, `Exception in server tick loop`). Summary updated in `audit/dedicated_server_startup_summary.json`.
+
+### M7 Yeyo 1.20.1 Decompile Comparison Slice — Shinra Tensei / Ban Sho Ten'in / Hakke Kusho
+
+- User requested comparing the external Yeyo 1.20.1 PublicBeta decompile from the prior Codex thread and migrating the good dojutsu / Six Paths pieces. The decompile remains outside the repo at `/Users/quasar2333/Downloads/narutomod-yeyo-decompile/narutomod-1.20.1-0.3.1-YEYO-PublicBeta-vineflower`; no decompiled source or tool output was copied into the repository.
+- Scope deliberately kept to the highest-confidence missing dojutsu behaviors. Existing ported Rinnegan path actions (Chibaku Tensei, Tengaishinsei, Animal/Preta/Naraka/Asura/Outer paths) were left in place; this slice reconnects the missing key paths that the backlog identified:
+  - Rinnegan/Tenseigan Special Jutsu Key 1 -> `Shinra Tensei`.
+  - Rinnegan/Tenseigan Special Jutsu Key 3 -> `Ban Sho Ten'in`.
+  - Byakugan Special Jutsu Key 1 + sneak -> `Hakke Kusho`.
+
+- 0.3.2-beta source re-audited for constants / behavior (read-only clone `/tmp/naruto_mod_032`):
+  - `ItemRinnegan`: `SHINRATENSEI_CHAKRA_USAGE = 10d`, `BANSHOTENIN_CHAKRA_USAGE = 0.5d`, Key 1 = Shinra Tensei, Key 2 = selected Six Paths action, Key 3 = Ban Sho Ten'in.
+  - `ProcedureShinraTenseiOnKeyPressed`: charge starts at power 10, grows by 0.1 up to max 100 / chakra budget, grants Flight 200t amp 1 while charging, release consumes `power * usage`, sets cooldown `gameTime + power * 10 * Chakra.getChakraModifier`, smoke burst count 1000, power >= 20 schedules spherical explosion radius `(int)(power*power/200)`, damage is `power * 1.8f` and bypasses armor.
+  - `ProcedureBanShoTenin`: per-tick cost 0.5, release cooldown 100t, entity hold at the look point, sneak+block dislodges a size-5 earth block group with `usage * 50d` cost.
+  - `ProcedureHakkeKusho`: `XP_REQUIRED = 500d`, chakra cost `0.5d * pressDuration`, range `duration / 3 + 5`, far radius `duration / 20`, damage `(strength * player.experienceLevel / 100 + 10) / sqrt(distance)`, high battle-XP block break gate `500 + 850`.
+
+- 1.20.1 implementation:
+  - Added server-safe helpers:
+    - `procedure/ProcedureAirPunch.java`: reusable press-duration + cone trace base for air-punch style jutsu. It runs entirely on common/server code and emits vanilla smoke/explosion particles only via `ServerLevel`.
+    - `procedure/ProcedureGravityPower.java`: creates `EarthBlocksEntity` groups from safe solid blocks, respecting Forge mobGriefing, then removes the source blocks only after the entity successfully spawns.
+    - `procedure/ProcedurePullAndHold.java`: tracks Ban Sho Ten'in grabbed entities / earth-block groups, keeps them suspended at the user's look point, and resets no-gravity state on release/death.
+  - `item/RinneganSpecialJutsuHandler.java`:
+    - Special Jutsu dispatcher now handles keys 1/2/3 instead of only key 2.
+    - Key 1 charges Shinra Tensei on server player tick because the current client sends Key 1 only on state changes. Release applies the old cooldown/cost, smoke/sound, spherical explosion, harmful-effect purge, fire clear, and `power * 1.8` damage.
+    - Added `shinratensei_damage` rather than reusing generic ninjutsu damage, so only Shinra Tensei receives the old armor-bypass behavior.
+    - Key 3 implements Ban Sho Ten'in entity pull/hold, sneak+block dislodge, per-tick chakra drain, release cooldown, death/head-removal cleanup, and Shinra Tensei launching of previously grabbed `EarthBlocksEntity` toward the looked-at target.
+  - `item/ByakuganHandler.java`:
+    - Sneak+Key 1 now starts Hakke Kusho charging; normal Key 1 still toggles Byakugan activation.
+    - Charging is advanced on server tick to match the current edge-triggered Key 1 packet model.
+    - Release consumes `0.5 * duration`, plays `hakkekusho`, pushes/damages entities through the `ProcedureAirPunch` base, and restores the 500 / 1350 battle-XP gates from 0.3.2-beta.
+  - Damage resources:
+    - Added `data/narutomod/damage_type/shinratensei_damage.json`.
+    - Added `narutomod:shinratensei_damage` to `data/minecraft/tags/damage_type/bypasses_armor.json`.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: BUILD SUCCESSFUL (only the pre-existing `IForgeItem.onArmorTick` deprecation warnings).
+  - `python tools/validate_port_resources.py`: all issue counts 0.
+  - `python tools/validate_dedicated_server_safety.py`: 281 non-client Java files scanned, 0 client-reference issues.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL.
+  - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: still not directly runnable on macOS due to the Windows `Start-Process -WindowStyle` usage. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (2.216s)! For help, type "help"` at `2026-06-30T01:07:41+08:00`, then shut down cleanly with all dimensions saved. Fatal/error/exception scan of `1.20.1/run/logs/latest.log` returned 0 matches, and `jps` showed no remaining Minecraft/Gradle server process. Summary updated in `audit/dedicated_server_startup_summary.json`.
+
+### M7 Release Bugfix Polish Slice — Kaiten Texture / Rasenshuriken Throw / Might Guy Cadence / Charge HUD
+
+- Follow-up on the user-reported high-version Naruto bugfix pack before publication:
+  - 回天 was still rendering through the generic `electric_armor.png`; upstream `0.3.2-beta` uses `assets/narutomod/textures/kaiten.png`.
+  - 螺旋手里剑 had the 0.3.2-beta target lock restored, but the 1.20.1 helper only stored acceleration / motion factor; the original `shoot(..., 0.99f, 0f)` gives the projectile immediate motion on release.
+  - 迈特凯 still ran the player-tick natural village spawn helper every 400 game ticks, which could stack poorly with the biome spawn path in active worlds.
+  - 蓄力 feedback existed again as a raw power number; this release makes it visible as an actionbar progress bar while keeping the numeric power value.
+
+- 1.20.1 changes:
+  - Copied the original `kaiten.png` resource into `assets/narutomod/textures/` and pointed `client/renderer/HakkeshoKeitenRenderer.java` back to that texture with full alpha.
+  - `entity/RasenshurikenEntity.java`: `shootTowards` now immediately applies `setDeltaMovement(direction.scale(speed))`, so the projectile leaves the owner as soon as it is released instead of waiting for the next acceleration update from a zero-motion state.
+  - `entity/MightGuyEntity.java`: added `NATURAL_PLAYER_TICK_SPAWN_INTERVAL = 24000L` and replaced the 400-tick player helper cadence. Forced debug spawns are unchanged.
+  - `item/JutsuItem.java`: actionbar charge feedback now renders as `Charge [####------] 1.4`, using the same charge math as `getChargingPower`.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; only the existing Forge deprecation warnings remained.
+  - `jar tf 1.20.1/build/libs/*.jar | rg 'assets/narutomod/textures/kaiten\.png|HakkeshoKeitenRenderer'`: both the texture and renderer class are present in the release jar.
+  - `python tools/validate_port_resources.py`: all issue counts 0.
+  - `python tools/validate_dedicated_server_safety.py`: 281 non-client Java files scanned, 0 client-reference issues.
+  - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: still Windows-specific on macOS because of `Start-Process -WindowStyle`. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (1.845s)! For help, type "help"` at `2026-06-30T04:43:21+08:00`, then was stopped with no remaining Minecraft/Gradle server process. Fatal/error/exception scan of `1.20.1/run/logs/latest.log` returned 0 matches, and `audit/dedicated_server_startup_summary.json` was updated.

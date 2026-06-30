@@ -99,6 +99,15 @@ public final class DojutsuHelmetSnugModel<T extends LivingEntity> extends Humano
         }
     }
 
+    public void showHelmetOnly(boolean showForehead) {
+        setAllVisible(false);
+        this.head.visible = true;
+        this.hat.visible = !this.headwearHidden;
+        this.highlight.visible = !this.highlightHidden;
+        this.forehead.visible = showForehead && !this.foreheadHidden;
+        syncExtraHeadParts();
+    }
+
     private void syncExtraHeadParts() {
         this.highlight.copyFrom(this.head);
         this.forehead.copyFrom(this.head);

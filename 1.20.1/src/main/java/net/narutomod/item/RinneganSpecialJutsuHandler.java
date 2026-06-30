@@ -1,5 +1,8 @@
 package net.narutomod.item;
 
+import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
@@ -7,31 +10,46 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ExperienceOrb;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.narutomod.Chakra;
 import net.narutomod.NarutomodMod;
 import net.narutomod.NarutomodModVariables;
 import net.narutomod.entity.ChibakuTenseiBallEntity;
+import net.narutomod.entity.EarthBlocksEntity;
 import net.narutomod.entity.GiantDog2hEntity;
+import net.narutomod.entity.HakkeshoKeitenEntity;
 import net.narutomod.entity.KingOfHellEntity;
 import net.narutomod.entity.PretaShieldEntity;
+import net.narutomod.entity.SandShieldEntity;
+import net.narutomod.event.SpecialEvent;
 import net.narutomod.particle.NarutoParticleKind;
+import net.narutomod.procedure.ProcedureGravityPower;
 import net.narutomod.procedure.ProcedureMeteorStrike;
+import net.narutomod.procedure.ProcedurePullAndHold;
 import net.narutomod.procedure.ProcedureUtils;
+import net.narutomod.registry.ModDamageTypes;
+import net.narutomod.registry.ModEffects;
 import net.narutomod.registry.ModItems;
 import net.narutomod.registry.ModParticleTypes;
 import net.narutomod.registry.ModSounds;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -47,6 +65,12 @@ public final class RinneganSpecialJutsuHandler {
     public static final double ANIMAL_PATH_CHAKRA_USAGE = 200.0D;
     public static final double PRETA_PATH_CHAKRA_USAGE = 10.0D;
     public static final double NARAKA_PATH_CHAKRA_USAGE = 100.0D;
+    public static final String SHINRATENSEI_COOLDOWN_TAG = "shinratenseicd";
+    public static final String SHINRATENSEI_POWER_TAG = "shinratensei_power";
+    public static final String SHINRATENSEI_WAS_PRESSED_TAG = "was_pressed";
+    public static final String BANSHOTENIN_COOLDOWN_TAG = "BanshoTenin_cooldown";
+    public static final double SHINRA_TENSEI_CHAKRA_USAGE = 10.0D;
+    public static final double BANSHO_TENIN_CHAKRA_USAGE = 0.5D;
     public static final int CHIBAKU_TENSEI_COOLDOWN_TICKS = 6000;
     public static final int DEVA_PATH = 0;
     public static final int ASURA_PATH = 1;
@@ -54,13 +78,21 @@ public final class RinneganSpecialJutsuHandler {
     public static final int PRETA_PATH = 3;
     public static final int NARAKA_PATH = 4;
     public static final int OUTER_PATH = 5;
+    private static final double SHINRA_TENSEI_START_POWER = 10.0D;
+    private static final double SHINRA_TENSEI_MIN_CAST_POWER = 5.0D;
+    private static final double SHINRA_TENSEI_MAX_POWER = 100.0D;
+    private static final double SHINRA_TENSEI_POWER_STEP = 0.1D;
+    private static final double SHINRA_TENSEI_DAMAGE_MULTIPLIER = 1.8D;
+    private static final int SHINRA_TENSEI_INVULNERABLE_TICKS = 60;
+    private static final int BANSHO_TENIN_BLOCK_SIZE = 5;
     private static final int MAX_PATH = OUTER_PATH;
+    private static final Map<Player, ProcedurePullAndHold> BANSHO_TENIN_PULLS = new WeakHashMap<>();
 
     private RinneganSpecialJutsuHandler() {
     }
 
     public static boolean handleSpecialJutsuKey(ServerPlayer player, int key, boolean pressed) {
-        if (key != 2 || player.isSpectator() || !player.isAlive()) {
+        if ((key < 1 || key > 3) || player.isSpectator() || !player.isAlive()) {
             return false;
         }
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
@@ -68,6 +100,16 @@ public final class RinneganSpecialJutsuHandler {
             return false;
         }
 
+        if (key == 1) {
+            return handleShinraTensei(player, pressed);
+        }
+        if (key == 3) {
+            return handleBanShoTenin(player, pressed);
+        }
+        return handlePathKey(player, head, pressed);
+    }
+
+    private static boolean handlePathKey(ServerPlayer player, ItemStack head, boolean pressed) {
         NarutomodModVariables.get(player).putBoolean(NarutomodModVariables.JUTSU_KEY_2_PRESSED, pressed);
         NarutomodModVariables.sync(player);
         if (pressed) {
@@ -113,6 +155,239 @@ public final class RinneganSpecialJutsuHandler {
             case OUTER_PATH -> triggerOuterPath(player, showMessages);
             default -> unselectedPath(player, showMessages);
         };
+    }
+
+    private static boolean handleShinraTensei(ServerPlayer player, boolean pressed) {
+        if (!(player.level() instanceof ServerLevel level)) {
+            return false;
+        }
+        if (pressed && !canUseShinraTensei(player, level.getGameTime())) {
+            return true;
+        }
+        if (pressed) {
+            chargeShinraTensei(player);
+            return true;
+        }
+
+        CompoundTag tag = player.getPersistentData();
+        boolean wasPressed = tag.getBoolean(SHINRATENSEI_WAS_PRESSED_TAG);
+        double power = tag.getDouble(SHINRATENSEI_POWER_TAG);
+        tag.putBoolean(SHINRATENSEI_WAS_PRESSED_TAG, false);
+        tag.putDouble(SHINRATENSEI_POWER_TAG, 0.0D);
+        if (!wasPressed || power < SHINRA_TENSEI_MIN_CAST_POWER) {
+            return true;
+        }
+
+        double chakraUsage = rinneganTechniqueCost(player, SHINRA_TENSEI_CHAKRA_USAGE);
+        if (player.isCreative() || Chakra.pathway(player).consume(power * chakraUsage)) {
+            castShinraTensei(level, player, power);
+            if (!player.isCreative()) {
+                long cooldownUntil = level.getGameTime() + (long)(power * 10.0D * Chakra.getChakraModifier(player));
+                tag.putLong(SHINRATENSEI_COOLDOWN_TAG, cooldownUntil);
+            }
+        }
+        return true;
+    }
+
+    private static boolean canUseShinraTensei(ServerPlayer player, long now) {
+        if (player.isCreative()) {
+            return true;
+        }
+        long cooldownUntil = player.getPersistentData().getLong(SHINRATENSEI_COOLDOWN_TAG);
+        if (now < cooldownUntil - 400L || now > cooldownUntil + 100L) {
+            return true;
+        }
+        player.displayClientMessage(Component.literal("Cooldown: "
+                + String.format("%.1f", (cooldownUntil - now + 100L) / 20.0D) + "s"), true);
+        return false;
+    }
+
+    private static void chargeShinraTensei(ServerPlayer player) {
+        CompoundTag tag = player.getPersistentData();
+        double chakraUsage = rinneganTechniqueCost(player, SHINRA_TENSEI_CHAKRA_USAGE);
+        double power = tag.getBoolean(SHINRATENSEI_WAS_PRESSED_TAG)
+                ? tag.getDouble(SHINRATENSEI_POWER_TAG)
+                : SHINRA_TENSEI_START_POWER;
+        double maxPower = maxShinraTenseiPower(player, chakraUsage);
+        if (power + SHINRA_TENSEI_POWER_STEP < maxPower && power < SHINRA_TENSEI_MAX_POWER) {
+            power += SHINRA_TENSEI_POWER_STEP;
+        }
+        power = Mth.clamp(power, SHINRA_TENSEI_MIN_CAST_POWER, SHINRA_TENSEI_MAX_POWER);
+        tag.putBoolean(SHINRATENSEI_WAS_PRESSED_TAG, true);
+        tag.putDouble(SHINRATENSEI_POWER_TAG, power);
+        player.displayClientMessage(Component.literal("Power " + (int)power), true);
+        player.addEffect(new MobEffectInstance(ModEffects.FLIGHT.get(), 200, 1, false, false));
+    }
+
+    private static double maxShinraTenseiPower(ServerPlayer player, double chakraUsage) {
+        if (player.isCreative()) {
+            return SHINRA_TENSEI_MAX_POWER;
+        }
+        return Math.min(SHINRA_TENSEI_MAX_POWER, Chakra.pathway(player).getAmount() / Math.max(chakraUsage, 0.001D));
+    }
+
+    private static void castShinraTensei(ServerLevel level, ServerPlayer player, double power) {
+        if (launchGrabbedEarthBlocks(player, power)) {
+            return;
+        }
+        player.invulnerableTime = Math.max(player.invulnerableTime, SHINRA_TENSEI_INVULNERABLE_TICKS);
+        level.sendParticles(ModParticleTypes.options(NarutoParticleKind.SMOKE_COLORED, 0x10FFFFFF, 30, 0, 0, -1, 4),
+                player.getX(), player.getY() + 1.4D, player.getZ(),
+                1000, 1.0D, 0.0D, 1.0D, 1.0D);
+        if (power >= 20.0D) {
+            SpecialEvent.setSphericalExplosionEvent(level,
+                    Mth.floor(player.getX()), Mth.floor(player.getY()) + 2, Mth.floor(player.getZ()),
+                    (int)(power * power / 200.0D), player);
+            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    ModSounds.SOUND_SHINRATENSEI.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
+        } else {
+            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    ModSounds.SOUND_BANSHOTENIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+        }
+        player.displayClientMessage(Component.literal("Power " + (int)power), true);
+        damageAndKnockbackShinraTargets(player, power);
+        ProcedureUtils.purgeHarmfulEffects(player);
+        player.clearFire();
+    }
+
+    private static void damageAndKnockbackShinraTargets(ServerPlayer player, double power) {
+        AABB box = player.getBoundingBox().inflate(power);
+        for (Entity target : player.level().getEntities(player, box, target -> isShinraTarget(player, target, power))) {
+            target.setNoGravity(false);
+            ProcedureUtils.pushEntity(player, target, power, 2.0F);
+            if (target instanceof LivingEntity living) {
+                living.invulnerableTime = 0;
+                living.hurt(ModDamageTypes.shinratensei(player.level(), player, player),
+                        (float)(power * SHINRA_TENSEI_DAMAGE_MULTIPLIER));
+            }
+        }
+    }
+
+    private static boolean isShinraTarget(ServerPlayer player, Entity target, double power) {
+        return target.isAlive()
+                && !target.isSpectator()
+                && target != player
+                && target.getRootVehicle() != player.getRootVehicle()
+                && target.distanceToSqr(player) <= power * power;
+    }
+
+    private static boolean launchGrabbedEarthBlocks(ServerPlayer player, double power) {
+        List<EarthBlocksEntity> earthBlocks = getBanshoGrabbedEarthBlocks(player);
+        if (earthBlocks.isEmpty()) {
+            return false;
+        }
+        HitResult hit = ProcedureUtils.objectEntityLookingAt(player, 40.0D, 3.0D, true, false,
+                target -> !earthBlocks.contains(target));
+        if (!(hit instanceof EntityHitResult entityHit) || entityHit.getEntity() == null) {
+            return false;
+        }
+        Entity target = entityHit.getEntity();
+        Vec3 targetCenter = target instanceof LivingEntity living ? living.getEyePosition() : target.getBoundingBox().getCenter();
+        for (EarthBlocksEntity earthBlock : earthBlocks) {
+            if (!earthBlock.isAlive()) {
+                continue;
+            }
+            earthBlock.setMovementEnabled(true);
+            Vec3 source = earthBlock.getBoundingBox().getCenter();
+            Vec3 motion = targetCenter.subtract(source);
+            if (motion.lengthSqr() > 1.0E-8D) {
+                Vec3 launched = motion.normalize().scale(power * 0.1D);
+                ProcedureUtils.setVelocity(earthBlock, launched.x(), launched.y(), launched.z());
+            }
+        }
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.SOUND_BANSHOTENIN.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+        resetBanshoTenin(player);
+        return true;
+    }
+
+    private static boolean handleBanShoTenin(ServerPlayer player, boolean pressed) {
+        ProcedurePullAndHold procedure = BANSHO_TENIN_PULLS.computeIfAbsent(player, key -> new ProcedurePullAndHold());
+        if (!pressed) {
+            boolean hadGrabbed = procedure.execute(false, player, null);
+            if (hadGrabbed && !player.isCreative()) {
+                player.getPersistentData().putLong(BANSHOTENIN_COOLDOWN_TAG, player.level().getGameTime() + 100L);
+            }
+            return true;
+        }
+
+        long cooldownUntil = player.getPersistentData().getLong(BANSHOTENIN_COOLDOWN_TAG);
+        if (!player.isCreative() && cooldownUntil > player.level().getGameTime()) {
+            player.displayClientMessage(Component.literal("Ban Sho Tenin cooldown "
+                    + String.format("%.1f", (cooldownUntil - player.level().getGameTime()) / 20.0D) + "s"), true);
+            return true;
+        }
+
+        double chakraUsage = rinneganTechniqueCost(player, BANSHO_TENIN_CHAKRA_USAGE);
+        HitResult hit = ProcedureUtils.objectEntityLookingAt(player, 50.0D, 3.0D, true, false,
+                RinneganSpecialJutsuHandler::canGrabBanShoTarget);
+        if (!procedure.hasGrabbedEntity()) {
+            if (hit instanceof EntityHitResult entityHit && canGrabBanShoTarget(entityHit.getEntity())) {
+                player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                        ModSounds.SOUND_BANSHOTENIN.get(), SoundSource.NEUTRAL, 5.0F, 1.0F);
+                return consumeAndHoldBanSho(player, procedure, entityHit.getEntity(), chakraUsage);
+            }
+            if (player.isShiftKeyDown() && hit instanceof BlockHitResult blockHit
+                    && blockHit.getType() == HitResult.Type.BLOCK) {
+                double blockCost = chakraUsage * 50.0D;
+                if (!consumeChakra(player, blockCost)) {
+                    return true;
+                }
+                EarthBlocksEntity earthBlocks = ProcedureGravityPower.dislodgeBlocks(
+                        player.level(), blockHit.getBlockPos(), BANSHO_TENIN_BLOCK_SIZE, player);
+                if (earthBlocks != null) {
+                    player.level().playSound(null, blockHit.getBlockPos(),
+                            ModSounds.SOUND_ROCKS.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                    procedure.addEarthBlock(earthBlocks);
+                    procedure.execute(true, player, earthBlocks);
+                }
+                return true;
+            }
+        }
+        if (!procedure.hasGrabbedEntity()) {
+            return true;
+        }
+        return consumeAndHoldBanSho(player, procedure, null, chakraUsage);
+    }
+
+    private static boolean consumeAndHoldBanSho(ServerPlayer player, ProcedurePullAndHold procedure,
+            Entity target, double chakraUsage) {
+        if (!player.isCreative() && !Chakra.pathway(player).consume(chakraUsage)) {
+            procedure.reset();
+            return true;
+        }
+        procedure.execute(true, player, target);
+        return true;
+    }
+
+    private static boolean canGrabBanShoTarget(Entity target) {
+        return target != null
+                && target.isAlive()
+                && !(target instanceof ChibakuTenseiBallEntity)
+                && !(target instanceof HakkeshoKeitenEntity)
+                && !(target instanceof PretaShieldEntity)
+                && !(target instanceof SandShieldEntity)
+                && target.getBbHeight() < 24.0F
+                && (target instanceof ItemEntity
+                    || target instanceof ExperienceOrb
+                    || target instanceof EarthBlocksEntity
+                    || target instanceof LivingEntity
+                    || target.isPickable());
+    }
+
+    public static List<EarthBlocksEntity> getBanshoGrabbedEarthBlocks(Entity entity) {
+        if (!(entity instanceof Player player)) {
+            return List.of();
+        }
+        ProcedurePullAndHold procedure = BANSHO_TENIN_PULLS.get(player);
+        return procedure == null ? List.of() : procedure.getGrabbedEarthBlocks();
+    }
+
+    public static void resetBanshoTenin(Player player) {
+        ProcedurePullAndHold procedure = BANSHO_TENIN_PULLS.remove(player);
+        if (procedure != null) {
+            procedure.reset();
+        }
     }
 
     public static boolean maintainAsuraPath(ServerPlayer player) {
@@ -344,6 +619,16 @@ public final class RinneganSpecialJutsuHandler {
         return player.isCreative() || Chakra.pathway(player).consume(amount);
     }
 
+    private static double rinneganTechniqueCost(ServerPlayer player, double baseCost) {
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        if (!isRinneganLikeHead(head)) {
+            return Double.MAX_VALUE * 0.001D;
+        }
+        return player.isCreative() || ProcedureUtils.getOwnerId(head) == null || ProcedureUtils.isOriginalOwner(player, head)
+                ? baseCost
+                : baseCost * 2.0D;
+    }
+
     private static void refundChakra(ServerPlayer player, double amount) {
         if (!player.isCreative()) {
             Chakra.pathway(player).consume(-amount, false);
@@ -391,10 +676,33 @@ public final class RinneganSpecialJutsuHandler {
         }
     }
 
+    private static void tickShinraTenseiCharge(ServerPlayer player) {
+        if (!player.getPersistentData().getBoolean(SHINRATENSEI_WAS_PRESSED_TAG)) {
+            return;
+        }
+        if (!player.isAlive() || player.isSpectator() || !isRinneganLikeHead(player.getItemBySlot(EquipmentSlot.HEAD))) {
+            player.getPersistentData().putBoolean(SHINRATENSEI_WAS_PRESSED_TAG, false);
+            player.getPersistentData().putDouble(SHINRATENSEI_POWER_TAG, 0.0D);
+            return;
+        }
+        chargeShinraTensei(player);
+    }
+
     @SubscribeEvent
     public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
         if (event.phase == TickEvent.Phase.END && event.player instanceof ServerPlayer player) {
             maintainAsuraPath(player);
+            tickShinraTenseiCharge(player);
+            if (!isRinneganLikeHead(player.getItemBySlot(EquipmentSlot.HEAD))) {
+                resetBanshoTenin(player);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onLivingDeath(LivingDeathEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            resetBanshoTenin(player);
         }
     }
 }

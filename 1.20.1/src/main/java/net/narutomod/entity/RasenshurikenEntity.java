@@ -72,6 +72,8 @@ public final class RasenshurikenEntity extends Entity {
     private boolean impactDimensions;
     private float dimensionsScale = 0.1F;
     private float impactDamageMultiplier = DEFAULT_IMPACT_DAMAGE_MULTIPLIER;
+    @Nullable
+    private Vec3 targetPoint;
 
     public RasenshurikenEntity(EntityType<? extends RasenshurikenEntity> entityType, Level level) {
         super(entityType, level);
@@ -92,6 +94,7 @@ public final class RasenshurikenEntity extends Entity {
         this.ticksInAir = 0;
         this.impactDimensions = false;
         this.impactPoint = null;
+        this.targetPoint = null;
         setDeltaMovement(Vec3.ZERO);
         moveAboveOwner(owner);
     }
@@ -204,7 +207,7 @@ public final class RasenshurikenEntity extends Entity {
                 }
             }
             if (owner != null && this.distanceTo(owner) < 48.0F) {
-                guideTowardOwnerLook(owner);
+                guideTowardLockedTarget(owner);
             }
         }
 
@@ -341,13 +344,14 @@ public final class RasenshurikenEntity extends Entity {
         this.moveTo(owner.getX(), owner.getY() + owner.getBbHeight() + 0.5D, owner.getZ(), owner.getYRot(), owner.getXRot());
     }
 
-    private void guideTowardOwnerLook(LivingEntity owner) {
-        HitResult hit = ProcedureUtils.objectEntityLookingAt(owner, 50.0D, 0.0D, false, false,
-                target -> target != this && target != owner);
-        Vec3 target = hit.getType() == HitResult.Type.MISS
-                ? owner.getEyePosition().add(owner.getLookAngle().scale(50.0D))
-                : hit.getLocation();
-        shootTowards(target, PROJECTILE_SPEED, owner);
+    private void guideTowardLockedTarget(LivingEntity owner) {
+        if (this.targetPoint == null) {
+            HitResult hit = ProcedureUtils.objectEntityLookingAt(owner, 50.0D, 3.0D, false, false,
+                    target -> target != this && target != owner);
+            this.targetPoint = hit.getLocation();
+        }
+        setDeltaMovement(getDeltaMovement().scale(0.9D));
+        shootTowards(this.targetPoint, PROJECTILE_SPEED, owner);
     }
 
     private void shootTowards(Vec3 target, float speed, LivingEntity owner) {
@@ -364,6 +368,7 @@ public final class RasenshurikenEntity extends Entity {
         direction = direction.normalize();
         this.acceleration = direction.scale(0.1D);
         this.motionFactor = speed;
+        setDeltaMovement(direction.scale(speed));
         faceMotion(direction);
         this.launched = true;
     }
@@ -468,6 +473,9 @@ public final class RasenshurikenEntity extends Entity {
     private boolean isIgnoredImpact(HitResult hit) {
         if (hit instanceof BlockHitResult blockHit
                 && this.level().getBlockState(blockHit.getBlockPos()).getBlock() instanceof LightSourceBlock) {
+            return true;
+        }
+        if (hit instanceof BlockHitResult && getFullScale() > 1.0F && this.ticksInAir < 15) {
             return true;
         }
         return false;

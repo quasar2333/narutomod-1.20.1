@@ -92,6 +92,8 @@ public final class MightGuyEntity extends NinjaMobEntity implements RangedAttack
     private static final double HIRUDORA_MIN_DISTANCE_SQR = 36.0D;
     private static final int DEFAULT_SIEGE_RADIUS = 32;
     private static final int MAX_SIEGE_RADIUS = 64;
+    private static final double NATURAL_DUPLICATE_SEARCH_RADIUS = 512.0D;
+    private static final long NATURAL_PLAYER_TICK_SPAWN_INTERVAL = 24000L;
     private static final int SIEGE_SPAWN_INTERVAL = 100;
     private static final int SCOREBOARD_SIDEBAR_SLOT = 1;
     private static final String NINJA_ADVANCEMENT = "narutomod:ninjaachievement";
@@ -546,7 +548,7 @@ public final class MightGuyEntity extends NinjaMobEntity implements RangedAttack
 
     public static NaturalVillageSpawnResult tryNaturalVillageSpawn(ServerPlayer player, boolean force) {
         ServerLevel level = player.serverLevel();
-        if (!force && level.getServer().overworld().getGameTime() % 400L != 0L) {
+        if (!force && level.getServer().overworld().getGameTime() % NATURAL_PLAYER_TICK_SPAWN_INTERVAL != 0L) {
             return NaturalVillageSpawnResult.skipped("cadence", player.blockPosition());
         }
         if (!force && !ProcedureUtils.advancementAchieved(player, NINJA_ADVANCEMENT)) {
@@ -561,7 +563,7 @@ public final class MightGuyEntity extends NinjaMobEntity implements RangedAttack
         }
         int nearbyGuys = level.getEntitiesOfClass(
                 MightGuyEntity.class,
-                new AABB(village.center()).inflate(96.0D),
+                new AABB(village.center()).inflate(NATURAL_DUPLICATE_SEARCH_RADIUS, 256.0D, NATURAL_DUPLICATE_SEARCH_RADIUS),
                 MightGuyEntity::isAlive).size();
         if (nearbyGuys > 0) {
             return NaturalVillageSpawnResult.skipped("nearby_might_guy", village.center(), village, null, nearbyGuys);

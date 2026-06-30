@@ -1,19 +1,26 @@
 package net.narutomod.item;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,7 +33,9 @@ import net.narutomod.entity.HakkeshoKeitenEntity;
 import net.narutomod.network.ByakuganViewSyncMessage;
 import net.narutomod.network.NetworkHandler;
 import net.narutomod.particle.NarutoParticleKind;
+import net.narutomod.procedure.ProcedureAirPunch;
 import net.narutomod.procedure.ProcedureUtils;
+import net.narutomod.registry.ModDamageTypes;
 import net.narutomod.registry.ModItems;
 import net.narutomod.registry.ModParticleTypes;
 import net.narutomod.registry.ModSounds;
@@ -42,12 +51,17 @@ public final class ByakuganHandler {
     public static final String HAKKE_ROKUJUUYONSHOU_COOLDOWN_TAG = "HakkeRokujuuyonshouCD";
     public static final String HAKKESHOKAITEN_COOLDOWN_TAG = "HakkeshoKaitenCD";
     public static final String RINNESHARINGAN_PRESS_TIME_TAG = "press_time";
+    public static final String HAKKE_KUSHO_HOLDING_TAG = "hakke_kusho_holding";
     public static final double ROKUJUYONSHO_CHAKRA_USAGE = 100.0D;
     public static final double KAITEN_CHAKRA_USAGE_PER_TICK = HakkeshoKeitenEntity.CHAKRA_COST_PER_TICK;
+    public static final double KUSHO_CHAKRA_USAGE = 0.5D;
+    private static final double HAKKE_KUSHO_REQUIRED_BATTLE_XP = 500.0D;
+    private static final double HAKKE_KUSHO_BREAK_BATTLE_XP = HAKKE_KUSHO_REQUIRED_BATTLE_XP + 850.0D;
     private static final int EIGHT_TRIGRAMS_REQUIRED_LEVEL = 20;
     private static final int HAKKESHOKAITEN_REQUIRED_LEVEL = 30;
     private static final int EIGHT_TRIGRAMS_COOLDOWN_BASE_TICKS = 1200;
     private static final double RINNESHARINGAN_MAX_PRESS_TICKS = 200.0D;
+    private static final ProcedureAirPunch HAKKE_KUSHO = new HakkeKushoAirPunch();
 
     private ByakuganHandler() {
     }
@@ -69,6 +83,9 @@ public final class ByakuganHandler {
     }
 
     private static boolean handleActivationKey(ServerPlayer player, boolean pressed) {
+        if (player.getPersistentData().getBoolean(HAKKE_KUSHO_HOLDING_TAG) || player.isShiftKeyDown()) {
+            return handleHakkeKusho(player, pressed);
+        }
         if (pressed) {
             if (!isActive(player) && Chakra.pathway(player).getAmount() >= getByakuganChakraUsage(player) * 2.0D) {
                 setActive(player, true, DEFAULT_FOV);
@@ -123,6 +140,8 @@ public final class ByakuganHandler {
     public static void tick(ServerPlayer player) {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
         if (!isByakuganHead(head)) {
+            player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, false);
+            ProcedureAirPunch.resetPressDuration(player);
             if (isActive(player)) {
                 setActive(player, false, 0.0F);
             }
@@ -133,6 +152,9 @@ public final class ByakuganHandler {
         }
         player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 210, 0, false, false));
         NarutomodModVariables.get(player).putLong(NarutomodModVariables.MOST_RECENT_WORN_DOJUTSU_TIME, player.level().getGameTime());
+        if (player.getPersistentData().getBoolean(HAKKE_KUSHO_HOLDING_TAG)) {
+            tickHakkeKusho(player);
+        }
         if (!isActive(player)) {
             return;
         }
@@ -194,6 +216,13 @@ public final class ByakuganHandler {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
         return player.isCreative() || isByakuganHead(head) && ProcedureUtils.isOriginalOwner(player, head)
                 ? KAITEN_CHAKRA_USAGE_PER_TICK
+                : Double.MAX_VALUE * 0.001D;
+    }
+
+    public static double getKushoChakraUsage(ServerPlayer player) {
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        return player.isCreative() || isByakuganHead(head) && ProcedureUtils.isOriginalOwner(player, head)
+                ? KUSHO_CHAKRA_USAGE
                 : Double.MAX_VALUE * 0.001D;
     }
 
@@ -283,6 +312,79 @@ public final class ByakuganHandler {
             setCooldownUntil(head, HAKKESHOKAITEN_COOLDOWN_TAG, player.level().getGameTime() + cooldownTicks);
             int foodCost = activeTicks / 60 + 1;
             player.getFoodData().setFoodLevel(Math.max(0, player.getFoodData().getFoodLevel() - foodCost));
+        }
+        return true;
+    }
+
+    private static boolean handleHakkeKusho(ServerPlayer player, boolean pressed) {
+        if (!canUseHakkeKusho(player, true)) {
+            player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, false);
+            ProcedureAirPunch.resetPressDuration(player);
+            return true;
+        }
+        if (pressed) {
+            player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, true);
+            tickHakkeKusho(player);
+            return true;
+        }
+        releaseHakkeKusho(player);
+        return true;
+    }
+
+    private static void tickHakkeKusho(ServerPlayer player) {
+        if (!canUseHakkeKusho(player, false)) {
+            player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, false);
+            ProcedureAirPunch.resetPressDuration(player);
+            return;
+        }
+        int nextDuration = ProcedureAirPunch.getPressDuration(player) + 1;
+        double chakraCost = getKushoChakraUsage(player) * nextDuration;
+        if (!player.isCreative() && Chakra.pathway(player).getAmount() < chakraCost) {
+            Chakra.pathway(player).warningDisplay();
+            player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, false);
+            ProcedureAirPunch.resetPressDuration(player);
+            return;
+        }
+        HAKKE_KUSHO.execute(true, player);
+    }
+
+    private static void releaseHakkeKusho(ServerPlayer player) {
+        int duration = ProcedureAirPunch.getPressDuration(player);
+        player.getPersistentData().putBoolean(HAKKE_KUSHO_HOLDING_TAG, false);
+        if (duration <= 0) {
+            return;
+        }
+        double chakraCost = getKushoChakraUsage(player) * duration;
+        if (!player.isCreative() && !Chakra.pathway(player).consume(chakraCost)) {
+            ProcedureAirPunch.resetPressDuration(player);
+            return;
+        }
+        player.swing(InteractionHand.MAIN_HAND, true);
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(),
+                ModSounds.SOUND_HAKKEKUSHO.get(), SoundSource.NEUTRAL, 1.0F, 1.0F);
+        HAKKE_KUSHO.execute(false, player);
+    }
+
+    private static boolean canUseHakkeKusho(ServerPlayer player, boolean showMessages) {
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        if (!isByakuganHead(head)) {
+            return false;
+        }
+        if (player.isCreative()) {
+            return true;
+        }
+        if (!ProcedureUtils.isOriginalOwner(player, head)) {
+            if (showMessages) {
+                player.displayClientMessage(Component.literal("This Byakugan belongs to another player."), true);
+            }
+            return false;
+        }
+        if (PlayerTracker.getBattleXp(player) < HAKKE_KUSHO_REQUIRED_BATTLE_XP) {
+            if (showMessages) {
+                player.displayClientMessage(Component.literal("Requires battle XP "
+                        + (int)HAKKE_KUSHO_REQUIRED_BATTLE_XP + "."), true);
+            }
+            return false;
         }
         return true;
     }
@@ -408,6 +510,58 @@ public final class ByakuganHandler {
             return Long.toString((long)power);
         }
         return String.format("%.1f", power);
+    }
+
+    private static final class HakkeKushoAirPunch extends ProcedureAirPunch {
+        @Override
+        protected double getRange(int duration) {
+            return duration / 3.0D + 5.0D;
+        }
+
+        @Override
+        protected double getFarRadius(int duration) {
+            return duration / 20.0D;
+        }
+
+        @Override
+        protected void attackEntityFrom(LivingEntity user, Entity target, double distanceToCenter) {
+            super.attackEntityFrom(user, target, distanceToCenter);
+            if (user instanceof Player player && target instanceof LivingEntity living) {
+                int strength = ProcedureAirPunch.getPressDuration(user);
+                double distance = Math.sqrt(Math.max(user.distanceToSqr(target), 0.001D));
+                float damage = (float)((strength * player.experienceLevel / 100.0D + 10.0D) / distance);
+                living.invulnerableTime = 0;
+                living.hurt(ModDamageTypes.ninjutsu(user.level(), user, user), damage);
+            }
+        }
+
+        @Override
+        protected boolean processAffectedBlock(LivingEntity user, BlockPos pos, double range,
+                double distanceToCenter, RandomSource random) {
+            if (user.level() instanceof ServerLevel level
+                    && ForgeEventFactory.getMobGriefingEvent(level, user)
+                    && level.getBlockState(pos.above()).isAir()) {
+                BlockState state = level.getBlockState(pos);
+                if (!state.isAir() && state.getDestroySpeed(level, pos) >= 0.0F) {
+                    FallingBlockEntity falling = FallingBlockEntity.fall(level, pos, state);
+                    falling.setDeltaMovement(falling.getDeltaMovement().add(0.0D, 0.45D, 0.0D));
+                    falling.hasImpulse = true;
+                    return true;
+                }
+            }
+            return super.processAffectedBlock(user, pos, range, distanceToCenter, random);
+        }
+
+        @Override
+        protected float getBreakChance(LivingEntity user, BlockPos pos, double range, double distanceToCenter) {
+            if (user instanceof Player player
+                    && user.level() instanceof ServerLevel level
+                    && ForgeEventFactory.getMobGriefingEvent(level, user)
+                    && PlayerTracker.getBattleXp(player) >= HAKKE_KUSHO_BREAK_BATTLE_XP) {
+                return (float)(1.0D - ((Math.sqrt(distanceToCenter) - 4.0D) / Mth.clamp(range, 0.0D, 30.0D)));
+            }
+            return 0.0F;
+        }
     }
 
     @SubscribeEvent

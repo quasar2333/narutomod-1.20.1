@@ -29,6 +29,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.narutomod.Chakra;
+import net.narutomod.PlayerTracker;
 import net.narutomod.procedure.ProcedureUtils;
 import net.narutomod.registry.ModDamageTypes;
 import net.narutomod.registry.ModEntityTypes;
@@ -38,7 +39,7 @@ public final class HakkeshoKeitenEntity extends Entity {
     public static final double CHAKRA_COST_PER_TICK = 4.0D;
     private static final int MATURE_TICKS = 10;
     private static final float MIN_SCALE = 1.0F;
-    private static final float MAX_SCALE = 10.0F;
+    private static final float MAX_SCALE = 6.0F;
     private static final double MOVE_ACCELERATION = 0.05D;
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(HakkeshoKeitenEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(HakkeshoKeitenEntity.class, EntityDataSerializers.FLOAT);
@@ -115,7 +116,7 @@ public final class HakkeshoKeitenEntity extends Entity {
 
     private void configure(Player owner) {
         setOwner(owner);
-        setShieldScale(owner.experienceLevel / 30.0F);
+        setShieldScale((float)PlayerTracker.getNinjaLevel(owner) * 0.02F);
         moveTo(owner.getX(), owner.getY(), owner.getZ(), owner.getYRot(), owner.getXRot());
         setDeltaMovement(Vec3.ZERO);
     }
@@ -257,7 +258,7 @@ public final class HakkeshoKeitenEntity extends Entity {
     }
 
     public float getRenderShellScale(float partialTick) {
-        return getMaturity(partialTick) * getShieldScale() * 2.5F;
+        return getMaturity(partialTick) * getShieldScale() * 3.0F;
     }
 
     private float getMaturity(float partialTick) {
@@ -303,7 +304,7 @@ public final class HakkeshoKeitenEntity extends Entity {
                 && entity.getRootVehicle() != getRootVehicle())) {
             ProcedureUtils.pushEntity(this, target, 60.0D, 1.0F);
             target.invulnerableTime = 0;
-            float damage = owner instanceof Player player ? player.experienceLevel / 2.0F + 10.0F : 10.0F;
+            float damage = owner instanceof Player player ? (float)PlayerTracker.getNinjaLevel(player) / 4.0F + 10.0F : 10.0F;
             target.hurt(ModDamageTypes.ninjutsu(this.level(), this, owner), damage);
         }
     }
@@ -316,7 +317,7 @@ public final class HakkeshoKeitenEntity extends Entity {
         int maxX = Mth.floor(box.maxX);
         int maxY = Mth.floor(box.maxY);
         int maxZ = Mth.floor(box.maxZ);
-        boolean canBreakSolid = owner instanceof Player player && player.experienceLevel >= 45;
+        boolean canBreakSolid = owner instanceof Player player && PlayerTracker.getNinjaLevel(player) >= 70.0D;
         for (BlockPos pos : BlockPos.betweenClosed(minX, minY, minZ, maxX, maxY, maxZ)) {
             BlockState state = this.level().getBlockState(pos);
             if (state.isAir()) {

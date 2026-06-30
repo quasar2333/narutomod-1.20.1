@@ -24,7 +24,7 @@ public final class ModSpawnPlacements {
 
     public static void register() {
         registerLegacyMerchant(ModEntityTypes.IRUKA_SENSEI.get(), IrukaSenseiEntity.class);
-        registerAmbient(ModEntityTypes.MIGHTGUY.get());
+        registerMightGuy(ModEntityTypes.MIGHTGUY.get());
         registerLegacyMerchant(ModEntityTypes.SAKURA_HARUNO.get(), SakuraHarunoEntity.class);
         registerLegacyMerchant(ModEntityTypes.TENTEN.get(), TentenEntity.class);
         registerItachi(ModEntityTypes.ITACHI.get());
@@ -39,6 +39,14 @@ public final class ModSpawnPlacements {
                 SpawnPlacements.Type.ON_GROUND,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 Mob::checkMobSpawnRules);
+    }
+
+    private static void registerMightGuy(EntityType<MightGuyEntity> type) {
+        SpawnPlacements.register(
+                type,
+                SpawnPlacements.Type.ON_GROUND,
+                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+                ModSpawnPlacements::checkMightGuySpawnRules);
     }
 
     private static <T extends Monster> void registerMonster(EntityType<T> type) {
@@ -121,6 +129,16 @@ public final class ModSpawnPlacements {
                 && level.getLevel()
                         .getEntitiesOfClass(entityClass, new AABB(pos).inflate(128.0D, 16.0D, 128.0D),
                                 Mob::isAlive)
+                        .isEmpty();
+    }
+
+    private static boolean checkMightGuySpawnRules(EntityType<MightGuyEntity> type, ServerLevelAccessor level,
+            MobSpawnType spawnType, BlockPos pos, RandomSource random) {
+        return Mob.checkMobSpawnRules(type, level, spawnType, pos, random)
+                && VillagePoiHelper.findNaturalMightGuyContext(level.getLevel(), pos).isPresent()
+                && level.getLevel()
+                        .getEntitiesOfClass(MightGuyEntity.class, new AABB(pos).inflate(512.0D, 256.0D, 512.0D),
+                                MightGuyEntity::isAlive)
                         .isEmpty();
     }
 

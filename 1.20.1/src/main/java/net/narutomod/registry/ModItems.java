@@ -14,6 +14,7 @@ import net.narutomod.item.BasicMeleeWeaponItem;
 import net.narutomod.item.BijuCloakItem;
 import net.narutomod.item.BoneArmorItem;
 import net.narutomod.item.ByakuganHelmetItem;
+import net.narutomod.item.DojutsuHelmetItem;
 import net.narutomod.item.DotonItem;
 import net.narutomod.item.EightGatesItem;
 import net.narutomod.item.EternalMangekyoHelmetItem;
@@ -144,7 +145,7 @@ public final class ModItems {
     public static final RegistryObject<Item> MANGEKYOSHARINGANETERNALHELMET = register("mangekyosharinganeternalhelmet",
             EternalMangekyoHelmetItem::new);
     public static final RegistryObject<Item> MANGEKYOSHARINGANHELMET = register("mangekyosharinganhelmet",
-            () -> new ArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new DojutsuHelmetItem("narutomod:textures/mangekyosharinganhelmet_sasuke.png"));
     public static final RegistryObject<Item> MANGEKYOSHARINGANOBITOHELMET = register("mangekyosharinganobitohelmet",
             ObitoMangekyoHelmetItem::new);
     public static final RegistryObject<Item> MEDICAL_SCROLL = register("medical_scroll", MedicalScrollItem::new);
@@ -304,7 +305,7 @@ public final class ModItems {
     public static final RegistryObject<Item> SHAKUTON = register("shakuton",
             () -> new AdvancedNatureJutsuItem(AdvancedNatureJutsuItem.AdvancedNatureKind.SHAKUTON));
     public static final RegistryObject<Item> SHARINGANHELMET = register("sharinganhelmet",
-            () -> new ArmorItem(ArmorMaterials.LEATHER, ArmorItem.Type.HELMET, new Item.Properties()));
+            () -> new DojutsuHelmetItem("narutomod:textures/sharinganhelmet.png"));
     public static final RegistryObject<Item> SHIBUKI_SWORD = register("shibuki_sword",
             () -> new BasicMeleeWeaponItem(BasicMeleeWeaponItem.WeaponKind.SHIBUKI_SWORD));
     public static final RegistryObject<Item> SHIKOTSUMYAKU = register("shikotsumyaku",

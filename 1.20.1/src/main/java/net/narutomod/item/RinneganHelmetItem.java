@@ -1,5 +1,6 @@
 package net.narutomod.item;
 
+import java.util.function.Consumer;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -12,8 +13,10 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.narutomod.NarutomodModVariables;
+import net.narutomod.client.DojutsuHelmetClientExtensions;
 import net.narutomod.entity.BijuManager;
 import net.narutomod.procedure.ProcedureUtils;
 import net.narutomod.registry.ModEffects;
@@ -44,6 +47,21 @@ public final class RinneganHelmetItem extends ArmorItem {
         if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
             applyLegacyTick(serverPlayer, stack);
         }
+    }
+
+    @Override
+    public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
+        if (this.tenseigan) {
+            return "narutomod:textures/tenseiganhelmet.png";
+        }
+        return isRinnesharinganActivated(stack)
+                ? "narutomod:textures/rinnesharinganhelmet.png"
+                : "narutomod:textures/rinneganhelmet.png";
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        DojutsuHelmetClientExtensions.initialize(consumer);
     }
 
     public static boolean applyLegacyTick(ServerPlayer player, ItemStack stack) {

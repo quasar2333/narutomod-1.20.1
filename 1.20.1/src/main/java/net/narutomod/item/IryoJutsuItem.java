@@ -89,6 +89,7 @@ public final class IryoJutsuItem extends JutsuItem {
 
     @Override
     public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        super.onUseTick(level, livingEntity, stack, remainingUseDuration);
         if (!(livingEntity instanceof Player player) || level.isClientSide) {
             return;
         }

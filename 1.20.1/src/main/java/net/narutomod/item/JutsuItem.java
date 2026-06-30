@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +14,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.narutomod.Chakra;
+import net.narutomod.PlayerTracker;
 import net.narutomod.procedure.ProcedureUtils;
 
 public abstract class JutsuItem extends Item {
@@ -50,6 +52,11 @@ public abstract class JutsuItem extends Item {
             setOwner(stack, livingEntity);
             resetJutsuMaps(stack);
         }
+    }
+
+    @Override
+    public void onUseTick(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        showChargingPower(level, livingEntity, stack, remainingUseDuration);
     }
 
     public List<JutsuDefinition> jutsuList() {
@@ -247,6 +254,28 @@ public abstract class JutsuItem extends Item {
     protected float getChargingPower(ItemStack stack, LivingEntity entity, int remainingUseDuration, float basePower, float powerUpDelay) {
         float divisor = powerUpDelay * (float) Chakra.getChakraModifier(entity) * getCurrentJutsuXpModifier(stack, entity);
         return divisor > 0.0F ? basePower + (float) Math.max(getUseDuration(stack) - remainingUseDuration, 0) / divisor : 0.0F;
+    }
+
+    protected void showChargingPower(Level level, LivingEntity livingEntity, ItemStack stack, int remainingUseDuration) {
+        JutsuDefinition current = getCurrentJutsu(stack);
+        if (level.isClientSide || current.powerUpDelay() <= 0.0F
+                || !(livingEntity instanceof Player player)
+                || !PlayerTracker.isNinja(player)) {
+            return;
+        }
+        float power = getChargingPower(stack, livingEntity, remainingUseDuration, current.basePower(), current.powerUpDelay());
+        float progress = chargingProgress(stack, livingEntity, remainingUseDuration, current.powerUpDelay());
+        player.displayClientMessage(Component.literal("Charge " + chargingBar(progress) + " " + String.format("%.1f", power)), true);
+    }
+
+    private float chargingProgress(ItemStack stack, LivingEntity entity, int remainingUseDuration, float powerUpDelay) {
+        float divisor = powerUpDelay * (float) Chakra.getChakraModifier(entity) * getCurrentJutsuXpModifier(stack, entity);
+        return divisor > 0.0F ? Mth.clamp((getUseDuration(stack) - remainingUseDuration) / divisor, 0.0F, 1.0F) : 0.0F;
+    }
+
+    private static String chargingBar(float progress) {
+        int filled = Mth.clamp((int)(progress * 10.0F), 0, 10);
+        return "[" + "#".repeat(filled) + "-".repeat(10 - filled) + "]";
     }
 
     protected void setAffinity(ItemStack stack, boolean affinity) {

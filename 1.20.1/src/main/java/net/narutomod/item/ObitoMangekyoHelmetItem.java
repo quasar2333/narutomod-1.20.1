@@ -2,6 +2,7 @@ package net.narutomod.item;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
@@ -21,7 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.narutomod.NarutomodModVariables;
+import net.narutomod.client.DojutsuHelmetClientExtensions;
 import net.narutomod.procedure.ProcedureUtils;
 import net.narutomod.registry.ModItems;
 import net.narutomod.world.KamuiDimension;
@@ -133,6 +136,11 @@ public final class ObitoMangekyoHelmetItem extends ArmorItem {
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, EquipmentSlot slot, String type) {
         return "narutomod:textures/mangekyosharinganhelmet_obito.png";
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+        DojutsuHelmetClientExtensions.initialize(consumer);
     }
 
     @Override
