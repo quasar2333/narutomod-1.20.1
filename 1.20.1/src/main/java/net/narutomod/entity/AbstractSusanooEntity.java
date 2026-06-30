@@ -18,6 +18,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -36,6 +38,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.network.NetworkHooks;
 import net.narutomod.Chakra;
 import net.narutomod.NarutomodModVariables;
@@ -47,10 +50,12 @@ import net.narutomod.registry.ModItems;
 import net.narutomod.registry.ModParticleTypes;
 
 public abstract class AbstractSusanooEntity extends PathfinderMob {
-    public static final double BXP_REQUIRED_L1 = 2000.0D;
-    public static final double BXP_REQUIRED_L2 = 6000.0D;
-    public static final double BXP_REQUIRED_L3 = 12000.0D;
-    public static final double BXP_REQUIRED_L4 = 24000.0D;
+    public static final double BXP_REQUIRED_L0 = 2000.0D;
+    public static final double BXP_REQUIRED_L1 = 5000.0D;
+    public static final double BXP_REQUIRED_L2 = 10000.0D;
+    public static final double BXP_REQUIRED_L3 = 20000.0D;
+    public static final double BXP_REQUIRED_L4 = 40000.0D;
+    protected static final double BASE_REACH_DISTANCE = 7.0D;
     private static final int ATTACK_COOLDOWN_TICKS = 10;
     private static final double MOTION_LIMIT = 0.05D;
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(AbstractSusanooEntity.class, EntityDataSerializers.INT);
@@ -58,7 +63,7 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
 
     @Nullable
     private UUID ownerUuid;
-    protected double chakraUsage = 50.0D;
+    protected double chakraUsage = 30.0D;
     protected double chakraUsageModifier = 2.0D;
     protected double ownerBattleXp;
     private int attackCooldown;
@@ -76,12 +81,13 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
 
     public static AttributeSupplier.Builder createSusanooAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.ARMOR, 100.0D)
+                .add(Attributes.ARMOR, 0.0D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D)
                 .add(Attributes.FOLLOW_RANGE, 48.0D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 1.0D)
                 .add(Attributes.MAX_HEALTH, 100.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.05D);
+                .add(Attributes.MOVEMENT_SPEED, 0.1D)
+                .add(ForgeMod.ENTITY_REACH.get(), BASE_REACH_DISTANCE);
     }
 
     public abstract float entityModelScale();
@@ -123,11 +129,12 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
         setYHeadRot(owner.getYRot());
         if (owner instanceof Player player) {
             this.ownerBattleXp = NarutomodModVariables.getBattleExperience(player);
-            setAttributeBaseValue(Attributes.MAX_HEALTH, Math.max(Math.sqrt(Math.max(this.ownerBattleXp, 1.0D)), 20.0D));
+            setAttributeBaseValue(Attributes.MAX_HEALTH, Math.sqrt(Math.max(this.ownerBattleXp, 1.0D)));
         } else {
             this.ownerBattleXp = 4000.0D;
         }
-        setAttributeBaseValue(Attributes.MOVEMENT_SPEED, Math.max(ProcedureUtils.getModifiedSpeed(owner) * 0.3D, 0.05D));
+        setAttributeBaseValue(Attributes.MOVEMENT_SPEED, 0.1D);
+        setReachDistance(BASE_REACH_DISTANCE);
         copyFlameColor(owner);
         getPersistentData().putDouble("entityModelScale", entityModelScale());
         setHealth(getMaxHealth());
@@ -158,18 +165,30 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
             discard();
             return;
         }
-        if (owner instanceof Player player && !player.isCreative()) {
-            player.setShiftKeyDown(false);
-        }
-        if (owner instanceof Player) {
-            consumeChakra(owner);
-            if (owner instanceof ServerPlayer player) {
-                SusanooPowerIncreaseHandler.setActiveTicks(player, this.tickCount);
+        if (owner instanceof Player player) {
+            if (!player.isCreative()) {
+                if (!isVehicle()) {
+                    if (player instanceof ServerPlayer serverPlayer) {
+                        SusanooPowerIncreaseHandler.deactivate(serverPlayer, true);
+                    } else {
+                        discard();
+                    }
+                    return;
+                }
+                player.setShiftKeyDown(false);
+                consumeChakra(owner);
+            }
+            if (this.tickCount % 20 == 1) {
+                owner.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, 22, 6, false, false));
+            }
+            if (player instanceof ServerPlayer serverPlayer) {
+                SusanooPowerIncreaseHandler.setActiveTicks(serverPlayer, this.tickCount);
             }
         } else if (!isVehicle()) {
             discard();
             return;
         }
+        syncHeldWeapons(owner);
         LivingEntity rider = getControllingPassenger();
         if (rider != null && isOwnedBy(rider)) {
             tickControlled(rider);
@@ -191,10 +210,26 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
     @Override
     public boolean doHurtTarget(Entity target) {
         LivingEntity owner = getOwner();
+        LivingEntity passenger = getControllingPassenger();
+        LivingEntity attacker = passenger != null ? passenger : this;
+        float cooledAttack = 1.0F;
+        if (passenger instanceof Player player) {
+            cooledAttack = player.getAttackStrengthScale(0.5F);
+            player.resetAttackStrengthTicker();
+        }
+        ItemStack held = attacker.getMainHandItem();
+        float damage = (float)(getAttributeValue(Attributes.ATTACK_DAMAGE) * cooledAttack);
+        if (held.is(ModItems.TOTSUKA_SWORD.get())
+                && target instanceof LivingEntity living
+                && Chakra.pathway(living).getAmount() < 5.0D) {
+            damage *= 2.0F + getRandom().nextFloat();
+        }
         target.invulnerableTime = 0;
-        boolean hurt = target.hurt(ModDamageTypes.ninjutsu(this.level(), this, owner), (float)getAttributeValue(Attributes.ATTACK_DAMAGE));
+        boolean hurt = target.hurt(ModDamageTypes.ninjutsu(this.level(), this, owner), damage);
         if (hurt && target instanceof LivingEntity living) {
-            living.knockback(1.8D, Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
+            living.knockback(Math.max(0.4D, cooledAttack * 2.5D),
+                    Mth.sin(getYRot() * Mth.DEG_TO_RAD), -Mth.cos(getYRot() * Mth.DEG_TO_RAD));
+            setDeltaMovement(getDeltaMovement().multiply(0.6D, 1.0D, 0.6D));
         }
         return hurt;
     }
@@ -248,10 +283,21 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
                 || source.is(DamageTypes.FALL)
                 || source.is(DamageTypes.INDIRECT_MAGIC)
                 || source.is(DamageTypes.MAGIC)
-                || source.is(DamageTypes.WITHER)) {
+                || source.is(DamageTypes.WITHER)
+                || source.is(ModDamageTypes.AMATERASU)
+                || source.is(ModDamageTypes.NINJUTSU_FIRE)) {
             return false;
         }
-        return super.hurt(source, amount);
+        float previousHealth = getHealth();
+        boolean hurt = super.hurt(source, amount);
+        LivingEntity owner = getOwner();
+        if (hurt && !isAlive() && owner != null) {
+            float overflow = amount - previousHealth;
+            if (overflow > 0.0F) {
+                owner.hurt(source, overflow);
+            }
+        }
+        return hurt;
     }
 
     @Override
@@ -346,7 +392,9 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
     }
 
     private double getAttackReach() {
-        return Math.max(4.0D, Math.sqrt(getBbWidth() * getBbWidth() + getBbHeight() * getBbHeight()));
+        AttributeInstance reach = getAttribute(ForgeMod.ENTITY_REACH.get());
+        return reach != null ? Math.max(0.0D, reach.getValue())
+                : Math.max(4.0D, Math.sqrt(getBbWidth() * getBbWidth() + getBbHeight() * getBbHeight()));
     }
 
     private void consumeChakra(LivingEntity owner) {
@@ -366,7 +414,7 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
             double y = getY() + getRandom().nextDouble() * getBbHeight();
             double z = getZ() + (getRandom().nextDouble() - 0.5D) * getBbWidth();
             serverLevel.sendParticles(
-                    ModParticleTypes.options(NarutoParticleKind.FLAME_COLORED, color, Math.max((int)(getBbWidth() * 8.0F), 8)),
+                    ModParticleTypes.options(NarutoParticleKind.FLAME_COLORED, color, Math.max((int)(getBbWidth() * 15.0F), 8)),
                     x,
                     y,
                     z,
@@ -384,9 +432,11 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
 
     private void copyFlameColor(LivingEntity owner) {
         ItemStack head = owner.getItemBySlot(EquipmentSlot.HEAD);
+        if (SusanooPowerIncreaseHandler.isSharinganHead(head)) {
+            this.chakraUsageModifier = 1.0D;
+        }
         if (head.is(ModItems.MANGEKYOSHARINGANHELMET.get()) || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get())) {
             this.entityData.set(FLAME_COLOR, 0x20B83DBA);
-            this.chakraUsageModifier = 1.0D;
         }
     }
 
@@ -401,6 +451,19 @@ public abstract class AbstractSusanooEntity extends PathfinderMob {
     private void setOwner(LivingEntity owner) {
         this.ownerUuid = owner.getUUID();
         this.entityData.set(OWNER_ID, owner.getId());
+    }
+
+    protected void syncHeldWeapons(LivingEntity owner) {
+        setShowSword(owner.getMainHandItem().is(ModItems.CHOKUTO.get()));
+    }
+
+    protected void setReachDistance(double reach) {
+        setAttributeBaseValue(ForgeMod.ENTITY_REACH.get(), reach);
+    }
+
+    protected double getReachDistance() {
+        AttributeInstance instance = getAttribute(ForgeMod.ENTITY_REACH.get());
+        return instance != null ? instance.getBaseValue() : BASE_REACH_DISTANCE;
     }
 
     protected void setAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attribute attribute, double value) {

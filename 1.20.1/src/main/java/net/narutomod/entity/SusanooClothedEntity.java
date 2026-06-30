@@ -88,8 +88,13 @@ public final class SusanooClothedEntity extends AbstractSusanooEntity {
 
     @Override
     public void setShowSword(boolean show) {
+        if (show == shouldShowSword()) {
+            return;
+        }
         this.entityData.set(SHOW_SWORD, show);
+        this.chakraUsage += show ? 15.0D : -15.0D;
         setAttributeBaseValue(Attributes.ATTACK_DAMAGE, baseAttackDamage() * (show ? 2.2D : 1.0D));
+        setReachDistance(baseReachDistance() + (show ? 2.0D : 0.0D));
     }
 
     @Override
@@ -191,19 +196,46 @@ public final class SusanooClothedEntity extends AbstractSusanooEntity {
 
     private void configure(LivingEntity owner, boolean fullBody) {
         this.entityData.set(HAS_LEGS, fullBody);
-        this.chakraUsage = fullBody ? 60.0D : 50.0D;
+        this.chakraUsage = fullBody ? 70.0D : 60.0D;
         configureFromOwner(owner);
-        setAttributeBaseValue(Attributes.MAX_HEALTH, getMaxHealth() * (fullBody ? 3.0D : 2.0D));
-        setAttributeBaseValue(Attributes.ATTACK_DAMAGE, baseAttackDamage());
-        if (fullBody) {
-            setAttributeBaseValue(Attributes.MOVEMENT_SPEED, getAttributeValue(Attributes.MOVEMENT_SPEED) + 0.2D);
+        if (owner instanceof Player) {
+            setAttributeBaseValue(Attributes.MAX_HEALTH, getMaxHealth() * (fullBody ? 11.0D : 4.0D));
+            setAttributeBaseValue(Attributes.ATTACK_DAMAGE, baseAttackDamage());
+            if (fullBody) {
+                setAttributeBaseValue(Attributes.MOVEMENT_SPEED, getAttributeValue(Attributes.MOVEMENT_SPEED) + 0.2D);
+            }
+            setReachDistance(baseReachDistance());
+        } else {
+            setNoAi(false);
+            setAttributeBaseValue(Attributes.MAX_HEALTH, getMaxHealth() + 400.0D);
+            setAttributeBaseValue(Attributes.ATTACK_DAMAGE, getAttributeValue(Attributes.ATTACK_DAMAGE) + 50.0D);
+            setAttributeBaseValue(Attributes.MOVEMENT_SPEED, 0.4D);
+            setReachDistance(baseReachDistance());
+            setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.TOTSUKA_SWORD.get()));
         }
         setHealth(getMaxHealth());
         refreshDimensions();
     }
 
     private double baseAttackDamage() {
-        return Math.min(this.ownerBattleXp, hasLegs() ? BXP_REQUIRED_L4 : BXP_REQUIRED_L3) * 0.005D;
+        return Math.min(this.ownerBattleXp, hasLegs() ? BXP_REQUIRED_L4 : BXP_REQUIRED_L3) * 0.003D;
+    }
+
+    private double baseReachDistance() {
+        return BASE_REACH_DISTANCE + (hasLegs() ? 3.0D : 0.0D);
+    }
+
+    @Override
+    protected void syncHeldWeapons(LivingEntity owner) {
+        super.syncHeldWeapons(owner);
+        ItemStack mainHand = owner.getMainHandItem();
+        if (mainHand.is(ModItems.TOTSUKA_SWORD.get())) {
+            if (!getMainHandItem().is(ModItems.TOTSUKA_SWORD.get())) {
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.TOTSUKA_SWORD.get()));
+            }
+        } else if (getMainHandItem().is(ModItems.TOTSUKA_SWORD.get())) {
+            setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+        }
     }
 
     private static boolean hasMangekyo(@Nullable LivingEntity owner) {
@@ -212,7 +244,6 @@ public final class SusanooClothedEntity extends AbstractSusanooEntity {
         }
         ItemStack head = owner.getItemBySlot(EquipmentSlot.HEAD);
         return head.is(ModItems.MANGEKYOSHARINGANHELMET.get())
-                || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get())
-                || head.is(ModItems.MANGEKYOSHARINGANOBITOHELMET.get());
+                || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get());
     }
 }

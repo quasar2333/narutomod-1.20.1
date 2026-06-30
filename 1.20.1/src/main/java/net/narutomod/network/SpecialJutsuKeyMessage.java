@@ -10,6 +10,7 @@ import net.narutomod.item.AmaterasuHandler;
 import net.narutomod.item.ByakuganHandler;
 import net.narutomod.item.ObitoKamuiHandler;
 import net.narutomod.item.RinneganSpecialJutsuHandler;
+import net.narutomod.item.SusanooPowerIncreaseHandler;
 import net.narutomod.procedure.ProcedureSync;
 
 public record SpecialJutsuKeyMessage(int key, boolean pressed) {
@@ -34,6 +35,7 @@ public record SpecialJutsuKeyMessage(int key, boolean pressed) {
             }
             if (!ObitoKamuiHandler.handleSpecialJutsuKey(sender, message.key, message.pressed)
                     && !AmaterasuHandler.handleSpecialJutsuKey(sender, message.key, message.pressed)
+                    && !SusanooPowerIncreaseHandler.handleSpecialJutsuKey(sender, message.key, message.pressed)
                     && !ByakuganHandler.handleSpecialJutsuKey(sender, message.key, message.pressed)
                     && !RinneganSpecialJutsuHandler.handleSpecialJutsuKey(sender, message.key, message.pressed)) {
                 BijuManager.handleSpecialJutsuKey(sender, message.key, message.pressed);

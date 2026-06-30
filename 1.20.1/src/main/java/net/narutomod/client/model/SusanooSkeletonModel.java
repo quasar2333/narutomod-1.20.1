@@ -31,6 +31,12 @@ public final class SusanooSkeletonModel extends HumanoidModel<SusanooSkeletonEnt
     @Override
     public void setupAnim(SusanooSkeletonEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         super.setupAnim(entity, limbSwing * 2.0F / OLD_MODEL_HEIGHT, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
+        boolean fullBody = entity.isFullBody();
+        this.head.visible = fullBody;
+        this.hat.visible = fullBody;
+        this.rightArm.visible = fullBody;
+        this.leftArm.visible = fullBody;
+        this.body.visible = true;
         this.head.y += -8.0F;
         this.hat.copyFrom(this.head);
         this.body.y = -8.0F;

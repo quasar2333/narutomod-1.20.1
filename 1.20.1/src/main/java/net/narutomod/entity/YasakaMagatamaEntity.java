@@ -40,7 +40,7 @@ import net.narutomod.registry.ModSounds;
 public final class YasakaMagatamaEntity extends Entity {
     private static final int MAX_FLIGHT_TICKS = 100;
     private static final double AOE_RADIUS = 3.0D;
-    private static final float SPEED = 0.95F;
+    private static final float SPEED = 0.99F;
     private static final float WATER_SLOWDOWN = 0.8F;
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(YasakaMagatamaEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(YasakaMagatamaEntity.class, EntityDataSerializers.FLOAT);

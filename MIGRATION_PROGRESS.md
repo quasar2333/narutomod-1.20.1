@@ -14819,3 +14819,31 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: remote MCPRepo handshake failed first and left the compile classpath incomplete; reran with `--offline` using the already cached Forge/Minecraft dependencies, and `compileJava` was BUILD SUCCESSFUL with only the existing Forge deprecation warnings.
   - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon --offline build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
   - Manual dedicated-server gate: `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon --offline runServer` reached `Done (2.010s)! For help, type "help"` at `2026-06-30T21:26:50+08:00`; fatal/resource scan of `1.20.1/run/logs/latest.log` found no `Missing textures`, `Missing model`, `Missing blockstate`, `ERROR`, `FATAL`, `Exception`, or `Caused by` matches.
+
+### M7 Upstream 0.3.2 Susanoo Restoration Slice
+
+- Follow-up request: compare AHZNB upstream `0.3.2-beta` Susanoo logic and restore the missing/changed behavior in the 1.20.1 port.
+
+- 0.3.2-beta source rechecked:
+  - `ProcedureSusanoo`: activation consumes `500d` chakra, stores `summonedSusanooID`, and toggles/deactivates from Special Jutsu 2; upgrades consume another `500d` per stage.
+  - `EntitySusanooBase`: battle XP gates are `2000 / 5000 / 10000 / 20000 / 40000`, base chakra upkeep is `30d * chakraUsageModifier`, base movement speed is `0.1d`, reach is `7d`, max health starts from `sqrt(playerBattleXp)`, owner damage overflow is applied when Susanoo breaks, and Amaterasu/arrow/potion/fall/cactus/drown/magic/wither damage is ignored.
+  - `EntitySusanooSkeleton`: first stage is half skeleton; upgrade at `5000` battle XP creates the full-body skeleton, with attack damage `min(playerXp, 10000) * 0.003d`.
+  - `EntitySusanooClothed`: half/full clothed stages use `60d/70d` upkeep, player max-health multipliers `4x/11x`, attack damage `min(playerXp, stageCap) * 0.003d`, full body adds `+3` reach and `+0.2` speed, Chokuto adds `+2` reach / `+15d` upkeep / `2.2x` attack, and Sasuke/Eternal Mangekyo contact applies Amaterasu.
+  - `EntitySusanooWinged`: complete-body upkeep is `100d`, max health is `44x`, attack damage is `playerXp * 0.003d`, reach adds `+12`, Chokuto still applies the sword modifiers, Mangekyo/Eternal grants Kagutsuchi sword, Obito/Eternal grants Kamui shuriken, and flight lift uses the rider pitch path.
+  - `EntitySusanooClothed.EntityYasakaMagatama`: launched magatama uses speed `0.99f`, scale-based `20x` damage, radius `3`, and max `100` ticks in air.
+
+- 1.20.1 changes:
+  - `entity/AbstractSusanooEntity.java`: restored upstream battle XP gates, base attributes, chakra upkeep, rider-only survival rule, mining fatigue, held Chokuto display, attack cooldown scaling, Totsuka low-chakra damage boost, Amaterasu/fire immunity, owner overflow damage, original reach lookup, and larger flame particle size.
+  - `item/SusanooPowerIncreaseHandler.java`: activation now gates at `BXP_REQUIRED_L0 = 2000`; upgrade chain now includes the missing full-skeleton stage (`5000 -> full skeleton`, `10000 -> clothed half`, `20000 -> clothed full`, `40000 -> winged`); deactivation cooldown again uses `ProcedureUtils.getCooldownModifier`.
+  - `network/SpecialJutsuKeyMessage.java`: Special Jutsu 2 now dispatches to Susanoo toggle for Mangekyo helmets, matching the upstream tooltip/behavior while leaving Power Increase available for mounted upgrades.
+  - `entity/SusanooSkeletonEntity.java` and `client/model/SusanooSkeletonModel.java`: added persisted full-body state, half/full dimensions, half-stage zero reach, original `0.003d` attack scaling, Sasuke-only skeleton Amaterasu contact, and model visibility so the half skeleton no longer renders full-stage head/arms early.
+  - `entity/SusanooClothedEntity.java` and `client/renderer/SusanooClothedRenderer.java`: restored `60d/70d` upkeep, `4x/11x` health, `0.003d` attack scaling, full-body reach/speed bonus, non-player Itachi-style combat stats/Totsuka hand item, sword reach/upkeep/attack modifiers, Sasuke/Eternal Amaterasu gating, and item-in-hand rendering.
+  - `entity/SusanooWingedEntity.java`: restored `100d` upkeep, `44x` health without the extra floor, `0.003d` attack scaling, `+12` reach, sword modifier upkeep/reach, Totsuka/Kagutsuchi/Kamui held-weapon sync, upstream-style grant/remove behavior for Kagutsuchi/Kamui shuriken, and rider pitch lift.
+  - `entity/YasakaMagatamaEntity.java`: restored launch speed from `0.95f` to upstream `0.99f`.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: BUILD SUCCESSFUL with only existing deprecation notes.
+  - `python tools/validate_port_resources.py`: all issue counts 0.
+  - `python tools/validate_dedicated_server_safety.py`: 282 non-client Java files scanned, 0 client-reference issues.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
+  - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: macOS PowerShell rejected the script's Windows-only `Start-Process -WindowStyle` parameter. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (2.024s)! For help, type "help"` at `2026-06-30T21:56:37+08:00`, and fatal-pattern scan reported 0 issues in `audit/dedicated_server_startup_summary.json`.

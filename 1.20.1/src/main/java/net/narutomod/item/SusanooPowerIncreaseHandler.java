@@ -49,6 +49,24 @@ public final class SusanooPowerIncreaseHandler {
         return true;
     }
 
+    public static boolean handleSpecialJutsuKey(ServerPlayer player, int key, boolean pressed) {
+        if (key != 2 || player.isSpectator() || !player.isAlive()) {
+            return false;
+        }
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        if (!isMangekyoHead(head)) {
+            return false;
+        }
+        if (!pressed) {
+            if (isActivated(player) || hasActiveOwnedSusanoo(player)) {
+                deactivate(player, true);
+            } else {
+                activate(player);
+            }
+        }
+        return true;
+    }
+
     public static boolean upgrade(ServerPlayer player) {
         if (player.getVehicle() instanceof AbstractSusanooEntity susanoo && susanoo.isOwnedBy(player)) {
             return upgrade(player, susanoo) != null;
@@ -85,7 +103,7 @@ public final class SusanooPowerIncreaseHandler {
                 || hasActiveOwnedSusanoo(player)
                 || !isMangekyoHead(head)
                 || ObitoMangekyoHelmetItem.isBlinded(head)
-                || NarutomodModVariables.getBattleExperience(player) < AbstractSusanooEntity.BXP_REQUIRED_L1) {
+                || NarutomodModVariables.getBattleExperience(player) < AbstractSusanooEntity.BXP_REQUIRED_L0) {
             return false;
         }
         if (BijuManager.getCloakLevel(player) > 0) {
@@ -122,7 +140,7 @@ public final class SusanooPowerIncreaseHandler {
         NarutomodModVariables.get(player).putBoolean(SUSANOO_ACTIVATED_TAG, false);
         NarutomodModVariables.sync(player);
 
-        int cooldown = (int)(activeTicks * 0.25D);
+        int cooldown = (int)(activeTicks * 0.25D * ProcedureUtils.getCooldownModifier(player));
         if (applyPenalty && cooldown > 0 && shouldApplyDeactivatePenalty(player)) {
             player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, cooldown, 3, false, false));
             player.addEffect(new MobEffectInstance(MobEffects.CONFUSION, cooldown, 2, false, false));
@@ -137,8 +155,11 @@ public final class SusanooPowerIncreaseHandler {
             return null;
         }
         double battleXp = NarutomodModVariables.getBattleExperience(player);
-        if (current instanceof SusanooSkeletonEntity) {
-            if (battleXp >= AbstractSusanooEntity.BXP_REQUIRED_L2 && consumeUpgradeChakra(player)) {
+        if (current instanceof SusanooSkeletonEntity skeleton) {
+            if (!skeleton.isFullBody() && battleXp >= AbstractSusanooEntity.BXP_REQUIRED_L1 && consumeUpgradeChakra(player)) {
+                return replaceWith(player, current, SusanooStage.SKELETON_FULL);
+            }
+            if (skeleton.isFullBody() && battleXp >= AbstractSusanooEntity.BXP_REQUIRED_L2 && consumeUpgradeChakra(player)) {
                 return replaceWith(player, current, SusanooStage.CLOTHED_HALF);
             }
         } else if (current instanceof SusanooClothedEntity clothed) {
@@ -167,7 +188,7 @@ public final class SusanooPowerIncreaseHandler {
 
     public static String describeVehicle(Entity vehicle) {
         if (vehicle instanceof SusanooSkeletonEntity) {
-            return "susanoo_skeleton";
+            return ((SusanooSkeletonEntity) vehicle).isFullBody() ? "susanoo_skeleton_full" : "susanoo_skeleton_half";
         }
         if (vehicle instanceof SusanooClothedEntity clothed) {
             return clothed.hasLegs() ? "susanoo_clothed_full" : "susanoo_clothed_half";
@@ -209,6 +230,7 @@ public final class SusanooPowerIncreaseHandler {
         player.stopRiding();
         current.discard();
         AbstractSusanooEntity next = switch (nextStage) {
+            case SKELETON_FULL -> SusanooSkeletonEntity.spawnFrom(player, true);
             case CLOTHED_HALF -> SusanooClothedEntity.spawnFrom(player, false);
             case CLOTHED_FULL -> SusanooClothedEntity.spawnFrom(player, true);
             case WINGED -> SusanooWingedEntity.spawnFrom(player);
@@ -227,6 +249,7 @@ public final class SusanooPowerIncreaseHandler {
     }
 
     private enum SusanooStage {
+        SKELETON_FULL,
         CLOTHED_HALF,
         CLOTHED_FULL,
         WINGED

@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.RenderLayerParent;
 import net.minecraft.client.renderer.entity.MobRenderer;
+import net.minecraft.client.renderer.entity.layers.ItemInHandLayer;
 import net.minecraft.client.renderer.entity.layers.RenderLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.narutomod.NarutomodMod;
@@ -24,6 +25,7 @@ public final class SusanooClothedRenderer extends MobRenderer<SusanooClothedEnti
     public SusanooClothedRenderer(EntityRendererProvider.Context context) {
         super(context, new SusanooClothedModel(context.bakeLayer(SusanooClothedModel.LAYER_LOCATION)), 0.6F * SusanooClothedEntity.MODEL_SCALE);
         addLayer(new FlameLayer(this));
+        addLayer(new ItemInHandLayer<>(this, context.getItemInHandRenderer()));
     }
 
     @Override

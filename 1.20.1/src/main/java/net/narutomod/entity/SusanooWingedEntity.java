@@ -47,7 +47,7 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
 
     public SusanooWingedEntity(EntityType<? extends SusanooWingedEntity> entityType, Level level) {
         super(entityType, level);
-        this.chakraUsage = 70.0D;
+        this.chakraUsage = 100.0D;
         this.setMaxUpStep(HEIGHT / 3.0F);
     }
 
@@ -98,8 +98,13 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
 
     @Override
     public void setShowSword(boolean show) {
+        if (show == shouldShowSword()) {
+            return;
+        }
         this.entityData.set(SHOW_SWORD, show);
+        this.chakraUsage += show ? 15.0D : -15.0D;
         setAttributeBaseValue(Attributes.ATTACK_DAMAGE, baseAttackDamage() * (show ? 2.2D : 1.0D));
+        setReachDistance(baseReachDistance() + (show ? 2.0D : 0.0D));
     }
 
     @Override
@@ -119,10 +124,6 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
         super.tick();
         if (this.level().isClientSide || isRemoved()) {
             return;
-        }
-        LivingEntity owner = getOwner();
-        if (owner != null) {
-            syncHeldWeapons(owner);
         }
         LivingEntity rider = getControllingPassenger();
         if (rider != null && isOwnedBy(rider)) {
@@ -230,18 +231,23 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
     }
 
     private void configure(Player owner) {
-        this.chakraUsage = 70.0D;
+        this.chakraUsage = 100.0D;
         configureFromOwner(owner);
-        setAttributeBaseValue(Attributes.MAX_HEALTH, Math.max(getMaxHealth() * 44.0D, 100.0D));
+        setAttributeBaseValue(Attributes.MAX_HEALTH, getMaxHealth() * 44.0D);
         setAttributeBaseValue(Attributes.ATTACK_DAMAGE, baseAttackDamage());
         setAttributeBaseValue(Attributes.MOVEMENT_SPEED, getAttributeValue(Attributes.MOVEMENT_SPEED) + 0.5D);
+        setReachDistance(baseReachDistance());
         setHealth(getMaxHealth());
         refreshDimensions();
         grantWeapons(owner);
     }
 
     private double baseAttackDamage() {
-        return this.ownerBattleXp * 0.005D;
+        return this.ownerBattleXp * 0.003D;
+    }
+
+    private double baseReachDistance() {
+        return BASE_REACH_DISTANCE + 12.0D;
     }
 
     private void tickWingFlight(LivingEntity rider) {
@@ -252,9 +258,9 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
             detractWings();
         }
         if (rider.zza > 0.0F && (!onGround() || rider.getXRot() < 0.0F)) {
-            double lift = Mth.clamp(-rider.getXRot() / 45.0D, -0.45D, 0.55D);
+            double lift = -rider.getXRot() / 45.0D;
             Vec3 motion = getDeltaMovement();
-            setDeltaMovement(motion.x(), Mth.clamp(motion.y() * 0.6D + lift * 0.08D, -0.25D, 0.25D), motion.z());
+            setDeltaMovement(motion.x(), Mth.clamp(motion.y() + lift, -0.05D, 0.05D), motion.z());
             move(MoverType.SELF, new Vec3(0.0D, getDeltaMovement().y(), 0.0D));
         }
     }
@@ -293,14 +299,21 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
         this.entityData.set(HEAD_YAW, headYaw);
     }
 
-    private void syncHeldWeapons(LivingEntity owner) {
+    @Override
+    protected void syncHeldWeapons(LivingEntity owner) {
+        super.syncHeldWeapons(owner);
         ItemStack mainHand = owner.getMainHandItem();
-        if (mainHand.is(ModItems.KAGUTSUCHISWORDRANGED.get())) {
+        if (mainHand.is(ModItems.TOTSUKA_SWORD.get())) {
+            if (!getMainHandItem().is(ModItems.TOTSUKA_SWORD.get())) {
+                setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.TOTSUKA_SWORD.get()));
+            }
+        } else if (mainHand.is(ModItems.KAGUTSUCHISWORDRANGED.get())) {
             if (!getMainHandItem().is(ModItems.KAGUTSUCHISWORDRANGED.get())) {
                 setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.KAGUTSUCHISWORDRANGED.get()));
             }
             setShowSword(false);
-        } else if (getMainHandItem().is(ModItems.KAGUTSUCHISWORDRANGED.get())) {
+        } else if (getMainHandItem().is(ModItems.TOTSUKA_SWORD.get())
+                || getMainHandItem().is(ModItems.KAGUTSUCHISWORDRANGED.get())) {
             setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
         }
         if (mainHand.is(ModItems.KAMUISHURIKEN.get())) {
@@ -319,13 +332,11 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
 
     private void grantWeapons(Player player) {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if ((head.is(ModItems.MANGEKYOSHARINGANHELMET.get()) || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get()))
-                && !hasItem(player, ModItems.KAGUTSUCHISWORDRANGED.get())) {
+        if (head.is(ModItems.MANGEKYOSHARINGANHELMET.get()) || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get())) {
             giveOrDrop(player, new ItemStack(ModItems.KAGUTSUCHISWORDRANGED.get()));
             this.grantedKagutsuchi = true;
         }
-        if ((head.is(ModItems.MANGEKYOSHARINGANOBITOHELMET.get()) || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get()))
-                && !hasItem(player, ModItems.KAMUISHURIKEN.get())) {
+        if (head.is(ModItems.MANGEKYOSHARINGANOBITOHELMET.get()) || head.is(ModItems.MANGEKYOSHARINGANETERNALHELMET.get())) {
             giveOrDrop(player, new ItemStack(ModItems.KAMUISHURIKEN.get()));
             this.grantedKamuiShuriken = true;
         }
@@ -333,22 +344,13 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
 
     private void removeGrantedWeapons(Player player) {
         if (this.grantedKagutsuchi) {
-            removeOneItem(player, ModItems.KAGUTSUCHISWORDRANGED.get());
+            removeAllItems(player, ModItems.KAGUTSUCHISWORDRANGED.get());
         }
         if (this.grantedKamuiShuriken) {
-            removeOneItem(player, ModItems.KAMUISHURIKEN.get());
+            removeAllItems(player, ModItems.KAMUISHURIKEN.get());
         }
         this.grantedKagutsuchi = false;
         this.grantedKamuiShuriken = false;
-    }
-
-    private static boolean hasItem(Player player, Item item) {
-        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
-            if (player.getInventory().getItem(i).is(item)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private static void giveOrDrop(Player player, ItemStack stack) {
@@ -357,15 +359,11 @@ public final class SusanooWingedEntity extends AbstractSusanooEntity {
         }
     }
 
-    private static void removeOneItem(Player player, Item item) {
+    private static void removeAllItems(Player player, Item item) {
         for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
             ItemStack stack = player.getInventory().getItem(i);
             if (stack.is(item)) {
-                stack.shrink(1);
-                if (stack.isEmpty()) {
-                    player.getInventory().setItem(i, ItemStack.EMPTY);
-                }
-                return;
+                player.getInventory().setItem(i, ItemStack.EMPTY);
             }
         }
     }
