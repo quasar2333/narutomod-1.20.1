@@ -36,9 +36,10 @@ import net.narutomod.registry.ModEntityTypes;
 import net.narutomod.registry.ModSounds;
 
 public final class HakkeshoKeitenEntity extends Entity {
-    public static final double CHAKRA_COST_PER_TICK = 4.0D;
+    public static final double CHAKRA_COST_PER_TICK = 5.0D;
     private static final int MATURE_TICKS = 10;
-    private static final float MIN_SCALE = 1.0F;
+    private static final float INITIAL_SCALE = 0.1F;
+    private static final float MIN_SCALE = 0.1F;
     private static final float MAX_SCALE = 6.0F;
     private static final double MOVE_ACCELERATION = 0.05D;
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(HakkeshoKeitenEntity.class, EntityDataSerializers.INT);
@@ -47,6 +48,7 @@ public final class HakkeshoKeitenEntity extends Entity {
     @Nullable
     private UUID ownerUuid;
     private float dimensionsScale = MIN_SCALE;
+    private float maxShieldScale = 1.0F;
 
     public HakkeshoKeitenEntity(EntityType<? extends HakkeshoKeitenEntity> entityType, Level level) {
         super(entityType, level);
@@ -116,7 +118,8 @@ public final class HakkeshoKeitenEntity extends Entity {
 
     private void configure(Player owner) {
         setOwner(owner);
-        setShieldScale((float)PlayerTracker.getNinjaLevel(owner) * 0.02F);
+        this.maxShieldScale = Mth.clamp((float)PlayerTracker.getNinjaLevel(owner) * 0.02F, 1.0F, MAX_SCALE);
+        setShieldScale(INITIAL_SCALE);
         moveTo(owner.getX(), owner.getY(), owner.getZ(), owner.getYRot(), owner.getXRot());
         setDeltaMovement(Vec3.ZERO);
     }
@@ -150,6 +153,7 @@ public final class HakkeshoKeitenEntity extends Entity {
             setDeltaMovement(getDeltaMovement().multiply(0.65D, 0.0D, 0.65D));
         }
 
+        growShieldScale();
         if (getMaturity(0.0F) >= 0.9F) {
             breakBlocks(owner);
             ProcedureUtils.purgeHarmfulEffects(owner);
@@ -242,6 +246,7 @@ public final class HakkeshoKeitenEntity extends Entity {
             this.ownerUuid = tag.getUUID("Owner");
         }
         setShieldScale(tag.contains("Scale") ? tag.getFloat("Scale") : MIN_SCALE);
+        this.maxShieldScale = tag.contains("MaxScale") ? Mth.clamp(tag.getFloat("MaxScale"), 1.0F, MAX_SCALE) : Math.max(getShieldScale(), 1.0F);
     }
 
     @Override
@@ -250,6 +255,7 @@ public final class HakkeshoKeitenEntity extends Entity {
             tag.putUUID("Owner", this.ownerUuid);
         }
         tag.putFloat("Scale", getShieldScale());
+        tag.putFloat("MaxScale", this.maxShieldScale);
     }
 
     @Override
@@ -258,11 +264,18 @@ public final class HakkeshoKeitenEntity extends Entity {
     }
 
     public float getRenderShellScale(float partialTick) {
-        return getMaturity(partialTick) * getShieldScale() * 3.0F;
+        return getShieldScale() * 3.0F;
     }
 
     private float getMaturity(float partialTick) {
         return Mth.clamp(((float)this.tickCount + partialTick) / (float)MATURE_TICKS, 0.0F, 1.0F);
+    }
+
+    private void growShieldScale() {
+        float desired = getMaturity(0.0F) * this.maxShieldScale;
+        if (getShieldScale() < desired) {
+            setShieldScale(desired);
+        }
     }
 
     private void tickControlled(Player rider) {
@@ -326,7 +339,7 @@ public final class HakkeshoKeitenEntity extends Entity {
             if (!state.getFluidState().isEmpty()) {
                 this.level().setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
             } else if (canBreakSolid) {
-                ProcedureUtils.breakBlockAndDropWithChance(this.level(), pos, 5.0F, 1.0F, 0.3F);
+                ProcedureUtils.breakBlockAndDropWithChance(this.level(), pos, 1.4F, 0.2F, 0.1F);
             }
         }
     }

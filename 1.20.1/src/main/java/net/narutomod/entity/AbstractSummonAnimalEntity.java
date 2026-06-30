@@ -22,7 +22,6 @@ import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
@@ -35,7 +34,6 @@ import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.NetworkHooks;
 import net.narutomod.event.SpecialEvent;
 import net.narutomod.procedure.ProcedureUtils;
@@ -45,7 +43,6 @@ import net.narutomod.registry.ModSounds;
 public abstract class AbstractSummonAnimalEntity extends PathfinderMob {
     private static final int SPAWN_DELAY_TICKS = 20;
     private static final int DEFAULT_LIFE_SPAN = 1200;
-    private static final double CONTROL_ACCELERATION = 0.10D;
     private static final EntityDataAccessor<Integer> OWNER_ID = SynchedEntityData.defineId(AbstractSummonAnimalEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Float> SCALE = SynchedEntityData.defineId(AbstractSummonAnimalEntity.class, EntityDataSerializers.FLOAT);
     private static final EntityDataAccessor<Integer> SUMMON_AGE = SynchedEntityData.defineId(AbstractSummonAnimalEntity.class, EntityDataSerializers.INT);
@@ -172,7 +169,9 @@ public abstract class AbstractSummonAnimalEntity extends PathfinderMob {
             return;
         }
         if (getControllingPassenger() instanceof Player rider && isOwnedBy(rider)) {
-            tickControlled(rider);
+            setTarget(null);
+            clearCommandedNavigation();
+            getNavigation().stop();
             return;
         }
         if (tickCommandedNavigation()) {
@@ -333,6 +332,11 @@ public abstract class AbstractSummonAnimalEntity extends PathfinderMob {
         return this.ownerUuid != null && this.ownerUuid.equals(entity.getUUID()) || getOwner() == entity;
     }
 
+    protected final boolean canMountedRiderControl(LivingEntity rider) {
+        LivingEntity owner = getOwner();
+        return owner != null && (rider.equals(owner) || rider.isAlliedTo(owner) || owner.isAlliedTo(rider));
+    }
+
     protected final void setAttributeBaseValue(net.minecraft.world.entity.ai.attributes.Attribute attribute, double value) {
         AttributeInstance instance = getAttribute(attribute);
         if (instance != null) {
@@ -407,33 +411,6 @@ public abstract class AbstractSummonAnimalEntity extends PathfinderMob {
         this.commandedNavigationTarget = null;
         this.commandedNavigationTicks = 0;
         getNavigation().stop();
-    }
-
-    private void tickControlled(Player rider) {
-        setTarget(null);
-        getNavigation().stop();
-        setYRot(rider.getYRot());
-        setXRot(0.0F);
-        yRotO = getYRot();
-        xRotO = getXRot();
-        rider.fallDistance = 0.0F;
-        Vec3 motion = getDeltaMovement();
-        Vec3 acceleration = controlAcceleration(rider);
-        setDeltaMovement(motion.x() * 0.65D + acceleration.x(), motion.y(), motion.z() * 0.65D + acceleration.z());
-        move(MoverType.SELF, getDeltaMovement());
-        setDeltaMovement(getDeltaMovement().multiply(0.85D, 1.0D, 0.85D));
-    }
-
-    private Vec3 controlAcceleration(Player rider) {
-        Vec3 forward = Vec3.directionFromRotation(0.0F, rider.getYRot());
-        forward = new Vec3(forward.x(), 0.0D, forward.z());
-        if (forward.lengthSqr() < 1.0E-8D) {
-            forward = new Vec3(0.0D, 0.0D, 1.0D);
-        }
-        forward = forward.normalize();
-        Vec3 right = new Vec3(-forward.z(), 0.0D, forward.x());
-        return forward.scale(rider.zza * CONTROL_ACCELERATION)
-                .add(right.scale(rider.xxa * CONTROL_ACCELERATION));
     }
 
     private void followOwner(LivingEntity owner) {

@@ -211,7 +211,7 @@ public final class ByakuganHelmetItem extends ArmorItem {
             return;
         }
         ensureImplicitRinnesharinganTag(stack);
-        if (player.isCreative() && ProcedureUtils.getOwnerId(stack) == null) {
+        if (ProcedureUtils.getOwnerId(stack) == null) {
             ProcedureUtils.setOriginalOwner(player, stack);
         }
         if (stack.is(ModItems.BYAKUGANHELMET.get()) && ProcedureUtils.getOwnerId(stack) != null) {

@@ -31,6 +31,7 @@ import net.narutomod.world.KamuiDimension;
 
 public final class ObitoMangekyoHelmetItem extends ArmorItem {
     public static final String SHARINGAN_BLINDED_TAG = "sharingan_blinded";
+    public static final String KAMUI_MODE_TAG = "kamui_mode";
     private static final String LAST_WORN_FOREIGN_DOJUTSU_TAG = "lastWornForeignDojutsu";
     private static final String KAMUI_FLIGHT_GRANTED_TAG = "NarutomodObitoKamuiFlightGranted";
     private static final String SUSANOO_ACTIVATED_TAG = "susanoo_activated";
@@ -100,6 +101,27 @@ public final class ObitoMangekyoHelmetItem extends ArmorItem {
         return isKamuiCapableHead(head) && !isBlinded(head);
     }
 
+    public static int getKamuiMode(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        if (tag == null) {
+            return 0;
+        }
+        int mode = tag.getInt(KAMUI_MODE_TAG);
+        return mode >= 0 && mode <= 2 ? mode : 0;
+    }
+
+    public static void cycleKamuiMode(Player player, ItemStack stack) {
+        if (player == null || !stack.is(ModItems.MANGEKYOSHARINGANOBITOHELMET.get())) {
+            return;
+        }
+        int mode = getKamuiMode(stack) + 1;
+        if (mode > 2) {
+            mode = 0;
+        }
+        stack.getOrCreateTag().putInt(KAMUI_MODE_TAG, mode);
+        player.displayClientMessage(Component.translatable("chattext.kamui.mode" + mode), true);
+    }
+
     public static void revokeKamuiFlightIfNeeded(Player player) {
         if (!player.level().isClientSide
                 && player.getPersistentData().getBoolean(KAMUI_FLIGHT_GRANTED_TAG)
@@ -157,6 +179,9 @@ public final class ObitoMangekyoHelmetItem extends ArmorItem {
         tooltip.add(Component.translatable("key.mcreator.specialjutsu2")
                 .append(": ")
                 .append(Component.translatable("entity.susanooclothed.name")));
+        tooltip.add(Component.translatable("key.mcreator.specialjutsu3")
+                .append(": ")
+                .append(Component.translatable("tooltip.mangekyo.kamui.selector")));
     }
 
     private static double chakraUsage(LivingEntity entity, double baseUsage) {

@@ -4,6 +4,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.narutomod.entity.BijuManager;
+import net.narutomod.registry.ModItems;
 
 public final class PowerIncreaseKeyHandler {
     private PowerIncreaseKeyHandler() {
@@ -38,6 +39,14 @@ public final class PowerIncreaseKeyHandler {
         }
 
         if (RinneganSpecialJutsuHandler.handlePowerIncreaseKey(player, pressed)) {
+            return true;
+        }
+
+        ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
+        if (head.is(ModItems.MANGEKYOSHARINGANOBITOHELMET.get())) {
+            if (!pressed) {
+                ObitoMangekyoHelmetItem.cycleKamuiMode(player, head);
+            }
             return true;
         }
 

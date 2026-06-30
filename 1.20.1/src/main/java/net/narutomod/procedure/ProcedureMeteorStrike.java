@@ -9,9 +9,11 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
 import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraft.world.phys.AABB;
@@ -59,7 +61,8 @@ public final class ProcedureMeteorStrike {
         StructurePlaceSettings settings = new StructurePlaceSettings()
                 .setRotation(Rotation.NONE)
                 .setMirror(Mirror.NONE)
-                .setIgnoreEntities(false);
+                .setIgnoreEntities(false)
+                .addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
         boolean placed = template.placeInWorld(level, spawnTo, spawnTo, settings, level.getRandom(), 2);
         if (!placed) {
             return MeteorStrikeResult.placementFailed(spawnTo);
@@ -114,6 +117,10 @@ public final class ProcedureMeteorStrike {
         BlockPos end = spawnTo.offset(CAPTURE_SIZE - 1, CAPTURE_SIZE - 1, CAPTURE_SIZE - 1);
         for (BlockPos pos : BlockPos.betweenClosed(spawnTo, end)) {
             BlockState state = level.getBlockState(pos);
+            if (state.is(Blocks.STRUCTURE_BLOCK) || state.is(Blocks.STRUCTURE_VOID)) {
+                level.removeBlock(pos, false);
+                continue;
+            }
             float hardness = state.getDestroySpeed(level, pos);
             if (!state.isAir() && hardness >= 0.0F && hardness <= 1000.0F) {
                 states.add(state);

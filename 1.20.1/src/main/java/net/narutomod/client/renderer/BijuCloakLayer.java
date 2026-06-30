@@ -16,6 +16,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.narutomod.client.model.BijuCloakModel;
 import net.narutomod.client.render.NarutoRenderTypes;
+import net.narutomod.entity.AbstractSusanooEntity;
 import net.narutomod.item.BijuCloakItem;
 
 public final class BijuCloakLayer<T extends LivingEntity, M extends HumanoidModel<T>> extends RenderLayer<T, M> {
@@ -31,6 +32,9 @@ public final class BijuCloakLayer<T extends LivingEntity, M extends HumanoidMode
                        float limbSwing, float limbSwingAmount, float partialTick, float ageInTicks,
                        float netHeadYaw, float headPitch) {
         if (entity.isInvisible()) {
+            return;
+        }
+        if (entity.getVehicle() instanceof AbstractSusanooEntity susanoo && susanoo.isOwnedBy(entity)) {
             return;
         }
 

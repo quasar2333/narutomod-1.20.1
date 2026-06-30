@@ -14762,3 +14762,39 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `jar tf 1.20.1/build/libs/narutomod-0.3.2-beta.jar | rg 'RinneganRobe|madara_jinchuriki|mods.toml'`: confirmed the new robe classes, `assets/narutomod/textures/madara_jinchuriki.png`, and `META-INF/mods.toml` are present.
   - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`: dedicated server reached `Done (2.244s)! For help, type "help"` at `2026-06-30T15:58:24+08:00`, then stopped cleanly with all dimensions saved at `2026-06-30T16:01:22+08:00`.
   - `rg -n "Missing textures|Missing model|Missing blockstate|ERROR|FATAL|Exception|Crash|Failed|Could not|Unable" 1.20.1/run/logs/latest.log`: only matched the macOS `hw.cpufrequency` sysctl warning; no mod/resource/server fatal errors were present.
+
+### M7 Release Regression Follow-up Slice — Kamui Extended Use / C1 / Kaiten Scale / Summons / Charge HUD
+
+- Follow-up after player feedback that only Expansive Truth-Seeking Ball, Chakra Fruit, and Six Paths robe were confirmed fixed:
+  - The first test package had Obito Kamui extended use on Special Jutsu 3 (`Teleport In / Kamui Chest / Kamui Projectiles`), but the current release narrowed Obito Kamui back to key 1 only.
+  - C1 explosive clay still needed the full high-version model shape rather than only a renderer flip.
+  - Hakkesho Kaiten was too small / vertically offset because the port treated the max scale as the current scale and multiplied maturity again in the renderer.
+  - Meteor placement could still leave structure-helper blocks because the port did not fully mirror the old `setIgnoreStructureBlock(true)` cleanup behavior.
+  - Large summoned animals needed the high-version ridden travel paths instead of the generic mounted movement fallback.
+  - Charge HUD was reported invisible/unhelpful; upstream `ItemJutsu` displays the charged power as a numeric actionbar value.
+
+- 0.3.2-beta / high-version reference rechecked:
+  - `ItemMangekyoSharinganObito`: stores `kamui_mode` on the helmet, cycles mode 0/1/2 with Power Increase, and shows `tooltip.mangekyo.kamui.selector` on Special Jutsu 3.
+  - `ProcedureKamuiJutsu3`: mode 0 teleports the player in/out of Kamui, mode 1 shift-links a physical Kamui-dimension chest / opens it remotely, mode 2 consumes allowed projectile items from the linked chest and fires them from a Kamui portal.
+  - `EntityHakkeshoKeiten`: starts at scale `0.1f`, computes max scale as `clamp(ninjaLevel * 0.02f, 1f, 6f)`, grows current scale by maturity, charges `5d` chakra/tick, and renders shell scale as `getScale() * 3.0f`.
+  - `ProcedureMeteorStrike`: places the meteor with structure blocks ignored.
+  - Yeyo high-version decompile: `ModelC1` uses explicit head/torso/arms/body/wings parts; toad/snake/slug summons each provide their own rider-controlled `travel` behavior.
+
+- 1.20.1 changes:
+  - `item/ObitoMangekyoHelmetItem.java`, `item/PowerIncreaseKeyHandler.java`, and `item/ObitoKamuiHandler.java`: restored Obito Kamui mode cycling, tooltip line, Special Jutsu 3 dispatch, self teleport, Kamui chest link/open, and Kamui projectile firing from linked chest inventory.
+  - `lang/en_us.json` and `lang/zh_cn.json`: added the Kamui selector and mode/chest status messages, matching the screenshot text in Chinese.
+  - `client/model/ClayC1Model.java` and `client/renderer/ExplosiveClayRenderer.java`: replaced the placeholder humanoid model path with the high-version C1 geometry and kept the correct humanoid coordinate transform.
+  - `entity/HakkeshoKeitenEntity.java` and `client/renderer/HakkeshoKeitenRenderer.java`: restored initial/current/max scale separation, `5d` chakra cost, original render scale, and removed the extra vertical translation that made the shield look wrong.
+  - `procedure/ProcedureMeteorStrike.java`: ignores structure blocks during template placement and filters structure helper blocks out of the falling meteor block collection.
+  - `entity/AbstractSummonAnimalEntity.java`, `ToadSummonEntity.java`, `SnakeSummonEntity.java`, and `SlugSummonEntity.java`: removed the generic mounted motion shim and restored per-summon rider travel, hop/slide damping, and large-body rider positioning.
+  - `item/RinneganSpecialJutsuHandler.java`: Asura Path now moves an existing cannon from inventory to offhand and removes duplicate body/cannon stacks while active instead of re-issuing gear every tick.
+  - `item/BijuCloakItem.java` and `client/renderer/BijuCloakLayer.java`: added runtime/render fallback so Biju cloak does not visually overlap an owned active Susanoo.
+  - `item/ByakuganHelmetItem.java` and `item/JutsuItem.java`: bind unowned Byakugan test helmets to the wearer on tick, and show charge power as the upstream numeric actionbar value.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: BUILD SUCCESSFUL (only existing Forge deprecation warnings).
+  - `python tools/validate_port_resources.py`: all issue counts 0.
+  - `python tools/validate_dedicated_server_safety.py`: 282 non-client Java files scanned, 0 client-reference issues.
+  - `git diff --check`: no whitespace errors.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
+  - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: still Windows-specific on macOS because of `Start-Process -WindowStyle`. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (1.847s)! For help, type "help"` at `2026-06-30T18:47:13+08:00`. Fatal-pattern scan of `1.20.1/run/logs/latest.log` matched only the `Done` line, crash-reports directory was empty, and no Minecraft/Gradle server process remained after shutdown.

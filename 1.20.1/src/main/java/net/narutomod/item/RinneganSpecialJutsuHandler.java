@@ -409,6 +409,8 @@ public final class RinneganSpecialJutsuHandler {
             ProcedureUtils.swapItemToSlot(player, EquipmentSlot.CHEST, new ItemStack(ModItems.ASURAPATHARMORBODY.get()));
         }
         ensureAsuraCannon(player);
+        removeMainInventoryMatching(player, ModItems.ASURAPATHARMORBODY.get());
+        removeMainInventoryMatching(player, ModItems.ASURACANON.get());
         tickAsuraBody(player, player.getItemBySlot(EquipmentSlot.CHEST));
         return true;
     }
@@ -636,17 +638,8 @@ public final class RinneganSpecialJutsuHandler {
 
     private static void clearInactiveAsuraGear(ServerPlayer player, boolean hasRinneganHead) {
         player.getPersistentData().remove(ASURA_CANNON_GRANTED_TAG);
-        if (hasRinneganHead) {
-            removeAllMatching(player, ModItems.ASURAPATHARMORBODY.get());
-            removeAllMatching(player, ModItems.ASURACANON.get());
-            return;
-        }
-        if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.ASURAPATHARMORBODY.get())) {
-            player.setItemSlot(EquipmentSlot.CHEST, ItemStack.EMPTY);
-        }
-        if (player.getOffhandItem().is(ModItems.ASURACANON.get())) {
-            player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
-        }
+        removeAllMatching(player, ModItems.ASURAPATHARMORBODY.get());
+        removeAllMatching(player, ModItems.ASURACANON.get());
     }
 
     private static void ensureAsuraCannon(ServerPlayer player) {
@@ -654,12 +647,54 @@ public final class RinneganSpecialJutsuHandler {
             player.getPersistentData().putBoolean(ASURA_CANNON_GRANTED_TAG, true);
             return;
         }
-        if (ProcedureUtils.hasItemInInventory(player, ModItems.ASURACANON.get())
-                || player.getPersistentData().getBoolean(ASURA_CANNON_GRANTED_TAG)) {
+        ItemStack stored = takeOneFromMainInventory(player, ModItems.ASURACANON.get());
+        if (!stored.isEmpty()) {
+            moveCurrentOffhandToInventory(player);
+            player.setItemSlot(EquipmentSlot.OFFHAND, stored);
+            player.getPersistentData().putBoolean(ASURA_CANNON_GRANTED_TAG, true);
             return;
         }
+        if (player.getPersistentData().getBoolean(ASURA_CANNON_GRANTED_TAG)) {
+            return;
+        }
+        moveCurrentOffhandToInventory(player);
         ProcedureUtils.swapItemToSlot(player, EquipmentSlot.OFFHAND, new ItemStack(ModItems.ASURACANON.get()));
         player.getPersistentData().putBoolean(ASURA_CANNON_GRANTED_TAG, true);
+    }
+
+    private static ItemStack takeOneFromMainInventory(Player player, Item item) {
+        for (int index = 0; index < player.getInventory().items.size(); index++) {
+            ItemStack stack = player.getInventory().items.get(index);
+            if (stack.is(item)) {
+                ItemStack result = stack.copyWithCount(1);
+                stack.shrink(1);
+                if (stack.isEmpty()) {
+                    player.getInventory().items.set(index, ItemStack.EMPTY);
+                }
+                return result;
+            }
+        }
+        return ItemStack.EMPTY;
+    }
+
+    private static void moveCurrentOffhandToInventory(Player player) {
+        ItemStack current = player.getOffhandItem();
+        if (current.isEmpty() || current.is(ModItems.ASURACANON.get())) {
+            return;
+        }
+        ItemStack moved = current.copy();
+        if (!player.getInventory().add(moved) && !moved.isEmpty()) {
+            player.drop(moved, false);
+        }
+        player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
+    }
+
+    private static void removeMainInventoryMatching(Player player, Item item) {
+        for (int index = 0; index < player.getInventory().items.size(); index++) {
+            if (player.getInventory().items.get(index).is(item)) {
+                player.getInventory().items.set(index, ItemStack.EMPTY);
+            }
+        }
     }
 
     private static void removeAllMatching(Player player, Item item) {

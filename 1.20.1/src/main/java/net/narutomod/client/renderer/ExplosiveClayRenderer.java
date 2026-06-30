@@ -60,8 +60,8 @@ public final class ExplosiveClayRenderer extends EntityRenderer<ExplosiveClayEnt
     private void renderC1(ExplosiveClayEntity entity, float age, float partialTick, PoseStack poseStack,
             MultiBufferSource bufferSource, int packedLight) {
         float scale = entity.getRenderScale(partialTick);
-        poseStack.scale(scale, scale, scale);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
+        poseStack.scale(scale, scale, scale);
         poseStack.translate(0.0D, -1.501D, 0.0D);
         VertexConsumer consumer = bufferSource.getBuffer(RenderType.entityCutoutNoCull(C1_TEXTURE));
         this.c1Model.setupAnim(entity, 0.0F, 0.0F, age, 0.0F, 0.0F);

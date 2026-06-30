@@ -35,7 +35,6 @@ public final class HakkeshoKeitenRenderer extends EntityRenderer<HakkeshoKeitenE
         }
 
         poseStack.pushPose();
-        poseStack.translate(0.0D, entity.getBbHeight() * 0.5D, 0.0D);
         poseStack.mulPose(Axis.YP.rotationDegrees((entity.tickCount + partialTick) * 30.0F));
         poseStack.scale(scale, scale, scale);
 
