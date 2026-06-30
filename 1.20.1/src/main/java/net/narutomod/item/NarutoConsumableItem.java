@@ -166,7 +166,7 @@ public final class NarutoConsumableItem extends Item {
         }
 
         if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
-            NarutomodModVariables.addBattleExperience(serverPlayer, 90000.0D);
+            NarutomodModVariables.addBattleExperience(serverPlayer, 100000.0D);
             serverPlayer.giveExperiencePoints(100000);
             ProcedureUtils.grantAdvancement(serverPlayer, "narutomod:rinneganawakened", true);
         }

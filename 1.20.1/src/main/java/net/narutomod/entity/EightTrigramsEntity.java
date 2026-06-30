@@ -84,7 +84,7 @@ public final class EightTrigramsEntity extends Entity {
         if (owner instanceof ServerPlayer player) {
             player.displayClientMessage(Component.translatable("tooltip.byakugan.jutsu2"), true);
             if (this.tickCount % 40 == 4) {
-                int strength = Math.max((int)(PlayerTracker.getNinjaLevel(player) + this.tickCount) / 20, 0);
+                int strength = Math.max((int)(PlayerTracker.getNinjaLevel(player) + this.tickCount) / 30, 0);
                 owner.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 50, strength, false, false));
                 owner.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, 50, 3, false, false));
             }

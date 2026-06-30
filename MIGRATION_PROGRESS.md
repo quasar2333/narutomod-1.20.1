@@ -14726,3 +14726,39 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `python tools/validate_port_resources.py`: all issue counts 0.
   - `python tools/validate_dedicated_server_safety.py`: 281 non-client Java files scanned, 0 client-reference issues.
   - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: still Windows-specific on macOS because of `Start-Process -WindowStyle`. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (1.845s)! For help, type "help"` at `2026-06-30T04:43:21+08:00`, then was stopped with no remaining Minecraft/Gradle server process. Fatal/error/exception scan of `1.20.1/run/logs/latest.log` returned 0 matches, and `audit/dedicated_server_startup_summary.json` was updated.
+
+### M7 0.3.2-beta Release Regression Slice — C1 / Expansive TSB / Meteor / Summons / Six Paths / Byakugan
+
+- Follow-up on the user-reported release blockers after bumping the upstream reference to `AHZNB/naruto_mod@0.3.2-beta`:
+  - C1 explosive clay rendered upside-down in the 1.20.1 renderer; upstream C1 is a biped-style renderer (`RenderBiped`) scaled to `0.4f`, so it needs the vanilla humanoid coordinate transform before drawing.
+  - Expansive Truth-Seeking Ball could freeze/crash clients because the port rendered one full 32x32 sphere per historical shell; the old immediate-mode renderer did not accumulate that many modern mesh draws per frame.
+  - Chakra Fruit should grant `100000` ninja battle XP and `100000` vanilla XP; the port granted only `90000` battle XP.
+  - Tengaishinsei/meteor should convert the placed template into a falling satellite that clears itself on impact; the port lacked per-spawn fall timing and could leave the temporary framework visible too long.
+  - Large summoned animals had the correct collision box but the renderer lifted the model by scale, and rideable summons had no rider-control travel path.
+  - Rinnegan body/legs were still registered as vanilla diamond armor; upstream Six Paths robe uses the `madara_jinchuriki.png` texture and the legacy `ModelSizPathRobe`.
+  - Asura Path was re-issuing the hand cannon every tick when the offhand/inventory state was not already perfect.
+  - Susanoo and Biju cloak could stay active together, overlapping the two body-mounted modes.
+  - Byakugan Key 2 / Key 3 gates were ordinary XP levels in the port; upstream uses battle XP thresholds (`500` Hakke Kusho, `1000` Hakke Rokujuuyonshou, `1500` Hakkesho Kaiten), and 64 Palms scales strength by `/30`.
+
+- 1.20.1 changes:
+  - `client/renderer/ExplosiveClayRenderer.java`: C1 now applies the humanoid armor-style `scale(-1, -1, 1)` plus body translation before rendering, fixing the inverted model without touching C2/C3.
+  - `client/particle/ExpandingSphereParticle.java`: capped rendered historical shells to 32 per frame and samples the active shell range, preserving the expanding-shell look while preventing massive sphere overdraw on Expansive Truth-Seeking Ball.
+  - `item/NarutoConsumableItem.java`: Chakra Fruit now adds `100000` battle XP to match the original food-eaten procedure.
+  - `entity/ChibakuSatelliteEntity.java` and `procedure/ProcedureMeteorStrike.java`: added persisted fall-delay / max-fall-tick configuration; meteor satellites use the original 5-tick fall delay and a shorter cleanup fallback so the temporary meteor framework cannot linger.
+  - `entity/AbstractSummonAnimalEntity.java`: rideable large summons now expose a controlling passenger, position the rider explicitly, and convert rider forward/strafe input into server-side movement; `ToadSummonRenderer`, `SnakeSummonRenderer`, and `SlugSummonRenderer` no longer apply the scale-based upward translation that made models float.
+  - Added `item/RinneganRobeItem.java`, `client/model/RinneganRobeModel.java`, and `client/RinneganRobeClientExtensions.java`; `ModItems.RINNEGANBODY` / `RINNEGANLEGS` keep their registry names but now render the legacy Six Paths robe layer with `textures/madara_jinchuriki.png` instead of diamond armor.
+  - `item/RinneganSpecialJutsuHandler.java`: Asura cannon provisioning is now guarded by an active-period persistent tag; existing cannons are respected, and a new cannon is created only once per Asura activation.
+  - `item/SusanooPowerIncreaseHandler.java` and `entity/BijuManager.java`: activating either Susanoo or Biju cloak now deactivates the other mode first, preventing overlapping body-mounted states.
+  - `item/ByakuganHandler.java`, `item/ByakuganHelmetItem.java`, and `entity/EightTrigramsEntity.java`: Byakugan technique gates and tooltip text now use battle XP thresholds (`NXP:500/1000/1500`), and 64 Palms strength uses the upstream `/30` divisor.
+  - `gradle.properties`: bumped the produced mod version and description from `0.2.10-beta.1+mc1.20.1` to `0.3.2-beta`.
+  - `audit/dedicated_server_safety_summary.json`: validator scan count updated from 281 to 282 after adding the new common item class.
+
+- Verification:
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: BUILD SUCCESSFUL (only the existing Forge deprecation warnings).
+  - `python tools/validate_port_resources.py`: all issue counts 0 (`sound_or_path`, `lang_registry`, `model_reference`, `recipe`, `loot_table`, `advancement`, `particle`, `registry_reference`).
+  - `python tools/validate_dedicated_server_safety.py`: 282 non-client Java files scanned, 0 client-reference issues.
+  - `git diff --check`: no whitespace errors; only Git CRLF normalization warnings for unchanged audit CSV files.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
+  - `jar tf 1.20.1/build/libs/narutomod-0.3.2-beta.jar | rg 'RinneganRobe|madara_jinchuriki|mods.toml'`: confirmed the new robe classes, `assets/narutomod/textures/madara_jinchuriki.png`, and `META-INF/mods.toml` are present.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`: dedicated server reached `Done (2.244s)! For help, type "help"` at `2026-06-30T15:58:24+08:00`, then stopped cleanly with all dimensions saved at `2026-06-30T16:01:22+08:00`.
+  - `rg -n "Missing textures|Missing model|Missing blockstate|ERROR|FATAL|Exception|Crash|Failed|Could not|Unable" 1.20.1/run/logs/latest.log`: only matched the macOS `hw.cpufrequency` sysctl warning; no mod/resource/server fatal errors were present.

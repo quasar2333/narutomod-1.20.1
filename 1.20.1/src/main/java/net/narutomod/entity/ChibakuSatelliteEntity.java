@@ -32,8 +32,10 @@ import net.narutomod.registry.ModEntityTypes;
 public final class ChibakuSatelliteEntity extends Entity implements IEntityAdditionalSpawnData {
     private static final String BLOCKS_TAG = "Blocks";
     private static final String SIZE_TAG = "Size";
-    private static final int FALL_DELAY_TICKS = 5;
-    private static final int MAX_FALL_TICKS = 220;
+    private static final String FALL_DELAY_TAG = "FallDelay";
+    private static final String MAX_FALL_TICKS_TAG = "MaxFallTicks";
+    private static final int DEFAULT_FALL_DELAY_TICKS = 5;
+    private static final int DEFAULT_MAX_FALL_TICKS = 220;
     private static final int MAX_BLOCKS = 8192;
     private static final int MAX_RADIUS = 10;
     private static final float EXPLOSION_STRENGTH = 12.0F;
@@ -43,6 +45,8 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
     @Nullable
     private UUID ownerUuid;
     private int size = 1;
+    private int fallDelayTicks = DEFAULT_FALL_DELAY_TICKS;
+    private int maxFallTicks = DEFAULT_MAX_FALL_TICKS;
     private boolean exploded;
 
     public ChibakuSatelliteEntity(EntityType<? extends ChibakuSatelliteEntity> entityType, Level level) {
@@ -52,6 +56,12 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
 
     @Nullable
     public static ChibakuSatelliteEntity spawnFromStates(LivingEntity owner, Vec3 center, List<BlockState> states) {
+        return spawnFromStates(owner, center, states, DEFAULT_FALL_DELAY_TICKS, DEFAULT_MAX_FALL_TICKS);
+    }
+
+    @Nullable
+    public static ChibakuSatelliteEntity spawnFromStates(LivingEntity owner, Vec3 center, List<BlockState> states,
+            int fallDelayTicks, int maxFallTicks) {
         if (!(owner.level() instanceof ServerLevel serverLevel)) {
             return null;
         }
@@ -59,7 +69,7 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
         if (satellite == null) {
             return null;
         }
-        satellite.configure(owner, center, states);
+        satellite.configure(owner, center, states, fallDelayTicks, maxFallTicks);
         serverLevel.addFreshEntity(satellite);
         return satellite;
     }
@@ -78,11 +88,11 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
         if (this.level().isClientSide) {
             return;
         }
-        if (this.blocks.isEmpty() || this.tickCount > MAX_FALL_TICKS) {
+        if (this.blocks.isEmpty() || this.tickCount > this.maxFallTicks) {
             impact();
             return;
         }
-        if (this.tickCount > FALL_DELAY_TICKS) {
+        if (this.tickCount > this.fallDelayTicks) {
             setNoGravity(false);
             Vec3 motion = getDeltaMovement().add(0.0D, -0.08D, 0.0D);
             setDeltaMovement(motion);
@@ -101,6 +111,10 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
             this.ownerUuid = tag.getUUID("Owner");
         }
         this.size = Math.max(tag.getInt(SIZE_TAG), 1);
+        this.fallDelayTicks = tag.contains(FALL_DELAY_TAG) ? Math.max(0, tag.getInt(FALL_DELAY_TAG)) : DEFAULT_FALL_DELAY_TICKS;
+        this.maxFallTicks = tag.contains(MAX_FALL_TICKS_TAG)
+                ? Math.max(this.fallDelayTicks + 20, tag.getInt(MAX_FALL_TICKS_TAG))
+                : DEFAULT_MAX_FALL_TICKS;
         this.exploded = tag.getBoolean("Exploded");
         readBlocks(tag.getList(BLOCKS_TAG, Tag.TAG_COMPOUND));
         updateBoundingBox();
@@ -112,6 +126,8 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
             tag.putUUID("Owner", this.ownerUuid);
         }
         tag.putInt(SIZE_TAG, this.size);
+        tag.putInt(FALL_DELAY_TAG, this.fallDelayTicks);
+        tag.putInt(MAX_FALL_TICKS_TAG, this.maxFallTicks);
         tag.putBoolean("Exploded", this.exploded);
         tag.put(BLOCKS_TAG, writeBlocks());
     }
@@ -157,9 +173,11 @@ public final class ChibakuSatelliteEntity extends Entity implements IEntityAddit
         return NetworkHooks.getEntitySpawningPacket(this);
     }
 
-    private void configure(LivingEntity owner, Vec3 center, List<BlockState> states) {
+    private void configure(LivingEntity owner, Vec3 center, List<BlockState> states, int fallDelayTicks, int maxFallTicks) {
         this.ownerUuid = owner.getUUID();
         this.blocks.clear();
+        this.fallDelayTicks = Math.max(0, fallDelayTicks);
+        this.maxFallTicks = Math.max(this.fallDelayTicks + 20, maxFallTicks);
         int radius = Mth.clamp((int)Math.ceil(Math.cbrt(Math.max(states.size(), 1))) + 1, 2, MAX_RADIUS);
         this.size = radius * 2 + 1;
         BlockPos origin = BlockPos.containing(center).offset(-radius, -radius, -radius);

@@ -26,6 +26,8 @@ public final class ProcedureMeteorStrike {
     private static final int METEOR_OFFSET_XZ = 10;
     private static final int METEOR_HEIGHT_OFFSET = 90;
     private static final int CAPTURE_SIZE = 20;
+    private static final int METEOR_FALL_DELAY_TICKS = 5;
+    private static final int METEOR_MAX_FALL_TICKS = 160;
     private static final double REUSE_HORIZONTAL_RANGE = 64.0D;
     private static final double REUSE_VERTICAL_RANGE = 128.0D;
     private static final double HORIZONTAL_VELOCITY_SCALE = 1.2D;
@@ -69,7 +71,12 @@ public final class ProcedureMeteorStrike {
         }
 
         Vec3 center = Vec3.atLowerCornerOf(spawnTo).add(CAPTURE_SIZE * 0.5D, CAPTURE_SIZE * 0.5D, CAPTURE_SIZE * 0.5D);
-        ChibakuSatelliteEntity created = ChibakuSatelliteEntity.spawnFromStates(owner, center, states);
+        ChibakuSatelliteEntity created = ChibakuSatelliteEntity.spawnFromStates(
+                owner,
+                center,
+                states,
+                METEOR_FALL_DELAY_TICKS,
+                METEOR_MAX_FALL_TICKS);
         if (created == null) {
             return MeteorStrikeResult.spawnFailed(spawnTo, states.size());
         }

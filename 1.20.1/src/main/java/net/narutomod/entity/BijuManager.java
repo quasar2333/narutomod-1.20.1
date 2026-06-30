@@ -37,6 +37,7 @@ import net.narutomod.item.DotonItem;
 import net.narutomod.item.FutonItem;
 import net.narutomod.item.JutsuItem;
 import net.narutomod.item.KatonItem;
+import net.narutomod.item.SusanooPowerIncreaseHandler;
 import net.narutomod.registry.ModEntityTypes;
 import net.narutomod.registry.ModItems;
 
@@ -671,6 +672,7 @@ public final class BijuManager {
                 player.displayClientMessage(Component.literal("Biju cloak cooldown " + ((cooldown - now) / 20L) + "s"), true);
                 return false;
             }
+            SusanooPowerIncreaseHandler.deactivate(player, false);
             setCloakCooldown(player.getServer(), tails, now);
             setCloakLevel(player.getServer(), tails, 1);
             BijuCloakItem.setWearingTicks(player, 0);

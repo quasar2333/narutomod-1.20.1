@@ -60,6 +60,7 @@ public final class RinneganSpecialJutsuHandler {
     public static final String SUMMONED_ANIMAL_ID_TAG = "SummonedAnimal_id";
     public static final String KING_OF_HELL_ID_TAG = "KoH_id";
     public static final String ASURA_TICKS_USED_TAG = "ticks_used";
+    private static final String ASURA_CANNON_GRANTED_TAG = "asura_cannon_granted";
     public static final double CHIBAKU_TENSEI_CHAKRA_USAGE = 5000.0D;
     public static final double TENGAISHINSEI_CHAKRA_USAGE = 5000.0D;
     public static final double ANIMAL_PATH_CHAKRA_USAGE = 200.0D;
@@ -407,9 +408,7 @@ public final class RinneganSpecialJutsuHandler {
         if (!player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.ASURAPATHARMORBODY.get())) {
             ProcedureUtils.swapItemToSlot(player, EquipmentSlot.CHEST, new ItemStack(ModItems.ASURAPATHARMORBODY.get()));
         }
-        if (!player.getOffhandItem().is(ModItems.ASURACANON.get())) {
-            ProcedureUtils.swapItemToSlot(player, EquipmentSlot.OFFHAND, new ItemStack(ModItems.ASURACANON.get()));
-        }
+        ensureAsuraCannon(player);
         tickAsuraBody(player, player.getItemBySlot(EquipmentSlot.CHEST));
         return true;
     }
@@ -636,6 +635,7 @@ public final class RinneganSpecialJutsuHandler {
     }
 
     private static void clearInactiveAsuraGear(ServerPlayer player, boolean hasRinneganHead) {
+        player.getPersistentData().remove(ASURA_CANNON_GRANTED_TAG);
         if (hasRinneganHead) {
             removeAllMatching(player, ModItems.ASURAPATHARMORBODY.get());
             removeAllMatching(player, ModItems.ASURACANON.get());
@@ -647,6 +647,19 @@ public final class RinneganSpecialJutsuHandler {
         if (player.getOffhandItem().is(ModItems.ASURACANON.get())) {
             player.setItemSlot(EquipmentSlot.OFFHAND, ItemStack.EMPTY);
         }
+    }
+
+    private static void ensureAsuraCannon(ServerPlayer player) {
+        if (player.getOffhandItem().is(ModItems.ASURACANON.get())) {
+            player.getPersistentData().putBoolean(ASURA_CANNON_GRANTED_TAG, true);
+            return;
+        }
+        if (ProcedureUtils.hasItemInInventory(player, ModItems.ASURACANON.get())
+                || player.getPersistentData().getBoolean(ASURA_CANNON_GRANTED_TAG)) {
+            return;
+        }
+        ProcedureUtils.swapItemToSlot(player, EquipmentSlot.OFFHAND, new ItemStack(ModItems.ASURACANON.get()));
+        player.getPersistentData().putBoolean(ASURA_CANNON_GRANTED_TAG, true);
     }
 
     private static void removeAllMatching(Player player, Item item) {

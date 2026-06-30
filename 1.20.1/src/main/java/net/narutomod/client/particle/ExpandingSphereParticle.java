@@ -13,6 +13,8 @@ import net.narutomod.client.render.SphereMesh;
 import net.narutomod.particle.NarutoParticleOptions;
 
 final class ExpandingSphereParticle extends Particle {
+    private static final int MAX_RENDERED_SHELLS = 32;
+
     private final float maxScale;
 
     ExpandingSphereParticle(
@@ -51,10 +53,15 @@ final class ExpandingSphereParticle extends Particle {
         float z = (float)(Mth.lerp(partialTicks, this.zo, this.z) - cameraPosition.z());
         float fade = fade(partialTicks);
         float age = Math.max(0.0F, this.age + partialTicks);
-        int shell = 0;
+        int firstShell = Math.max(Mth.ceil(age - this.maxScale * 2.0F), 0);
+        int lastShellExclusive = Math.max(Mth.ceil(age), firstShell + 1);
+        int activeShells = Math.max(lastShellExclusive - firstShell, 1);
+        int stride = Math.max(Mth.ceil((float)activeShells / MAX_RENDERED_SHELLS), 1);
+        int rendered = 0;
 
-        for (float scale = age * 0.5F; scale > 0.0F; scale = (age - ++shell) * 0.5F) {
-            if (scale <= this.maxScale) {
+        for (int shell = firstShell; shell < lastShellExclusive && rendered < MAX_RENDERED_SHELLS; shell += stride) {
+            float scale = (age - shell) * 0.5F;
+            if (scale > 0.0F && scale <= this.maxScale) {
                 PoseStack poseStack = new PoseStack();
                 poseStack.translate(x, y, z);
                 poseStack.scale(scale, scale, scale);
@@ -67,6 +74,7 @@ final class ExpandingSphereParticle extends Particle {
                         toColor(1.0F - 0.05F * shell * (1.0F - this.bCol)),
                         toColor(0.05F * fade)
                 );
+                rendered++;
             }
         }
     }

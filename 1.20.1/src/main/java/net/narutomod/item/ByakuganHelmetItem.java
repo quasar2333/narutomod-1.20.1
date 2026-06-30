@@ -185,17 +185,17 @@ public final class ByakuganHelmetItem extends ArmorItem {
         tooltip.add(Component.translatable("key.mcreator.specialjutsu1")
                 .append(": ")
                 .append(Component.translatable("tooltip.byakugan.jutsu1"))
-                .append(" (L15)"));
+                .append(" (NXP:500)"));
         tooltip.add(Component.translatable("key.mcreator.specialjutsu2")
                 .append(": ")
                 .append(Component.translatable(rinnesharingan
                         ? "tooltip.byakurinnesharingan.jutsu2"
                         : "tooltip.byakugan.jutsu2"))
-                .append(rinnesharingan ? "" : " (L20)"));
+                .append(rinnesharingan ? "" : " (NXP:1000)"));
         tooltip.add(Component.translatable("key.mcreator.specialjutsu3")
                 .append(": ")
                 .append(Component.translatable("entity.hakkeshokeiten.name"))
-                .append(" (L30)"));
+                .append(" (NXP:1500)"));
         if (stack.getTag() != null && stack.getTag().contains(NarutomodModVariables.TENSEIGAN_EVOLVED_TIME)) {
             double ticks = stack.getTag().getDouble(NarutomodModVariables.TENSEIGAN_EVOLVED_TIME);
             if (ticks > 0.0D) {

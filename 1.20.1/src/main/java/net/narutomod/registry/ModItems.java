@@ -44,6 +44,7 @@ import net.narutomod.item.NarutoConsumableItem;
 import net.narutomod.item.PuppetScrollItem;
 import net.narutomod.item.RaitonItem;
 import net.narutomod.item.RinneganHelmetItem;
+import net.narutomod.item.RinneganRobeItem;
 import net.narutomod.item.RyoItem;
 import net.narutomod.item.ScrollRasenganItem;
 import net.narutomod.item.SenjutsuItem;
@@ -206,11 +207,11 @@ public final class ModItems {
     public static final RegistryObject<Item> RANTON = register("ranton",
             () -> new AdvancedNatureJutsuItem(AdvancedNatureJutsuItem.AdvancedNatureKind.RANTON));
     public static final RegistryObject<Item> RINNEGANBODY = register("rinneganbody",
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+            () -> new RinneganRobeItem(ArmorItem.Type.CHESTPLATE));
     public static final RegistryObject<Item> RINNEGANHELMET = register("rinneganhelmet",
             () -> new RinneganHelmetItem(false));
     public static final RegistryObject<Item> RINNEGANLEGS = register("rinneganlegs",
-            () -> new ArmorItem(ArmorMaterials.DIAMOND, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+            () -> new RinneganRobeItem(ArmorItem.Type.LEGGINGS));
     public static final RegistryObject<Item> RYO_100 = register("ryo_100", () -> new RyoItem("100 Ryo"));
     public static final RegistryObject<Item> RYO_1000 = register("ryo_1000", () -> new RyoItem("1000 Ryo"));
     public static final RegistryObject<Item> RYO_10000 = register("ryo_10000", () -> new RyoItem("10,000 Ryo"));

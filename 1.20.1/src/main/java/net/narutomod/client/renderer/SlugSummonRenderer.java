@@ -29,7 +29,6 @@ public final class SlugSummonRenderer extends MobRenderer<SlugSummonEntity, Slug
     @Override
     protected void scale(SlugSummonEntity entity, PoseStack poseStack, float partialTick) {
         float scale = entity.getSummonScale();
-        poseStack.translate(0.0F, 1.5F - 1.5F * scale, 0.0F);
         poseStack.scale(scale, scale, scale);
     }
 

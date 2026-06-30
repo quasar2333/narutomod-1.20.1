@@ -64,6 +64,7 @@ import net.narutomod.client.model.PuppetSanshouoModel;
 import net.narutomod.client.model.PuppetScrollModel;
 import net.narutomod.client.model.RasenganModel;
 import net.narutomod.client.model.RasenshurikenModel;
+import net.narutomod.client.model.RinneganRobeModel;
 import net.narutomod.client.model.SakuraHarunoModel;
 import net.narutomod.client.model.SandLevitationModel;
 import net.narutomod.client.model.SealingModel;
@@ -468,6 +469,7 @@ public final class ClientModEvents {
         event.registerLayerDefinition(PuppetScrollModel.SANSHOUO_LAYER_LOCATION, PuppetScrollModel::createSanshouoBodyLayer);
         event.registerLayerDefinition(RasenganModel.LAYER_LOCATION, RasenganModel::createBodyLayer);
         event.registerLayerDefinition(RasenshurikenModel.LAYER_LOCATION, RasenshurikenModel::createBodyLayer);
+        event.registerLayerDefinition(RinneganRobeModel.LAYER_LOCATION, RinneganRobeModel::createBodyLayer);
         event.registerLayerDefinition(SakuraHarunoModel.LAYER_LOCATION, SakuraHarunoModel::createBodyLayer);
         event.registerLayerDefinition(SandLevitationModel.LAYER_LOCATION, SandLevitationModel::createBodyLayer);
         event.registerLayerDefinition(SealingModel.LAYER_LOCATION, SealingModel::createBodyLayer);

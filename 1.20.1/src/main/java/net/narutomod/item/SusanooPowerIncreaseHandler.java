@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.narutomod.Chakra;
 import net.narutomod.NarutomodModVariables;
 import net.narutomod.entity.AbstractSusanooEntity;
+import net.narutomod.entity.BijuManager;
 import net.narutomod.entity.SusanooClothedEntity;
 import net.narutomod.entity.SusanooSkeletonEntity;
 import net.narutomod.entity.SusanooWingedEntity;
@@ -84,8 +85,13 @@ public final class SusanooPowerIncreaseHandler {
                 || hasActiveOwnedSusanoo(player)
                 || !isMangekyoHead(head)
                 || ObitoMangekyoHelmetItem.isBlinded(head)
-                || NarutomodModVariables.getBattleExperience(player) < AbstractSusanooEntity.BXP_REQUIRED_L1
-                || !Chakra.pathway(player).consume(BASE_CHAKRA_USAGE)) {
+                || NarutomodModVariables.getBattleExperience(player) < AbstractSusanooEntity.BXP_REQUIRED_L1) {
+            return false;
+        }
+        if (BijuManager.getCloakLevel(player) > 0) {
+            BijuManager.toggleBijuCloak(player);
+        }
+        if (!Chakra.pathway(player).consume(BASE_CHAKRA_USAGE)) {
             return false;
         }
 

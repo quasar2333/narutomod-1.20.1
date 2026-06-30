@@ -57,8 +57,8 @@ public final class ByakuganHandler {
     public static final double KUSHO_CHAKRA_USAGE = 0.5D;
     private static final double HAKKE_KUSHO_REQUIRED_BATTLE_XP = 500.0D;
     private static final double HAKKE_KUSHO_BREAK_BATTLE_XP = HAKKE_KUSHO_REQUIRED_BATTLE_XP + 850.0D;
-    private static final int EIGHT_TRIGRAMS_REQUIRED_LEVEL = 20;
-    private static final int HAKKESHOKAITEN_REQUIRED_LEVEL = 30;
+    private static final double EIGHT_TRIGRAMS_REQUIRED_BATTLE_XP = 1000.0D;
+    private static final double HAKKESHOKAITEN_REQUIRED_BATTLE_XP = 1500.0D;
     private static final int EIGHT_TRIGRAMS_COOLDOWN_BASE_TICKS = 1200;
     private static final double RINNESHARINGAN_MAX_PRESS_TICKS = 200.0D;
     private static final ProcedureAirPunch HAKKE_KUSHO = new HakkeKushoAirPunch();
@@ -244,7 +244,7 @@ public final class ByakuganHandler {
 
     public static boolean triggerEightTrigrams64Palms(ServerPlayer player, boolean showMessages) {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if (!canUseOwnedByakuganTechnique(player, head, EIGHT_TRIGRAMS_REQUIRED_LEVEL, showMessages)) {
+        if (!canUseOwnedByakuganTechnique(player, head, EIGHT_TRIGRAMS_REQUIRED_BATTLE_XP, showMessages)) {
             return false;
         }
         long now = player.level().getGameTime();
@@ -276,7 +276,7 @@ public final class ByakuganHandler {
 
     public static boolean handleHakkeshoKaiten(ServerPlayer player, boolean pressed, boolean showMessages) {
         ItemStack head = player.getItemBySlot(EquipmentSlot.HEAD);
-        if (!canUseOwnedByakuganTechnique(player, head, HAKKESHOKAITEN_REQUIRED_LEVEL, showMessages)) {
+        if (!canUseOwnedByakuganTechnique(player, head, HAKKESHOKAITEN_REQUIRED_BATTLE_XP, showMessages)) {
             return false;
         }
         if (pressed) {
@@ -440,7 +440,7 @@ public final class ByakuganHandler {
         return entity.distanceToSqr(player) <= radius * radius;
     }
 
-    private static boolean canUseOwnedByakuganTechnique(ServerPlayer player, ItemStack head, int requiredLevel, boolean showMessages) {
+    private static boolean canUseOwnedByakuganTechnique(ServerPlayer player, ItemStack head, double requiredBattleXp, boolean showMessages) {
         if (!isByakuganHead(head)) {
             return false;
         }
@@ -453,9 +453,9 @@ public final class ByakuganHandler {
             }
             return false;
         }
-        if (player.experienceLevel < requiredLevel) {
+        if (PlayerTracker.getBattleXp(player) < requiredBattleXp) {
             if (showMessages) {
-                player.displayClientMessage(Component.literal("Requires level " + requiredLevel + "."), true);
+                player.displayClientMessage(Component.literal("Requires battle XP " + (int)requiredBattleXp + "."), true);
             }
             return false;
         }
