@@ -14798,3 +14798,24 @@ Result: `BUILD SUCCESSFUL`, jar emitted at `1.20.1/build/libs/narutomod-0.2.10-b
   - `git diff --check`: no whitespace errors.
   - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
   - `pwsh -ExecutionPolicy Bypass -File tools/run_dedicated_server_gate.ps1`: still Windows-specific on macOS because of `Start-Process -WindowStyle`. Ran the equivalent manual gate with `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon runServer`; dedicated server reached `Done (1.847s)! For help, type "help"` at `2026-06-30T18:47:13+08:00`. Fatal-pattern scan of `1.20.1/run/logs/latest.log` matched only the `Done` line, crash-reports directory was empty, and no Minecraft/Gradle server process remained after shutdown.
+
+### M7 Release Regression Correction Slice — Kamui Selector / Biju Cloak / Chakra HUD / Meteor Cleanup
+
+- Follow-up after player testing reported that the previous package still had real regressions:
+  - Obito Kamui extended use existed in code, but Power Increase dispatch tried Susanoo activation before the Obito helmet selector. For Obito, this swallowed the selector key before `kamui_mode` could cycle.
+  - The Susanoo/Biju anti-overlap fallback was too aggressive: `BijuCloakItem` could toggle the cloak off every armor tick when an owned Susanoo state was found, and `BijuCloakLayer` also hid the rendered cloak while riding an owned Susanoo. This made normal Biju cloak visuals disappear.
+  - The chakra HUD was tied to the helmet overlay and additionally gated by the ninja flag; this made the bar fragile in the current UI stack and could hide it even when the player had a valid chakra max.
+  - Meteor template placement no longer left visible structure blocks, but any non-air helper/uncollected block in the capture cube could still remain floating at the spawn position.
+
+- 1.20.1 changes:
+  - `item/PowerIncreaseKeyHandler.java`: Obito's helmet selector now runs before the generic Susanoo Power Increase handler unless the player is already riding their owned Susanoo, so Power Increase cycles `Teleport In / Kamui Chest / Kamui Projectiles` again while keeping mounted Susanoo upgrades available.
+  - `item/BijuCloakItem.java` and `client/renderer/BijuCloakLayer.java`: removed the per-tick/per-render Biju cloak suppression. The existing mutual-exclusion point remains in `BijuManager.toggleBijuCloak` / `SusanooPowerIncreaseHandler.activate`, where starting one body mode closes the other once instead of continuously hiding the cloak.
+  - `client/ClientChakraHudEvents.java`: chakra HUD now renders after the hotbar overlay and relies on `Chakra.Pathway#getMax() > 0` instead of the extra ninja flag; empty chakra still draws a visible one-segment frame and numeric text.
+  - `procedure/ProcedureMeteorStrike.java`: after placing the meteor template, every non-air block in the 20x20x20 capture cube is cleared. Valid hardness blocks are still collected into the falling satellite; structure helper blocks and uncollectable blocks are removed instead of being left floating.
+
+- Verification:
+  - `python tools/validate_port_resources.py`: all issue counts 0.
+  - `python tools/validate_dedicated_server_safety.py`: 282 non-client Java files scanned, 0 client-reference issues.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon compileJava`: remote MCPRepo handshake failed first and left the compile classpath incomplete; reran with `--offline` using the already cached Forge/Minecraft dependencies, and `compileJava` was BUILD SUCCESSFUL with only the existing Forge deprecation warnings.
+  - `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon --offline build`: BUILD SUCCESSFUL; release jar regenerated at `1.20.1/build/libs/narutomod-0.3.2-beta.jar`.
+  - Manual dedicated-server gate: `sh ./gradlew -Dnet.minecraftforge.gradle.check.certs=false --no-daemon --offline runServer` reached `Done (2.010s)! For help, type "help"` at `2026-06-30T21:26:50+08:00`; fatal/resource scan of `1.20.1/run/logs/latest.log` found no `Missing textures`, `Missing model`, `Missing blockstate`, `ERROR`, `FATAL`, `Exception`, or `Caused by` matches.

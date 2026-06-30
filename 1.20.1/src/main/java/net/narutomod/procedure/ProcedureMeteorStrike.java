@@ -117,15 +117,18 @@ public final class ProcedureMeteorStrike {
         BlockPos end = spawnTo.offset(CAPTURE_SIZE - 1, CAPTURE_SIZE - 1, CAPTURE_SIZE - 1);
         for (BlockPos pos : BlockPos.betweenClosed(spawnTo, end)) {
             BlockState state = level.getBlockState(pos);
+            if (state.isAir()) {
+                continue;
+            }
             if (state.is(Blocks.STRUCTURE_BLOCK) || state.is(Blocks.STRUCTURE_VOID)) {
-                level.removeBlock(pos, false);
+                level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
                 continue;
             }
             float hardness = state.getDestroySpeed(level, pos);
-            if (!state.isAir() && hardness >= 0.0F && hardness <= 1000.0F) {
+            if (hardness >= 0.0F && hardness <= 1000.0F) {
                 states.add(state);
-                level.removeBlock(pos, false);
             }
+            level.setBlock(pos, Blocks.AIR.defaultBlockState(), 3);
         }
         return states;
     }

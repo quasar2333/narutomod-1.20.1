@@ -232,10 +232,6 @@ public final class BijuCloakItem extends ArmorItem {
         if (!fullSet) {
             return;
         }
-        if (SusanooPowerIncreaseHandler.hasActiveOwnedSusanoo(player)) {
-            BijuManager.toggleBijuCloak(player);
-            return;
-        }
 
         int wearingTicks = getWearingTicks(player) + 1;
         int storedXp = BijuManager.getCurrentCloakXp(player);

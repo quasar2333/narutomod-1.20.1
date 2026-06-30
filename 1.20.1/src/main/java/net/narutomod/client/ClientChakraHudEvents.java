@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.narutomod.Chakra;
 import net.narutomod.NarutomodMod;
 import net.narutomod.NarutomodModVariables;
-import net.narutomod.PlayerTracker;
 import net.narutomod.item.SenjutsuItem;
 
 @Mod.EventBusSubscriber(modid = NarutomodMod.MODID, value = Dist.CLIENT)
@@ -30,12 +29,12 @@ public final class ClientChakraHudEvents {
 
     @SubscribeEvent
     public static void onRenderGuiOverlay(RenderGuiOverlayEvent.Post event) {
-        if (!event.getOverlay().id().equals(VanillaGuiOverlay.HELMET.id())) {
+        if (!event.getOverlay().id().equals(VanillaGuiOverlay.HOTBAR.id())) {
             return;
         }
         Minecraft minecraft = Minecraft.getInstance();
         LocalPlayer player = minecraft.player;
-        if (player == null || !PlayerTracker.isNinja(player)) {
+        if (player == null) {
             tickWarning();
             return;
         }
@@ -57,7 +56,8 @@ public final class ClientChakraHudEvents {
         if (ratio != 0.0D && partial == 0.0D) {
             partial = 1.0D;
         }
-        int top = height - (4 * ((int)Math.ceil(ratio) - 1) + 9);
+        int segmentCount = Math.max((int)Math.ceil(ratio), 1);
+        int top = height - (4 * (segmentCount - 1) + 9);
         int left = width / 2 - 200;
         int warningColor = warningTime % 20 < 10 ? 0xFF00FFFF : 0xFFFF0000;
 
@@ -72,7 +72,7 @@ public final class ClientChakraHudEvents {
         }
         graphics.fill(left - 1, top - 1, left + BAR_WIDTH + 1, height - 5, 0xFF202020);
         for (int y = top; y <= height - 9; y += 4) {
-            int fillWidth = (int)((y == top ? partial : 1.0D) * BAR_WIDTH);
+            int fillWidth = (int)((ratio <= 0.0D ? 0.0D : y == top ? partial : 1.0D) * BAR_WIDTH);
             int color = y == height - 9 ? warningColor : 0xFFFFFF00;
             graphics.fill(left, y, left + fillWidth, y + 3, color);
         }
